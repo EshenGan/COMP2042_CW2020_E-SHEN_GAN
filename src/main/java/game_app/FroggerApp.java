@@ -6,12 +6,29 @@
  */
 package game_app;
 
+
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class FroggerApp extends Application {
 	/**
@@ -26,6 +43,9 @@ public class FroggerApp extends Application {
 	private Frog frog1;
 	private Scene scene;
 	private BackgroundImage froggerbackground;
+	//private GameMenu gameMenu;
+	//public int flag =0;
+	
 	
 	
 //*********************************************************************VIEW****************************************************************************
@@ -38,6 +58,21 @@ public class FroggerApp extends Application {
 	 * method overriding on application class
 	 */
 	public void start(Stage primaryStage) throws Exception {  // view
+		/* main menu
+        Pane root = new Pane();
+        root.setPrefSize(800, 600);
+        Image img = new Image("file:src/main/resources/wallpaper-frogger-boxart-800x600.jpg",800,600,true,true);
+        ImageView imgView = new ImageView(img);
+        //gameMenu.setVisible(false);
+        if(gameMenu == null) {
+        	gameMenu = new GameMenu();
+        }
+        root.getChildren().addAll(imgView,gameMenu);
+        Scene menuscene = new Scene(root);
+		primaryStage.setScene(menuscene);
+		primaryStage.show();		
+		*/
+
 	    setBackground( new MyStage());
 	    setScene(new Scene(getBackground(),600,800));
 	    setFroggerbackground(new BackgroundImage("file:src/main/resources/try1.jpg"));
@@ -45,7 +80,7 @@ public class FroggerApp extends Application {
 		 * Replace constructor with factory method
 		 */
 		setFrog1(Frog.createFrog("file:src/main/resources/froggerUp.png"));
-		primaryStage.setScene(scene);
+		primaryStage.setScene(getScene());
 		getBackground().add(getFroggerbackground());
 		getBackground().add(new Digit(0, 30, 560, 25)); //changed xpos to 560 from 360
 		buildLogs();
@@ -201,6 +236,9 @@ public class FroggerApp extends Application {
     }
 
 	public AnimationTimer getTimer() {
+		if(timer == null) {
+			createTimer();
+		}
 		return timer;
 	}
 
@@ -248,5 +286,85 @@ public class FroggerApp extends Application {
 		this.froggerbackground = froggerbackground;
 	}
 //**********************************************************************************************************************************************
+    public class GameMenu extends Parent {
+        public GameMenu() {
+            VBox menu0 = new VBox(10);
+
+            menu0.setTranslateX(100);
+            menu0.setTranslateY(200);
+
+
+            MenuButton btnResume = new MenuButton("PLAY");
+            btnResume.setOnMouseClicked(event -> {
+                FadeTransition ft = new FadeTransition(Duration.seconds(0.5), this);
+                ft.setFromValue(1);
+                ft.setToValue(0);
+                ft.setOnFinished(evt -> setVisible(false));
+                //flag = 1;
+            });
+
+
+            MenuButton btnOptions = new MenuButton("MANUAL");
+            btnOptions.setOnMouseClicked(event -> {
+
+            });
+
+            MenuButton btnExit = new MenuButton("EXIT");
+            btnExit.setOnMouseClicked(event -> {
+                System.exit(0);
+                //flag =0;
+            });
+
+
+            menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
+
+
+            Rectangle bg = new Rectangle(800, 600);
+            bg.setFill(Color.GREY);
+            bg.setOpacity(0.4);
+
+            getChildren().addAll(bg, menu0);
+        }
+    }
+    
+    public static class MenuButton extends StackPane {
+        public Text text;
+
+        public MenuButton(String name) {
+            text = new Text(name);
+            text.getFont();
+			text.setFont(Font.font(20));
+            text.setFill(Color.WHITE);
+
+            Rectangle bg = new Rectangle(250, 30);
+            bg.setOpacity(0.6);
+            bg.setFill(Color.BLACK);
+            bg.setEffect(new GaussianBlur(3.5));
+
+            setAlignment(Pos.CENTER_LEFT);
+            setRotate(-0.5);
+            getChildren().addAll(bg, text);
+
+            setOnMouseEntered(event -> {
+                bg.setTranslateX(10);
+                text.setTranslateX(10);
+                bg.setFill(Color.WHITE);
+                text.setFill(Color.BLACK);
+            });
+
+            setOnMouseExited(event -> {
+                bg.setTranslateX(0);
+                text.setTranslateX(0);
+                bg.setFill(Color.BLACK);
+                text.setFill(Color.WHITE);
+            });
+
+            DropShadow drop = new DropShadow(50, Color.WHITE);
+            drop.setInput(new Glow());
+
+            setOnMousePressed(event -> setEffect(drop));
+            setOnMouseReleased(event -> setEffect(null));
+        }
+    }
 
 }
