@@ -6,12 +6,9 @@
  */
 package game_app;
 
-
 import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -28,7 +25,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
 
 public class FroggerApp extends Application {
 	/**
@@ -41,12 +38,9 @@ public class FroggerApp extends Application {
 	private AnimationTimer timer;
 	private MyStage background;
 	private Frog frog1;
-	private Scene scene;
+	private Scene scenegame;
+	private Scene scenemenu;
 	private BackgroundImage froggerbackground;
-	//private GameMenu gameMenu;
-	//public int flag =0;
-	
-	
 	
 //*********************************************************************VIEW****************************************************************************
 	public static void main(String[] args) {
@@ -58,29 +52,48 @@ public class FroggerApp extends Application {
 	 * method overriding on application class
 	 */
 	public void start(Stage primaryStage) throws Exception {  // view
-		/* main menu
+		// main menu background
         Pane root = new Pane();
+        scenemenu = new Scene(root);
         root.setPrefSize(800, 600);
         Image img = new Image("file:src/main/resources/wallpaper-frogger-boxart-800x600.jpg",800,600,true,true);
         ImageView imgView = new ImageView(img);
-        //gameMenu.setVisible(false);
-        if(gameMenu == null) {
-        	gameMenu = new GameMenu();
-        }
-        root.getChildren().addAll(imgView,gameMenu);
-        Scene menuscene = new Scene(root);
-		primaryStage.setScene(menuscene);
-		primaryStage.show();		
-		*/
+        root.getChildren().addAll(imgView);
+        // menu bar
+        VBox menu0 = new VBox(10);       //MAKE 2 MORE FILE -MAINMENU.JAVA & MENUBUTTON.JAVA
+        menu0.setTranslateX(100);
+        menu0.setTranslateY(200);
+        MenuButton btnPlay = new MenuButton("PLAY");
+        MenuButton btnManual = new MenuButton("MANUAL");
+        MenuButton btnExit = new MenuButton("EXIT");
+        menu0.getChildren().addAll(btnPlay, btnManual, btnExit);
+        Rectangle bg = new Rectangle(800, 600);
+        bg.setFill(Color.GREY);
+        bg.setOpacity(0.4);
+        root.getChildren().addAll(bg, menu0);
+        
+        btnPlay.setOnMouseClicked(event -> {
+            primaryStage.setScene(getScenegame()); // frogger game scene
+            start();
+        });
+        
+        btnManual.setOnMouseClicked(event -> {
 
-	    setBackground( new MyStage());
-	    setScene(new Scene(getBackground(),600,800));
-	    setFroggerbackground(new BackgroundImage("file:src/main/resources/try1.jpg"));
+        });
+        
+        btnExit.setOnMouseClicked(event -> {
+            System.exit(0);
+          
+        });
+                	
+		setBackground( new MyStage());
+		setScenegame(new Scene(getBackground(),600,800));
+		setFroggerbackground(new BackgroundImage("file:src/main/resources/try1.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
-		 */
+		 */		
 		setFrog1(Frog.createFrog("file:src/main/resources/froggerUp.png"));
-		primaryStage.setScene(getScene());
+					
 		getBackground().add(getFroggerbackground());
 		getBackground().add(new Digit(0, 30, 560, 25)); //changed xpos to 560 from 360
 		buildLogs();
@@ -88,8 +101,10 @@ public class FroggerApp extends Application {
 		buildFrogHome();
 		getBackground().add(getFrog1());//DO NOT EVER MOVE THIS method below to other place		
 		buildObstacles();
+		primaryStage.setScene(scenemenu);
 		primaryStage.show();
-		start();
+				
+
 	}
 
 //*****************************************************************************************************************************************************
@@ -236,9 +251,6 @@ public class FroggerApp extends Application {
     }
 
 	public AnimationTimer getTimer() {
-		if(timer == null) {
-			createTimer();
-		}
 		return timer;
 	}
 
@@ -264,15 +276,15 @@ public class FroggerApp extends Application {
 		this.frog1 = frog1;
 	}
 
-	public Scene getScene() {
-		return scene;
+	public Scene getScenegame() {
+		return scenegame;
 	}
 
 	/**@Refactor
 	 * method hiding since it is only used within the class
 	 */
-	protected void setScene(Scene scene) {
-		this.scene = scene;
+	protected void setScenegame(Scene scenegame) {
+		this.scenegame = scenegame;
 	}
 
 	public BackgroundImage getFroggerbackground() {
@@ -286,47 +298,7 @@ public class FroggerApp extends Application {
 		this.froggerbackground = froggerbackground;
 	}
 //**********************************************************************************************************************************************
-    public class GameMenu extends Parent {
-        public GameMenu() {
-            VBox menu0 = new VBox(10);
-
-            menu0.setTranslateX(100);
-            menu0.setTranslateY(200);
-
-
-            MenuButton btnResume = new MenuButton("PLAY");
-            btnResume.setOnMouseClicked(event -> {
-                FadeTransition ft = new FadeTransition(Duration.seconds(0.5), this);
-                ft.setFromValue(1);
-                ft.setToValue(0);
-                ft.setOnFinished(evt -> setVisible(false));
-                //flag = 1;
-            });
-
-
-            MenuButton btnOptions = new MenuButton("MANUAL");
-            btnOptions.setOnMouseClicked(event -> {
-
-            });
-
-            MenuButton btnExit = new MenuButton("EXIT");
-            btnExit.setOnMouseClicked(event -> {
-                System.exit(0);
-                //flag =0;
-            });
-
-
-            menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
-
-
-            Rectangle bg = new Rectangle(800, 600);
-            bg.setFill(Color.GREY);
-            bg.setOpacity(0.4);
-
-            getChildren().addAll(bg, menu0);
-        }
-    }
-    
+ 
     public static class MenuButton extends StackPane {
         public Text text;
 
