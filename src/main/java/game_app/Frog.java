@@ -157,8 +157,8 @@ public class Frog extends Sprites {
 //******************************************************************CONTROLLER************************************************************************
 	private Frog(String imageLink) { 
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(300);
-		setY(679.8+movement);
+		setX(300); 
+		setY(679.8+movement); 
 		setFrogSprite(imgSize);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){

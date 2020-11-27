@@ -6,6 +6,8 @@
  */
 package game_app;
 
+import java.io.*;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -42,6 +44,7 @@ public class FroggerApp extends Application {
 	private Scene scenemenu;
 	private BackgroundImage froggerbackground;
 	
+	
 //*********************************************************************VIEW****************************************************************************
 	public static void main(String[] args) {
 		launch(args);
@@ -72,10 +75,12 @@ public class FroggerApp extends Application {
         bg.setOpacity(0.4);
         root.getChildren().addAll(bg, menu0);
         
+
         btnPlay.setOnMouseClicked(event -> {
             primaryStage.setScene(getScenegame()); // frogger game scene
             start();
         });
+		
         
         btnManual.setOnMouseClicked(event -> {
 
@@ -88,7 +93,7 @@ public class FroggerApp extends Application {
                 	
 		setBackground( new MyStage());
 		setScenegame(new Scene(getBackground(),600,800));
-		setFroggerbackground(new BackgroundImage("file:src/main/resources/try1.jpg"));
+		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropmain.png"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
 		 */		
@@ -103,8 +108,7 @@ public class FroggerApp extends Application {
 		buildObstacles();
 		primaryStage.setScene(scenemenu);
 		primaryStage.show();
-				
-
+      
 	}
 
 //*****************************************************************************************************************************************************
@@ -139,17 +143,43 @@ public class FroggerApp extends Application {
             	if (getFrog1().getChangeScore()) {
             		setNumber(getFrog1().getPoints());
             	}
-            	if (getFrog1().getStop()) {// if end is equal to 5 then 
-            		System.out.print("STOP:");
-            		getBackground().stopMusic();
-            		stop();
-            		getBackground().stop();
-            		Alert alert = new Alert(AlertType.INFORMATION);
-            		alert.setTitle("You Have Won The Game!");
-            		alert.setHeaderText("Your High Score: "+frog1.getPoints()+"!");
-            		alert.setContentText("Highest Possible Score: 800");
-            		alert.show();
-            	}
+            	//if (getFrog1().getStop()) {// if end is equal to 5 then 
+            	//	//System.out.print("STOP:");
+            	//	getBackground().stopMusic();
+            	//	stop();
+            	//	getBackground().stop();
+            	//	Alert alert = new Alert(AlertType.INFORMATION);
+            	//	alert.setTitle("You Have Won The Game!");
+            	//	alert.setHeaderText("Your High Score: "+getFrog1().getPoints()+"!");
+            	//	alert.setContentText("Highest Possible Score: 800");
+            	//	alert.show();
+            	//	System.exit(0);
+            	//}
+        			try {
+        				FileWriter board = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt",true);
+        				BufferedWriter output = new BufferedWriter(board);
+                    	if (getFrog1().getStop()) {// if end is equal to 5 then 
+                    		//System.out.print("STOP:");
+                    		getBackground().stopMusic();
+                    		stop();
+                    		getBackground().stop();
+                    		Alert alert = new Alert(AlertType.INFORMATION);
+                    		alert.setTitle("You Have Won The Game!");
+                    		alert.setHeaderText("Your High Score: "+getFrog1().getPoints()+"!");
+                    		alert.setContentText("Highest Possible Score: 800");
+                    		alert.show();
+                    		
+						output.write("Round 1 - HI Score");
+		       			output.newLine();
+		       			output.write(""+getFrog1().getPoints());
+	        			output.newLine();
+	        			output.close();
+	        			System.out.println("success");
+	        			System.exit(0);
+                    	}
+					} 
+        			catch (IOException e) {
+					e.printStackTrace();}
             }    
         };
     }
@@ -193,29 +223,11 @@ public class FroggerApp extends Application {
     	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 0, 166, 0.75));
     	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 220, 166, 0.75));
     	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 440, 166, 0.75));
-		//background.add(new Log("file:src/game_app/log3.png", 150, 0, 166, 0.75));
     	getBackground().add(new Log("file:src/main/resources/logs.png", 300, 0, 276, -2));
     	getBackground().add(new Log("file:src/main/resources/logs.png", 300, 400, 276, -2));
-		///background.add(new Log("file:src/game_app/logs.png", 300, 800, 276, -2));
     	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 50, 329, 0.75));
     	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 270, 329, 0.75));
     	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 490, 329, 0.75));
-		///background.add(new Log("file:src/game_app/log3.png", 150, 570, 329, 0.75));
-		//background.add(new Log("file:src/game_app/log2.png", 200, 100,300, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 0, 100, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 100, 120, -1));
-		//background.add(new Log("file:src/game_app/log2.png", 200, 120, -1));
-		//background.add(new Log("file:src/game_app/log2.png", 100, 140, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 200, 140, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 100, 160, -1));
-		//background.add(new Log("file:src/game_app/log2.png", 300, 160, -1));
-		//background.add(new Log("file:src/game_app/log2.png", 100, 180, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 200, 180, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 100, 200, -1));
-		//background.add(new Log("file:src/game_app/log2.png", 200, 200, -1));
-		//background.add(new Log("file:src/game_app/log2.png", 100, 220, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 200, 220, 1));
-		//background.add(new Log("file:src/game_app/log2.png", 400, 220, 1));
     }
     
     /** @Refactor
@@ -240,7 +252,6 @@ public class FroggerApp extends Application {
     	getBackground().add(new Obstacle("file:src/main/resources/truck1Right.png", 0, 649, 1, 120, 120));
     	getBackground().add(new Obstacle("file:src/main/resources/truck1Right.png", 300, 649, 1, 120, 120));
     	getBackground().add(new Obstacle("file:src/main/resources/truck1Right.png", 600, 649, 1, 120, 120));
-		//background.add(new Obstacle("file:src/game_app/truck1"+"Right.png", 720, 649, 1, 120, 120));
     	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 100, 597, -1, 50, 50));
     	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 250, 597, -1, 50, 50));
     	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 400, 597, -1, 50, 50));
