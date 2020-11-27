@@ -19,9 +19,9 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -38,7 +38,7 @@ public class FroggerApp extends Application {
 	 * create setter and getter for encapsulated field
 	 */
 	private AnimationTimer timer;
-	private MyStage background;
+	private MyStage gameroot;
 	private Frog frog1;
 	private Scene scenegame;
 	private Scene scenemenu;
@@ -54,28 +54,46 @@ public class FroggerApp extends Application {
 	 * @Override
 	 * method overriding on application class
 	 */
-	public void start(Stage primaryStage) throws Exception {  // view
-		// main menu background
-        Pane root = new Pane();
-        scenemenu = new Scene(root);
-        root.setPrefSize(800, 600);
+	public void start(Stage primaryStage) throws Exception {  
+		// main menu scene
+        Pane menuroot = new Pane();
+        menuroot.setPrefSize(800, 600);
+        scenemenu = new Scene(menuroot);
         Image img = new Image("file:src/main/resources/wallpaper-frogger-boxart-800x600.jpg",800,600,true,true);
-        ImageView imgView = new ImageView(img);
-        root.getChildren().addAll(imgView);
+        ImageView img4menu = new ImageView(img);
+        menuroot.getChildren().addAll(img4menu);
         // menu bar
-        VBox menu0 = new VBox(10);       //MAKE 2 MORE FILE -MAINMENU.JAVA & MENUBUTTON.JAVA
-        menu0.setTranslateX(100);
-        menu0.setTranslateY(200);
+        HBox menuhbox = new HBox(10);       //MAKE 2 MORE FILE -MAINMENU.JAVA & MENUBUTTON.JAVA and also extract handle() in animationtimer
+        menuhbox.setTranslateX(15);
+        menuhbox.setTranslateY(300);
         MenuButton btnPlay = new MenuButton("PLAY");
         MenuButton btnManual = new MenuButton("MANUAL");
         MenuButton btnExit = new MenuButton("EXIT");
-        menu0.getChildren().addAll(btnPlay, btnManual, btnExit);
-        Rectangle bg = new Rectangle(800, 600);
-        bg.setFill(Color.GREY);
-        bg.setOpacity(0.4);
-        root.getChildren().addAll(bg, menu0);
-        
-
+        menuhbox.getChildren().addAll(btnPlay, btnManual, btnExit);
+        Rectangle rect = new Rectangle(800, 600);
+        rect.setFill(Color.BLUE);
+        rect.setOpacity(0.2);
+        menuroot.getChildren().addAll(rect, menuhbox);
+        // frogger game scene
+		setGameroot( new MyStage());
+		setScenegame(new Scene(getGameroot(),600,800));
+		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropmain.png"));
+		/**@RefactorFactoryMethodDesignPattern
+		 * Replace constructor with factory method
+		 */		
+		setFrog1(Frog.createFrog("file:src/main/resources/froggerUp.png"));
+		getGameroot().add(getFroggerbackground());
+		getGameroot().add(new Digit(0, 30, 560, 25)); //changed xpos to 560 from 360
+		buildLogs();
+		buildTurtles();
+		buildFrogHome();
+		getGameroot().add(getFrog1());//DO NOT EVER MOVE THIS method below to other place		
+		buildObstacles();
+		primaryStage.getIcons().add(new Image("file:src/main/resources/icon-frogger-boxart-96x96.png"));
+		primaryStage.setTitle("FROGGER ARCADE GAME by E-Shen Gan");
+		primaryStage.setScene(scenemenu);
+		primaryStage.show();
+		//button actions
         btnPlay.setOnMouseClicked(event -> {
             primaryStage.setScene(getScenegame()); // frogger game scene
             start();
@@ -90,37 +108,19 @@ public class FroggerApp extends Application {
             System.exit(0);
           
         });
-                	
-		setBackground( new MyStage());
-		setScenegame(new Scene(getBackground(),600,800));
-		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropmain.png"));
-		/**@RefactorFactoryMethodDesignPattern
-		 * Replace constructor with factory method
-		 */		
-		setFrog1(Frog.createFrog("file:src/main/resources/froggerUp.png"));
-					
-		getBackground().add(getFroggerbackground());
-		getBackground().add(new Digit(0, 30, 560, 25)); //changed xpos to 560 from 360
-		buildLogs();
-		buildTurtles();
-		buildFrogHome();
-		getBackground().add(getFrog1());//DO NOT EVER MOVE THIS method below to other place		
-		buildObstacles();
-		primaryStage.setScene(scenemenu);
-		primaryStage.show();
-      
+        
 	}
 
 //*****************************************************************************************************************************************************
 //****************************************************************************CONTROLLER***************************************************************
 	/**@Refactor
-	 * background.start() is moved into start() 
+	 * gameroot.start() is moved into start() 
 	 * from start(Stage primaryStage)
 	 * method hiding since it is only used within the class
 	 */
 	protected void start() { //controller
-		getBackground().start();
-		getBackground().playMusic();
+		getGameroot().start();
+		getGameroot().playMusic();
     	createTimer();
         getTimer().start();
     }
@@ -143,26 +143,14 @@ public class FroggerApp extends Application {
             	if (getFrog1().getChangeScore()) {
             		setNumber(getFrog1().getPoints());
             	}
-            	//if (getFrog1().getStop()) {// if end is equal to 5 then 
-            	//	//System.out.print("STOP:");
-            	//	getBackground().stopMusic();
-            	//	stop();
-            	//	getBackground().stop();
-            	//	Alert alert = new Alert(AlertType.INFORMATION);
-            	//	alert.setTitle("You Have Won The Game!");
-            	//	alert.setHeaderText("Your High Score: "+getFrog1().getPoints()+"!");
-            	//	alert.setContentText("Highest Possible Score: 800");
-            	//	alert.show();
-            	//	System.exit(0);
-            	//}
         			try {
         				FileWriter board = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt",true);
         				BufferedWriter output = new BufferedWriter(board);
                     	if (getFrog1().getStop()) {// if end is equal to 5 then 
                     		//System.out.print("STOP:");
-                    		getBackground().stopMusic();
+                    		getGameroot().stopMusic();
                     		stop();
-                    		getBackground().stop();
+                    		getGameroot().stop();
                     		Alert alert = new Alert(AlertType.INFORMATION);
                     		alert.setTitle("You Have Won The Game!");
                     		alert.setHeaderText("Your High Score: "+getFrog1().getPoints()+"!");
@@ -175,7 +163,7 @@ public class FroggerApp extends Application {
 	        			output.newLine();
 	        			output.close();
 	        			System.out.println("success");
-	        			System.exit(0);
+	        			//System.exit(0);
                     	}
 					} 
         			catch (IOException e) {
@@ -194,7 +182,7 @@ public class FroggerApp extends Application {
     		  int d = n / 10;
     		  int k = n - d * 10;
     		  n = d;
-    		  getBackground().add(new Digit(k, 30, 560 - shift, 25)); //changed xpos to 560
+    		  getGameroot().add(new Digit(k, 30, 560 - shift, 25)); //changed xpos to 560
     		  shift+=30;
     		}
     }
@@ -207,11 +195,11 @@ public class FroggerApp extends Application {
     	int ax = 13 , bx= 141 , cx=269;
     	int dx = 394, ex=524;
     	int y = 96;
-    	getBackground().add(new End(ax,y));
-    	getBackground().add(new End(bx,y));
-    	getBackground().add(new End(cx,y));
-    	getBackground().add(new End(dx,y));
-    	getBackground().add(new End(ex,y));
+    	getGameroot().add(new End(ax,y));
+    	getGameroot().add(new End(bx,y));
+    	getGameroot().add(new End(cx,y));
+    	getGameroot().add(new End(dx,y));
+    	getGameroot().add(new End(ex,y));
     }
     
     /**@Refactor
@@ -220,14 +208,14 @@ public class FroggerApp extends Application {
      */
     protected void buildLogs() {
     	//should i extract the parameters into objects instead?
-    	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 0, 166, 0.75));
-    	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 220, 166, 0.75));
-    	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 440, 166, 0.75));
-    	getBackground().add(new Log("file:src/main/resources/logs.png", 300, 0, 276, -2));
-    	getBackground().add(new Log("file:src/main/resources/logs.png", 300, 400, 276, -2));
-    	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 50, 329, 0.75));
-    	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 270, 329, 0.75));
-    	getBackground().add(new Log("file:src/main/resources/log3.png", 150, 490, 329, 0.75));
+    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 0, 166, 0.75));
+    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 220, 166, 0.75));
+    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 440, 166, 0.75));
+    	getGameroot().add(new Log("file:src/main/resources/logs.png", 300, 0, 276, -2));
+    	getGameroot().add(new Log("file:src/main/resources/logs.png", 300, 400, 276, -2));
+    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 50, 329, 0.75));
+    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 270, 329, 0.75));
+    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 490, 329, 0.75));
     }
     
     /** @Refactor
@@ -235,12 +223,12 @@ public class FroggerApp extends Application {
      * method hiding since it is only used within the class
      */
     protected void buildTurtles() {
-    	getBackground().add(new Turtle(500, 376, -1, 130, 130));
-    	getBackground().add(new Turtle(300, 376, -1, 130, 130));
-    	getBackground().add(new WetTurtle(700, 376, -1, 130, 130));
-    	getBackground().add(new WetTurtle(600, 217, -1, 130, 130));
-    	getBackground().add(new WetTurtle(400, 217, -1, 130, 130));
-    	getBackground().add(new WetTurtle(200, 217, -1, 130, 130));
+    	getGameroot().add(new Turtle(500, 376, -1, 130, 130));
+    	getGameroot().add(new Turtle(300, 376, -1, 130, 130));
+    	getGameroot().add(new WetTurtle(700, 376, -1, 130, 130));
+    	getGameroot().add(new WetTurtle(600, 217, -1, 130, 130));
+    	getGameroot().add(new WetTurtle(400, 217, -1, 130, 130));
+    	getGameroot().add(new WetTurtle(200, 217, -1, 130, 130));
     
     }
     
@@ -249,31 +237,31 @@ public class FroggerApp extends Application {
      * method hiding since it is only used within the class
      */
     protected void buildObstacles() {
-    	getBackground().add(new Obstacle("file:src/main/resources/truck1Right.png", 0, 649, 1, 120, 120));
-    	getBackground().add(new Obstacle("file:src/main/resources/truck1Right.png", 300, 649, 1, 120, 120));
-    	getBackground().add(new Obstacle("file:src/main/resources/truck1Right.png", 600, 649, 1, 120, 120));
-    	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 100, 597, -1, 50, 50));
-    	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 250, 597, -1, 50, 50));
-    	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 400, 597, -1, 50, 50));
-    	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 550, 597, -1, 50, 50));
-    	getBackground().add(new Obstacle("file:src/main/resources/truck2Right.png", 0, 540, 1, 200, 200));
-    	getBackground().add(new Obstacle("file:src/main/resources/truck2Right.png", 500, 540, 1, 200, 200));
-    	getBackground().add(new Obstacle("file:src/main/resources/car1Left.png", 500, 490, -5, 50, 50));   	
+    	getGameroot().add(new Obstacle("file:src/main/resources/truck1Right.png", 0, 649, 1, 120, 120));
+    	getGameroot().add(new Obstacle("file:src/main/resources/truck1Right.png", 300, 649, 1, 120, 120));
+    	getGameroot().add(new Obstacle("file:src/main/resources/truck1Right.png", 600, 649, 1, 120, 120));
+    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 100, 597, -1, 50, 50));
+    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 250, 597, -1, 50, 50));
+    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 400, 597, -1, 50, 50));
+    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 550, 597, -1, 50, 50));
+    	getGameroot().add(new Obstacle("file:src/main/resources/truck2Right.png", 0, 540, 1, 200, 200));
+    	getGameroot().add(new Obstacle("file:src/main/resources/truck2Right.png", 500, 540, 1, 200, 200));
+    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 500, 490, -5, 50, 50));   	
     }
 
 	public AnimationTimer getTimer() {
 		return timer;
 	}
 
-	public MyStage getBackground() {
-		return background;
+	public MyStage getGameroot() {
+		return gameroot;
 	}
 	
 	/**@Refactor
 	 * method hiding since it is only used within the class
 	 */
-	protected void setBackground(MyStage background) {
-		this.background = background;
+	protected void setGameroot(MyStage gameroot) {
+		this.gameroot = gameroot;
 	}
 
 	public Frog getFrog1() {
