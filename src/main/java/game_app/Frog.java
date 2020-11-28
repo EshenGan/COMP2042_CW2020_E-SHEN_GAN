@@ -39,7 +39,14 @@ public class Frog extends Sprites {
 	 private double w = 800;
 	 
 //*********************************************************************VIEW*******************************************************************
-		ArrayList<End> inter = new ArrayList<End>();
+	 /**@RefactorFactoryMethodDesignPattern
+	  * Replace constructor with factory method
+	  * Frog constructor is encapsulated
+	  */
+	 	public static Frog createFrog(String imageLink) { 
+	 		return new Frog(imageLink);
+	 	}	
+	 ArrayList<End> inter = new ArrayList<End>();
 		@Override
 		public void act(long now) { 
 			if (getY()<0 || getY()>734) {
@@ -244,13 +251,6 @@ public class Frog extends Sprites {
 	}// end of frog constructor
 	
 //********************************************************************************MODEL***********************************************************	
-/**@RefactorFactoryMethodDesignPattern
- * Replace constructor with factory method
- * Frog constructor is encapsulated
- */
-	public static Frog createFrog(String imageLink) { 
-		return new Frog(imageLink);
-	}	
 	
 	public boolean getStop() {
 		return end==5;  //if frog home aka end contains/is equal to 5 then return true

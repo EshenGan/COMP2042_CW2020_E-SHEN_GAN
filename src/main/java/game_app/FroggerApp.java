@@ -10,22 +10,15 @@ import java.io.*;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -41,8 +34,10 @@ public class FroggerApp extends Application {
 	private MyStage gameroot;
 	private Frog frog1;
 	private Scene scenegame;
-	private Scene scenemenu;
+	public Scene scenemenu;
+	public Scene scenemanual;
 	private BackgroundImage froggerbackground;
+	
 	
 	
 //*********************************************************************VIEW****************************************************************************
@@ -59,21 +54,28 @@ public class FroggerApp extends Application {
         Pane menuroot = new Pane();
         menuroot.setPrefSize(800, 600);
         scenemenu = new Scene(menuroot);
-        Image img = new Image("file:src/main/resources/wallpaper-frogger-boxart-800x600.jpg",800,600,true,true);
-        ImageView img4menu = new ImageView(img);
+        Image img0 = new Image("file:src/main/resources/wallpaper-frogger-boxart-800x600.jpg",800,600,true,true);
+        ImageView img4menu = new ImageView(img0);
         menuroot.getChildren().addAll(img4menu);
         // menu bar
         HBox menuhbox = new HBox(10);       //MAKE 2 MORE FILE -MAINMENU.JAVA & MENUBUTTON.JAVA and also extract handle() in animationtimer
         menuhbox.setTranslateX(15);
         menuhbox.setTranslateY(300);
-        MenuButton btnPlay = new MenuButton("PLAY");
-        MenuButton btnManual = new MenuButton("MANUAL");
-        MenuButton btnExit = new MenuButton("EXIT");
+        MenuButton btnPlay = MenuButton.createMenuButton("PLAY");
+        MenuButton btnManual = MenuButton.createMenuButton("MANUAL");
+        MenuButton btnExit = MenuButton.createMenuButton("EXIT");
         menuhbox.getChildren().addAll(btnPlay, btnManual, btnExit);
         Rectangle rect = new Rectangle(800, 600);
         rect.setFill(Color.BLUE);
         rect.setOpacity(0.2);
         menuroot.getChildren().addAll(rect, menuhbox);
+        //user guide scene
+        Pane manualroot = new Pane();
+        manualroot.setPrefSize(800, 490);
+        scenemanual = new Scene(manualroot);
+        Image img1 = new Image("file:src/main/resources/user_guide.png",800,490,true,true);
+        ImageView manual = new ImageView(img1);
+        manualroot.getChildren().addAll(manual);
         // frogger game scene
 		setGameroot( new MyStage());
 		setScenegame(new Scene(getGameroot(),600,800));
@@ -101,7 +103,7 @@ public class FroggerApp extends Application {
 		
         
         btnManual.setOnMouseClicked(event -> {
-
+        	primaryStage.setScene(scenemanual);
         });
         
         btnExit.setOnMouseClicked(event -> {
@@ -144,7 +146,8 @@ public class FroggerApp extends Application {
             		setNumber(getFrog1().getPoints());
             	}
         			try {
-        				FileWriter board = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt",true);
+        				FileWriter board = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\"
+        						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt",true);
         				BufferedWriter output = new BufferedWriter(board);
                     	if (getFrog1().getStop()) {// if end is equal to 5 then 
                     		//System.out.print("STOP:");
@@ -296,46 +299,31 @@ public class FroggerApp extends Application {
 	protected void setFroggerbackground(BackgroundImage froggerbackground) {
 		this.froggerbackground = froggerbackground;
 	}
+}
 //**********************************************************************************************************************************************
  
-    public static class MenuButton extends StackPane {
-        public Text text;
+	/*
+	 * public static class MenuButton extends StackPane { public Text text;
+	 * 
+	 * public MenuButton(String name) { text = new Text(name); text.getFont();
+	 * text.setFont(Font.font(20)); text.setFill(Color.WHITE);
+	 * 
+	 * Rectangle bg = new Rectangle(250, 30); bg.setOpacity(0.6);
+	 * bg.setFill(Color.BLACK); bg.setEffect(new GaussianBlur(3.5));
+	 * 
+	 * setAlignment(Pos.CENTER_LEFT); setRotate(-0.5); getChildren().addAll(bg,
+	 * text);
+	 * 
+	 * setOnMouseEntered(event -> { bg.setTranslateX(10); text.setTranslateX(10);
+	 * bg.setFill(Color.WHITE); text.setFill(Color.BLACK); });
+	 * 
+	 * setOnMouseExited(event -> { bg.setTranslateX(0); text.setTranslateX(0);
+	 * bg.setFill(Color.BLACK); text.setFill(Color.WHITE); });
+	 * 
+	 * DropShadow drop = new DropShadow(50, Color.WHITE); drop.setInput(new Glow());
+	 * 
+	 * setOnMousePressed(event -> setEffect(drop)); setOnMouseReleased(event ->
+	 * setEffect(null)); } }
+	 */
 
-        public MenuButton(String name) {
-            text = new Text(name);
-            text.getFont();
-			text.setFont(Font.font(20));
-            text.setFill(Color.WHITE);
 
-            Rectangle bg = new Rectangle(250, 30);
-            bg.setOpacity(0.6);
-            bg.setFill(Color.BLACK);
-            bg.setEffect(new GaussianBlur(3.5));
-
-            setAlignment(Pos.CENTER_LEFT);
-            setRotate(-0.5);
-            getChildren().addAll(bg, text);
-
-            setOnMouseEntered(event -> {
-                bg.setTranslateX(10);
-                text.setTranslateX(10);
-                bg.setFill(Color.WHITE);
-                text.setFill(Color.BLACK);
-            });
-
-            setOnMouseExited(event -> {
-                bg.setTranslateX(0);
-                text.setTranslateX(0);
-                bg.setFill(Color.BLACK);
-                text.setFill(Color.WHITE);
-            });
-
-            DropShadow drop = new DropShadow(50, Color.WHITE);
-            drop.setInput(new Glow());
-
-            setOnMousePressed(event -> setEffect(drop));
-            setOnMouseReleased(event -> setEffect(null));
-        }
-    }
-
-}
