@@ -44,8 +44,8 @@ public class MenuButton extends StackPane {
         rect0.setFill(Color.BLACK);
         rect0.setEffect(new GaussianBlur(3.5));
 
-        setAlignment(Pos.CENTER_LEFT);
-        setRotate(-0.5);
+        //setAlignment(Pos.CENTER_LEFT);
+        //setRotate(-0.5);
         getChildren().addAll(rect0, txt);
 
         setOnMouseEntered(event -> {
