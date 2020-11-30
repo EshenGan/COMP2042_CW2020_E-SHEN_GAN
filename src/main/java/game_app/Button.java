@@ -9,17 +9,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class MenuButton extends StackPane {
+public class Button extends StackPane {
 	private Text txt;
 
 	/**
 	 * @FactoryMethod
-	 * created a factory method /virtual constructor for complex MenuButton constructor
+	 * created a factory method /virtual constructor for complex Button constructor
 	 * @param label
 	 * @return
 	 */
-    public static MenuButton createMenuButton(String label) { // view
-		return new MenuButton(label);
+    public static Button createButton(String label) { // view
+		return new Button(label);
 	}
 
 	
@@ -32,7 +32,7 @@ public class MenuButton extends StackPane {
 		this.txt = txt;
 	}
 
-	private MenuButton(String label) { //controller
+	private Button(String label) { //controller
 		setTxt(new Text(label));
         getTxt().getFont();
         getTxt().setFont(Font.font(20));

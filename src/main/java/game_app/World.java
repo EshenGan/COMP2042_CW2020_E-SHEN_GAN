@@ -44,10 +44,10 @@ public abstract class World extends Pane {
 						public void handle(KeyEvent event) {
 							if(getOnKeyReleased() != null) 
 								getOnKeyReleased().handle(event);
-							List<Sprites> myActors = getObjects(Sprites.class);
-							for (Sprites anActor: myActors) {
-								if (anActor.getOnKeyReleased() != null) {
-									anActor.getOnKeyReleased().handle(event);
+							List<Sprites> mySprites = getObjects(Sprites.class);
+							for (Sprites aSprite: mySprites) {
+								if (aSprite.getOnKeyReleased() != null) {
+									aSprite.getOnKeyReleased().handle(event);
 								}
 							}
 						}
@@ -60,10 +60,10 @@ public abstract class World extends Pane {
 						public void handle(KeyEvent event) {
 							if(getOnKeyPressed() != null) 
 								getOnKeyPressed().handle(event);
-							List<Sprites> myActors = getObjects(Sprites.class);
-							for (Sprites anActor: myActors) {
-								if (anActor.getOnKeyPressed() != null) {
-									anActor.getOnKeyPressed().handle(event);
+							List<Sprites> mySprites = getObjects(Sprites.class);
+							for (Sprites aSprite: mySprites) {
+								if (aSprite.getOnKeyPressed() != null) {
+									aSprite.getOnKeyPressed().handle(event);
 								}
 							}
 						}
@@ -86,12 +86,12 @@ public abstract class World extends Pane {
     }
     
   //****************************************************MODEL***********************************************************
-    public void add(Sprites actor) {//model
-        getChildren().add(actor);
+    public void add(Sprites sprite) {//model
+        getChildren().add(sprite);
     }
 
-    public void remove(Sprites actor) {//model
-        getChildren().remove(actor);
+    public void remove(Sprites sprite) {//model
+        getChildren().remove(sprite);
     }
 
     /** @refactor 
@@ -100,17 +100,17 @@ public abstract class World extends Pane {
      *  instead of someArray.add((A)n);
      *  added try and catch
      */
-    public <A extends Sprites> List<A> getObjects(Class<A> cls) {//model
-        ArrayList<A> someArray = new ArrayList<A>();
+    public <S extends Sprites> List<S> getObjects(Class<S> cls) {//model
+        ArrayList<S> someArray = new ArrayList<S>();
         for (Node n: getChildren()) {
             if (cls.isInstance(n)) {
             	try {
                 	@SuppressWarnings("unchecked")
-					A a = (A)n;
-    				someArray.add(a);
+					S s = (S)n;
+    				someArray.add(s);
             	}
             	catch(Exception e) {
-            		System.out.println(e);
+            		e.getStackTrace();
             	}
 
             	
@@ -124,10 +124,10 @@ public abstract class World extends Pane {
             @Override
             public void handle(long now) {
                 act(now);
-                List<Sprites> actors = getObjects(Sprites.class);
+                List<Sprites> sprites = getObjects(Sprites.class);
                 
-                for (Sprites anActor: actors) {
-                	anActor.act(now);
+                for (Sprites aSprite: sprites) {
+                	aSprite.act(now);
                 }
       
             }

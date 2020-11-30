@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public abstract class Sprites extends ImageView{
 
+	
+
 	//***********************************************************************VIEW*********************************************************************
     public void move(double dx, double dy) { //view
         setX(getX() + dx);
@@ -23,11 +25,11 @@ public abstract class Sprites extends ImageView{
         public void act(long now) {} //view
 
 //***********************************************************************CONTROLLER*****************************************************************        
-    public <A extends Sprites> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){ //controller
-        ArrayList<A> someArray = new ArrayList<A>();
-        for (A actor: getWorld().getObjects(cls)) {
-            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-                someArray.add(actor);
+    public <S extends Sprites> java.util.List<S> getIntersectingObjects(java.lang.Class<S> cls){ //controller
+        ArrayList<S> someArray = new ArrayList<S>();
+        for (S sprite: getWorld().getObjects(cls)) {
+            if (sprite != this && sprite.intersects(this.getBoundsInLocal())) {
+                someArray.add(sprite);
             }
         }
         return someArray;
@@ -37,11 +39,11 @@ public abstract class Sprites extends ImageView{
         
     }
 
-    public <A extends Sprites> A getOneIntersectingObject(java.lang.Class<A> cls) { //controller
-        ArrayList<A> someArray = new ArrayList<A>();
-        for (A actor: getWorld().getObjects(cls)) {
-            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-                someArray.add(actor);
+    public <S extends Sprites> S getOneIntersectingObject(java.lang.Class<S> cls) { //controller
+        ArrayList<S> someArray = new ArrayList<S>();
+        for (S sprite: getWorld().getObjects(cls)) {
+            if (sprite != this && sprite.intersects(this.getBoundsInLocal())) {
+                someArray.add(sprite);
                 break;
             }
         }

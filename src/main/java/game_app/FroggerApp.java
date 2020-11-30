@@ -66,9 +66,9 @@ public class FroggerApp extends Application {
         HBox menuhbox = new HBox(10);       //MAKE 2 MORE FILE -MAINMENU.JAVA & MENUBUTTON.JAVA and also extract handle() in animationtimer
         menuhbox.setTranslateX(15);
         menuhbox.setTranslateY(300);
-        MenuButton btnPlay = MenuButton.createMenuButton("PLAY");
-        MenuButton btnManual = MenuButton.createMenuButton("MANUAL");
-        MenuButton btnExit = MenuButton.createMenuButton("EXIT");
+        Button btnPlay = Button.createButton("PLAY");
+        Button btnManual = Button.createButton("MANUAL");
+        Button btnExit = Button.createButton("EXIT");
         menuhbox.getChildren().addAll(btnPlay, btnManual, btnExit);
         Rectangle rect = new Rectangle(800, 600);
         rect.setFill(Color.BLUE);
@@ -86,9 +86,9 @@ public class FroggerApp extends Application {
         HBox manualhbox = new HBox(20);
         manualhbox.setTranslateX(5);
         manualhbox.setTranslateY(490);
-        MenuButton manualplay = MenuButton.createMenuButton("PLAY");
-        MenuButton manualexit = MenuButton.createMenuButton("EXIT");
-        MenuButton manualmenu = MenuButton.createMenuButton("BACK TO MENU");
+        Button manualplay = Button.createButton("PLAY");
+        Button manualexit = Button.createButton("EXIT");
+        Button manualmenu = Button.createButton("BACK TO MENU");
         Rectangle rect1 = new Rectangle(800, 50);
         rect1.setFill(Color.DARKCYAN);
         rect1.setOpacity(0.8);
@@ -98,8 +98,8 @@ public class FroggerApp extends Application {
         
         // frogger game scene
 		setGameroot( new MyStage());
-		setScenegame(new Scene(getGameroot(),600,800));//745
-		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropmain.png"));
+		setScenegame(new Scene(getGameroot(),598,745));//745
+		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.png"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
 		 */		
@@ -365,9 +365,9 @@ public class FroggerApp extends Application {
 //**********************************************************************************************************************************************
  
 	/*
-	 * public static class MenuButton extends StackPane { public Text text;
+	 * public static class Button extends StackPane { public Text text;
 	 * 
-	 * public MenuButton(String name) { text = new Text(name); text.getFont();
+	 * public Button(String name) { text = new Text(name); text.getFont();
 	 * text.setFont(Font.font(20)); text.setFill(Color.WHITE);
 	 * 
 	 * Rectangle bg = new Rectangle(250, 30); bg.setOpacity(0.6);

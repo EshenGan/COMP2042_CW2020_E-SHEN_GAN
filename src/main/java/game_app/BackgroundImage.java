@@ -9,7 +9,7 @@ public class BackgroundImage extends Sprites{
 	
 //**************************************************CONTROLLER****************************************************************
 	public BackgroundImage(String imageLink) { 
-		setImage(new Image(imageLink, 600,800, true, true));
+		setImage(new Image(imageLink,600,800, true, true));
 		
 	}
 
