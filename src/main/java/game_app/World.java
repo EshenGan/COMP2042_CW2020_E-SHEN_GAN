@@ -105,7 +105,8 @@ public abstract class World extends Pane {
         for (Node n: getChildren()) {
             if (cls.isInstance(n)) {
             	try {
-                	A a = (A)n;
+                	@SuppressWarnings("unchecked")
+					A a = (A)n;
     				someArray.add(a);
             	}
             	catch(Exception e) {
