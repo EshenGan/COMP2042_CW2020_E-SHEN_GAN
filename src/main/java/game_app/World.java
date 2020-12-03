@@ -23,14 +23,13 @@ public abstract class World extends Pane {
 	 */
     private AnimationTimer timer;
 
-  //****************************************************VIEW***********************************************************
+  //****************************************************VIEW************************************************************************
     //public abstract void act(long now);
     /** @Refactor
-     * pull up method from subclass MyStage
+     * pull up method from subclass Bgm
      */
     public void act(long now) {} //view
-
-//****************************************************CONTROLLER***********************************************************
+//****************************************************CONTROLLER********************************************************************
     public World() { //controller
     	
     	sceneProperty().addListener(new ChangeListener<Scene>() {

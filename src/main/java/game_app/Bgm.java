@@ -1,5 +1,6 @@
-/**@Remove
+/**@RemoveAndRename
  * remove all unused imports
+ * changed file name from MyStage to Bgm
  */
 package game_app;
 
@@ -8,7 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
-public class MyStage extends World{
+public class Bgm extends World{
 	private MediaPlayer mediaPlayer;
 	/**@Refactor
 	 * act method pulled to superclass

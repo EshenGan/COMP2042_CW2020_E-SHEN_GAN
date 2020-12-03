@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -32,7 +33,7 @@ public class FroggerApp extends Application {
 	 * create setter and getter for encapsulated field
 	 */
 	private AnimationTimer timer;
-	private MyStage gameroot;
+	private Bgm gameroot;
 	private Frog frog1;
 	private Scene scenegame;
 	public Scene scenemenu;
@@ -40,6 +41,7 @@ public class FroggerApp extends Application {
 	private BackgroundImage froggerbackground;
 	public int[] record;
 	public int rounds; 
+	public int pauseflag=0;
 	
 	
 //*********************************************************************VIEW****************************************************************************
@@ -63,13 +65,13 @@ public class FroggerApp extends Application {
         menuroot.getChildren().addAll(img4menu);
         
         // menu bar buttons
-        HBox menuhbox = new HBox(10);       //MAKE 2 MORE FILE -MAINMENU.JAVA & MENUBUTTON.JAVA and also extract handle() in animationtimer
+        HBox menuhbox = new HBox(10);       //MAKE FILE -MAINMENU.JAVA  and also extract handle() in animationtimer
         menuhbox.setTranslateX(15);
         menuhbox.setTranslateY(300);
-        Button btnPlay = Button.createButton("PLAY");
-        Button btnManual = Button.createButton("MANUAL");
-        Button btnExit = Button.createButton("EXIT");
-        menuhbox.getChildren().addAll(btnPlay, btnManual, btnExit);
+        Button menuplay = Button.createButton("PLAY");
+        Button menumanual = Button.createButton("MANUAL");
+        Button menuexit = Button.createButton("EXIT");
+        menuhbox.getChildren().addAll(menuplay, menumanual, menuexit);
         Rectangle rect = new Rectangle(800, 600);
         rect.setFill(Color.BLUE);
         rect.setOpacity(0.2);
@@ -89,17 +91,18 @@ public class FroggerApp extends Application {
         Button manualplay = Button.createButton("PLAY");
         Button manualexit = Button.createButton("EXIT");
         Button manualmenu = Button.createButton("BACK TO MENU");
+        manualhbox.getChildren().addAll(manualplay, manualmenu, manualexit);
         Rectangle rect1 = new Rectangle(800, 50);
         rect1.setFill(Color.DARKCYAN);
         rect1.setOpacity(0.8);
-        manualhbox.getChildren().addAll(manualplay, manualmenu, manualexit);
         rect1.setTranslateY(480);
         manualroot.getChildren().addAll(rect1, manualhbox);
         
         // frogger game scene
-		setGameroot( new MyStage());
+        //setGameroot(World.createbgm());
+		setGameroot( new Bgm());
 		setScenegame(new Scene(getGameroot(),598,745));//745
-		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.png"));
+		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
 		 */		
@@ -113,21 +116,84 @@ public class FroggerApp extends Application {
 		buildObstacles();
 		primaryStage.getIcons().add(new Image("file:src/main/resources/icon-frogger-boxart-96x96.png"));
 		primaryStage.setTitle("FROGGER ARCADE GAME by E-Shen Gan");
+		
+		//game buttons
+		VBox gamebox = new VBox(5);
+		gamebox.setTranslateX(5);
+		gamebox.setTranslateY(5);
+		Button gamepause = Button.createButton("PAUSE");
+		Button gameexit = Button.createButton("EXIT");
+		gamebox.getChildren().addAll(gamepause,gameexit);
+		getGameroot().getChildren().addAll(gamebox);
+		
+		//pauselayer
+		VBox pausebox = new VBox(30);
+		pausebox.setTranslateX(185);
+		pausebox.setTranslateY(300);
+		Button gameresume = Button.createButton("RESUME");
+		Button gameExit = Button.createButton("EXIT");
+		pausebox.getChildren().addAll(gameresume,gameExit);
+		Rectangle pauselayer = new Rectangle(598,745);
+        pauselayer.setOpacity(0.8);
+		
 		primaryStage.setScene(scenemenu);
 		primaryStage.show();
 		
 		//button actions
-        btnPlay.setOnMouseClicked(event -> {
+		gamepause.setOnMouseClicked(event ->{
+			if(pauseflag == 0) {
+				getGameroot().getChildren().addAll(pauselayer,pausebox);
+				pauseflag=1;
+			}
+			if(gamepause.isDisabled() == false) {
+			getGameroot().stop();
+			getGameroot().stopMusic();
+			stop();
+			pauselayer.setDisable(false);
+			pauselayer.setFill(Color.DARKBLUE);
+			gameresume.setVisible(true);
+			gameExit.setVisible(true);
+	        gameresume.setDisable(false);
+	        gameExit.setDisable(false);			
+	        gamepause.setDisable(true);
+	        gameexit.setDisable(true);
+
+			}
+		});
+		
+		gameresume.setOnMouseClicked(event ->{
+			if(gameresume.isDisabled() == false) {
+				pauselayer.setFill(Color.TRANSPARENT);
+				pauselayer.setDisable(true);
+				gameresume.setVisible(false);
+				gameExit.setVisible(false);
+				primaryStage.setScene(getScenegame());
+				start();
+				gamepause.setDisable(false);
+				gameexit.setDisable(false);	
+				gameresume.setDisable(true);
+				gameExit.setDisable(true);
+			}			
+
+		});
+		gameExit.setOnMouseClicked(event ->{
+			System.exit(0);
+		});
+		
+		gameexit.setOnMouseClicked(event ->{
+			System.exit(0);
+		});
+		
+        menuplay.setOnMouseClicked(event -> {
             primaryStage.setScene(getScenegame()); // frogger game scene
             start();
         });
 		
-        
-        btnManual.setOnMouseClicked(event -> {
+        menumanual.setOnMouseClicked(event -> {
         	primaryStage.setScene(scenemanual);
         });
         
-        btnExit.setOnMouseClicked(event -> {
+        menuexit.setOnMouseClicked(event -> {
             System.exit(0);
         });
         
@@ -156,6 +222,7 @@ public class FroggerApp extends Application {
 	 */
 	protected void start() { //controller
 		getGameroot().start();
+		//World.createbgm().playMusic();
 		getGameroot().playMusic();
     	createTimer();
         getTimer().start();
@@ -182,22 +249,22 @@ public class FroggerApp extends Application {
         			try {
         				FileWriter board = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\"
         						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt",true);
-        				BufferedWriter output = new BufferedWriter(board);
+        				BufferedWriter writescore = new BufferedWriter(board);
         				BufferedReader readscore = new BufferedReader(new FileReader("D:\\(A)Y2_CSAI\\software maintenance\\"
         						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt"));
         				Alert alert = new Alert(AlertType.INFORMATION);
         				String currentline;
                     	if (getFrog1().getStop()) {// if end is equal to 5 then 
-                    		//System.out.print("STOP:");
                     		getGameroot().stopMusic();
+                    		//World.createbgm().stopMusic(); // stopMusic();
                     		stop();
                     		getGameroot().stop();
                     		
                     		alert.setTitle("You Have Won The Game!");
                     		alert.setHeaderText("Your Score: "+getFrog1().getPoints()+"!");
-							output.write(""+getFrog1().getPoints());
-		        			output.newLine();
-		        			output.close();
+							writescore.write(""+getFrog1().getPoints());
+		        			writescore.newLine();
+		        			writescore.close();
 		        			while((currentline = readscore.readLine()) != null) {
 		        				//currentline = readscore.readLine();
 		        				int x = Integer.parseUnsignedInt(currentline);
@@ -318,14 +385,14 @@ public class FroggerApp extends Application {
 		return timer;
 	}
 
-	public MyStage getGameroot() {
+	public Bgm getGameroot() {
 		return gameroot;
 	}
 	
 	/**@Refactor
 	 * method hiding since it is only used within the class
 	 */
-	protected void setGameroot(MyStage gameroot) {
+	protected void setGameroot(Bgm gameroot) {
 		this.gameroot = gameroot;
 	}
 
@@ -364,28 +431,5 @@ public class FroggerApp extends Application {
 }
 //**********************************************************************************************************************************************
  
-	/*
-	 * public static class Button extends StackPane { public Text text;
-	 * 
-	 * public Button(String name) { text = new Text(name); text.getFont();
-	 * text.setFont(Font.font(20)); text.setFill(Color.WHITE);
-	 * 
-	 * Rectangle bg = new Rectangle(250, 30); bg.setOpacity(0.6);
-	 * bg.setFill(Color.BLACK); bg.setEffect(new GaussianBlur(3.5));
-	 * 
-	 * setAlignment(Pos.CENTER_LEFT); setRotate(-0.5); getChildren().addAll(bg,
-	 * text);
-	 * 
-	 * setOnMouseEntered(event -> { bg.setTranslateX(10); text.setTranslateX(10);
-	 * bg.setFill(Color.WHITE); text.setFill(Color.BLACK); });
-	 * 
-	 * setOnMouseExited(event -> { bg.setTranslateX(0); text.setTranslateX(0);
-	 * bg.setFill(Color.BLACK); text.setFill(Color.WHITE); });
-	 * 
-	 * DropShadow drop = new DropShadow(50, Color.WHITE); drop.setInput(new Glow());
-	 * 
-	 * setOnMousePressed(event -> setEffect(drop)); setOnMouseReleased(event ->
-	 * setEffect(null)); } }
-	 */
 
 
