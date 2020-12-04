@@ -99,7 +99,7 @@ public class FroggerApp extends Application {
         manualroot.getChildren().addAll(rect1, manualhbox);
         
         // frogger game scene
-        //setGameroot(World.createbgm());
+        //setGameroot(GamePane.createbgm());
 		setGameroot( new Bgm());
 		setScenegame(new Scene(getGameroot(),598,745));//745
 		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
@@ -223,7 +223,7 @@ public class FroggerApp extends Application {
 	 */
 	protected void start() { //controller
 		getGameroot().start();
-		//World.createbgm().playMusic();
+		//GamePane.createbgm().playMusic();
 		getGameroot().playMusic();
     	createTimer();
         getTimer().start();
@@ -257,7 +257,7 @@ public class FroggerApp extends Application {
         				String currentline;
                     	if (getFrog1().getStop()) {// if end is equal to 5 then 
                     		getGameroot().stopMusic();
-                    		//World.createbgm().stopMusic(); // stopMusic();
+                    		//GamePane.createbgm().stopMusic(); // stopMusic();
                     		stop();
                     		getGameroot().stop();
                     		

@@ -1,5 +1,7 @@
 /**@Remove
+ * @Rename
  * remove all unused imports
+ * rename World to GamePane
  */
 package game_app;
 
@@ -16,7 +18,7 @@ import javafx.scene.layout.Pane;
 
 
 
-public abstract class World extends Pane {
+public abstract class GamePane extends Pane {
 	/**@Refactor
 	 * self encapsulating field to avoid direct access of field  even within own class
 	 * create setter and getter for encapsulated field
@@ -30,7 +32,7 @@ public abstract class World extends Pane {
      */
     public void act(long now) {} //view
 //****************************************************CONTROLLER********************************************************************
-    public World() { //controller
+    public GamePane() { //controller
     	
     	sceneProperty().addListener(new ChangeListener<Scene>() {
 

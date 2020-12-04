@@ -9,7 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
-public class Bgm extends World{
+public class Bgm extends GamePane{
 	private MediaPlayer mediaPlayer;
 	/**@Refactor
 	 * act method pulled to superclass

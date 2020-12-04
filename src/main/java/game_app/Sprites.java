@@ -2,6 +2,7 @@
  * @Rename
  * remove all unused imports
  * rename Actor.java to Sprites.java 
+ * rename getWorld() to getGamePane()
  */
 package game_app;
 
@@ -27,7 +28,7 @@ public abstract class Sprites extends ImageView{
 //***********************************************************************CONTROLLER*****************************************************************        
     public <S extends Sprites> java.util.List<S> getIntersectingObjects(java.lang.Class<S> cls){ //controller
         ArrayList<S> someArray = new ArrayList<S>();
-        for (S sprite: getWorld().getObjects(cls)) {
+        for (S sprite: getGamePane().getObjects(cls)) {
             if (sprite != this && sprite.intersects(this.getBoundsInLocal())) {
                 someArray.add(sprite);
             }
@@ -41,7 +42,7 @@ public abstract class Sprites extends ImageView{
 
     public <S extends Sprites> S getOneIntersectingObject(java.lang.Class<S> cls) { //controller
         ArrayList<S> someArray = new ArrayList<S>();
-        for (S sprite: getWorld().getObjects(cls)) {
+        for (S sprite: getGamePane().getObjects(cls)) {
             if (sprite != this && sprite.intersects(this.getBoundsInLocal())) {
                 someArray.add(sprite);
                 break;
@@ -51,8 +52,8 @@ public abstract class Sprites extends ImageView{
     }
 
 //***********************************************************************MODEL**********************************************************************
-    public World getWorld() { // model
-        return (World) getParent();
+    public GamePane getGamePane() { // model
+        return (GamePane) getParent();
     }
 
     public double getWidth() { //model

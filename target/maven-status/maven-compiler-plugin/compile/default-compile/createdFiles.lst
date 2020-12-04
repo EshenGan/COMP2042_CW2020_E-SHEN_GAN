@@ -1,16 +1,16 @@
 game_app\Frog.class
 game_app\Turtle.class
 game_app\Frog$2.class
-game_app\World.class
+game_app\GamePane.class
 game_app\FroggerApp$1.class
-game_app\World$1.class
+game_app\GamePane$1$2.class
+game_app\GamePane$2.class
 game_app\Frog$1.class
 game_app\Digit.class
 game_app\Log.class
 game_app\BubbleSort.class
-game_app\World$1$1.class
+game_app\GamePane$1.class
 game_app\FroggerApp.class
-game_app\World$2.class
 game_app\Sprites.class
 game_app\Button.class
 game_app\BackgroundImage.class
@@ -18,4 +18,4 @@ game_app\End.class
 game_app\Obstacle.class
 game_app\Bgm.class
 game_app\WetTurtle.class
-game_app\World$1$2.class
+game_app\GamePane$1$1.class
