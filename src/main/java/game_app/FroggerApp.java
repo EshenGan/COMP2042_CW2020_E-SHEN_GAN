@@ -16,7 +16,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,14 +33,20 @@ public class FroggerApp extends Application {
 	 */
 	private AnimationTimer timer;
 	private Bgm gameroot;
+//	public Bgm gameroot2;
+//	public Bgm gameroot3;
 	private Frog frog1;
-	private Scene scenegame;
+	private Scene scenegame1;
+//	public Scene scenegame2;
+//	public Scene scenegame3;
 	public Scene scenemenu;
 	public Scene scenemanual;
 	private BackgroundImage froggerbackground;
 	public int[] record;
 	public int rounds; 
 	public int pauseflag=0;
+	public MenuPage menu;
+	public ManualPage manual;
 	
 	
 //*********************************************************************VIEW****************************************************************************
@@ -54,8 +59,8 @@ public class FroggerApp extends Application {
 	 * method overriding on application class
 	 */
 	public void start(Stage primaryStage) throws Exception { 
-		record = new int[5];
-		rounds =0;
+	record = new int[5];
+	rounds =0;
 		primaryStage.getIcons().add(new Image("file:src/main/resources/icon-frogger-boxart-96x96.png"));
 		primaryStage.setTitle("FROGGER ARCADE GAME by E-Shen Gan");
 		// main menu scene
@@ -64,45 +69,22 @@ public class FroggerApp extends Application {
         scenemenu = new Scene(menuroot);
         Image img0 = new Image("file:src/main/resources/wallpaper-frogger-boxart-800x600.jpg",800,600,true,true);
         ImageView img4menu = new ImageView(img0);
-        menuroot.getChildren().addAll(img4menu);
-        
-        // menu bar buttons
-        HBox menuhbox = new HBox(10);       
-        menuhbox.setTranslateX(15);
-        menuhbox.setTranslateY(300);
-        Button menuplay = Button.createButton("PLAY",250,30);
-        Button menumanual = Button.createButton("MANUAL",250,30);
-        Button menuexit = Button.createButton("EXIT",250,30);
-        menuhbox.getChildren().addAll(menuplay, menumanual, menuexit);
-        Rectangle rect = new Rectangle(800, 600);
-        rect.setFill(Color.BLUE);
-        rect.setOpacity(0.2);
-        menuroot.getChildren().addAll(rect, menuhbox);
-        
+        menu = new MenuPage();
+        menuroot.getChildren().addAll(img4menu,menu);
+ 
         //user guide scene
         Pane manualroot = new Pane();
         manualroot.setPrefSize(800, 525);
         scenemanual = new Scene(manualroot);
         Image img1 = new Image("file:src/main/resources/user_guide.png",800,525,true,true);
-        ImageView manual = new ImageView(img1);
-        manualroot.getChildren().addAll(manual);
-        //user guide buttons
-        HBox manualhbox = new HBox(20);
-        manualhbox.setTranslateX(5);
-        manualhbox.setTranslateY(490);
-        Button manualplay = Button.createButton("PLAY",240,30);
-        Button manualexit = Button.createButton("EXIT",240,30);
-        Button manualmenu = Button.createButton("BACK TO MENU",240,30);
-        manualhbox.getChildren().addAll(manualplay, manualmenu, manualexit);
-        Rectangle rect1 = new Rectangle(800, 50);
-        rect1.setFill(Color.DARKCYAN);
-        rect1.setOpacity(0.8);
-        rect1.setTranslateY(480);
-        manualroot.getChildren().addAll(rect1, manualhbox);
+        ImageView img4manual = new ImageView(img1);
+        manual = new ManualPage();
+        manualroot.getChildren().addAll(img4manual,manual);
+
         
-        //  game scene
+        //  game scene MAYBE CAN MOVE ENITRE Gameroot and scenegame1 to other class and invoke here
 		setGameroot( new Bgm());
-		setScenegame(new Scene(getGameroot(),598,745));//745
+		setScenegame1(new Scene(getGameroot(),598,745));//745
 		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
@@ -115,6 +97,16 @@ public class FroggerApp extends Application {
 		buildFrogHome();
 		getGameroot().add(getFrog1());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
+		
+//		gameroot2 = new Bgm();
+//		scenegame2 = new Scene(gameroot2,598,745);
+//		
+//		
+//		
+//		gameroot3 = new Bgm();
+//		scenegame3 = new Scene(gameroot3,598,745);
+		
+		
 
 		
 		//game scene buttons
@@ -167,7 +159,7 @@ public class FroggerApp extends Application {
 				pauselayer.setDisable(true);
 				gameresume.setVisible(false);
 				gameExit.setVisible(false);
-				primaryStage.setScene(getScenegame());
+				primaryStage.setScene(getScenegame1());
 				start();
 				gamepause.setDisable(false);
 				gameexit.setDisable(false);	
@@ -184,29 +176,29 @@ public class FroggerApp extends Application {
 			System.exit(0);
 		});
 		
-        menuplay.setOnMouseClicked(event -> {
-            primaryStage.setScene(getScenegame()); // frogger game scene
+		menu.getMenuplay().setOnMouseClicked(event -> {
+			primaryStage.setScene(getScenegame1()); // frogger game scene
+			start();
+  		});
+	
+  		menu.getMenumanual().setOnMouseClicked(event -> {
+  			primaryStage.setScene(scenemanual);
+  		});
+  
+  		menu.getMenuexit().setOnMouseClicked(event -> {
+  			System.exit(0);
+  		});
+        
+        manual.getManualplay().setOnMouseClicked(event -> {
+            primaryStage.setScene(getScenegame1());
             start();
         });
-		
-        menumanual.setOnMouseClicked(event -> {
-        	primaryStage.setScene(scenemanual);
-        });
         
-        menuexit.setOnMouseClicked(event -> {
-            System.exit(0);
-        });
-        
-        manualplay.setOnMouseClicked(event -> {
-            primaryStage.setScene(getScenegame());
-            start();
-        });
-        
-        manualmenu.setOnMouseClicked(event -> {
+        manual.getManualmenu().setOnMouseClicked(event -> {
             primaryStage.setScene(scenemenu);
         });
 
-        manualexit.setOnMouseClicked(event -> {
+       manual.getManualexit().setOnMouseClicked(event -> {
             System.exit(0);
           
         });
@@ -223,7 +215,6 @@ public class FroggerApp extends Application {
 	 */
 	protected void start() { //controller
 		getGameroot().start();
-		//GamePane.createbgm().playMusic();
 		getGameroot().playMusic();
     	createTimer();
         getTimer().start();
@@ -408,15 +399,15 @@ public class FroggerApp extends Application {
 		this.frog1 = frog1;
 	}
 
-	public Scene getScenegame() {
-		return scenegame;
+	public Scene getScenegame1() {
+		return scenegame1;
 	}
 
 	/**@Refactor
 	 * method hiding since it is only used within the class
 	 */
-	protected void setScenegame(Scene scenegame) {
-		this.scenegame = scenegame;
+	protected void setScenegame1(Scene scenegame) {
+		this.scenegame1 = scenegame;
 	}
 
 	public BackgroundImage getFroggerbackground() {
