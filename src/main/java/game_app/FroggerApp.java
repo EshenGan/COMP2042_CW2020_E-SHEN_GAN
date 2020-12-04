@@ -56,6 +56,8 @@ public class FroggerApp extends Application {
 	public void start(Stage primaryStage) throws Exception { 
 		record = new int[5];
 		rounds =0;
+		primaryStage.getIcons().add(new Image("file:src/main/resources/icon-frogger-boxart-96x96.png"));
+		primaryStage.setTitle("FROGGER ARCADE GAME by E-Shen Gan");
 		// main menu scene
         Pane menuroot = new Pane();
         menuroot.setPrefSize(800, 600);
@@ -65,12 +67,12 @@ public class FroggerApp extends Application {
         menuroot.getChildren().addAll(img4menu);
         
         // menu bar buttons
-        HBox menuhbox = new HBox(10);       //MAKE FILE -MAINMENU.JAVA  and also extract handle() in animationtimer
+        HBox menuhbox = new HBox(10);       
         menuhbox.setTranslateX(15);
         menuhbox.setTranslateY(300);
-        Button menuplay = Button.createButton("PLAY");
-        Button menumanual = Button.createButton("MANUAL");
-        Button menuexit = Button.createButton("EXIT");
+        Button menuplay = Button.createButton("PLAY",250,30);
+        Button menumanual = Button.createButton("MANUAL",250,30);
+        Button menuexit = Button.createButton("EXIT",250,30);
         menuhbox.getChildren().addAll(menuplay, menumanual, menuexit);
         Rectangle rect = new Rectangle(800, 600);
         rect.setFill(Color.BLUE);
@@ -84,13 +86,13 @@ public class FroggerApp extends Application {
         Image img1 = new Image("file:src/main/resources/user_guide.png",800,525,true,true);
         ImageView manual = new ImageView(img1);
         manualroot.getChildren().addAll(manual);
-        //manual buttons
+        //user guide buttons
         HBox manualhbox = new HBox(20);
         manualhbox.setTranslateX(5);
         manualhbox.setTranslateY(490);
-        Button manualplay = Button.createButton("PLAY");
-        Button manualexit = Button.createButton("EXIT");
-        Button manualmenu = Button.createButton("BACK TO MENU");
+        Button manualplay = Button.createButton("PLAY",240,30);
+        Button manualexit = Button.createButton("EXIT",240,30);
+        Button manualmenu = Button.createButton("BACK TO MENU",240,30);
         manualhbox.getChildren().addAll(manualplay, manualmenu, manualexit);
         Rectangle rect1 = new Rectangle(800, 50);
         rect1.setFill(Color.DARKCYAN);
@@ -98,8 +100,7 @@ public class FroggerApp extends Application {
         rect1.setTranslateY(480);
         manualroot.getChildren().addAll(rect1, manualhbox);
         
-        // frogger game scene
-        //setGameroot(GamePane.createbgm());
+        //  game scene
 		setGameroot( new Bgm());
 		setScenegame(new Scene(getGameroot(),598,745));//745
 		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
@@ -112,26 +113,25 @@ public class FroggerApp extends Application {
 		buildLogs();
 		buildTurtles();
 		buildFrogHome();
-		getGameroot().add(getFrog1());//DO NOT EVER MOVE THIS method below to other place		
+		getGameroot().add(getFrog1());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
-		primaryStage.getIcons().add(new Image("file:src/main/resources/icon-frogger-boxart-96x96.png"));
-		primaryStage.setTitle("FROGGER ARCADE GAME by E-Shen Gan");
+
 		
-		//game buttons
+		//game scene buttons
 		VBox gamebox = new VBox(5);
 		gamebox.setTranslateX(5);
 		gamebox.setTranslateY(5);
-		Button gamepause = Button.createButton("PAUSE");
-		Button gameexit = Button.createButton("EXIT");
+		Button gamepause = Button.createButton("PAUSE",150,30);
+		Button gameexit = Button.createButton("EXIT",150,30);
 		gamebox.getChildren().addAll(gamepause,gameexit);
 		getGameroot().getChildren().addAll(gamebox);
 		
-		//pauselayer
+		//pauselayer buttons
 		VBox pausebox = new VBox(30);
 		pausebox.setTranslateX(185);
 		pausebox.setTranslateY(300);
-		Button gameresume = Button.createButton("RESUME");
-		Button gameExit = Button.createButton("EXIT");
+		Button gameresume = Button.createButton("RESUME",250,30);
+		Button gameExit = Button.createButton("EXIT",250,30);
 		pausebox.getChildren().addAll(gameresume,gameExit);
 		Rectangle pauselayer = new Rectangle(598,745);
         pauselayer.setOpacity(0.8);
@@ -289,7 +289,7 @@ public class FroggerApp extends Application {
 
 		        			}
 		        			readscore.close();
-			        		alert.setContentText("Top 5 high scores\nHighest recorded score:\n"+record[0]+"\n Other high scores"
+			        		alert.setContentText("Top 5 high scores\nHighest recorded score:\n"+record[0]+"\n Other high scores:\n"
 					        		+record[1]+"\n"+record[2]+"\n"+record[3]+
 					        		"\n"+record[4]+"\n\nHighest possible score: 800");
 			        		alert.show();

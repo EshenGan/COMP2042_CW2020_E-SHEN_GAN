@@ -18,8 +18,8 @@ public class Button extends StackPane {
 	 * @param label
 	 * @return
 	 */
-    public static Button createButton(String label) { // view
-		return new Button(label);
+    public static Button createButton(String label,double width,double height) { // view
+		return new Button(label,width,height);
 	}
 
 	
@@ -31,14 +31,17 @@ public class Button extends StackPane {
 	public void setTxt(Text txt) { //model
 		this.txt = txt;
 	}
+	
+	
+	
 
-	private Button(String label) { //controller
+	private Button(String label, double width, double height) { //controller
 		setTxt(new Text(label));
         getTxt().getFont();
         getTxt().setFont(Font.font(20));
         getTxt().setFill(Color.WHITE);
 
-        Rectangle rect0 = new Rectangle(250, 30);
+        Rectangle rect0 = new Rectangle(width, height); //250,30
         rect0.setOpacity(0.6);
         rect0.setFill(Color.BLACK);
         rect0.setEffect(new GaussianBlur(3.5));
@@ -48,8 +51,8 @@ public class Button extends StackPane {
         getChildren().addAll(rect0, txt);
 
         setOnMouseEntered(event -> {
-            rect0.setTranslateX(10);
-            getTxt().setTranslateX(10);
+            rect0.setTranslateX(5);
+            getTxt().setTranslateX(5);
             rect0.setFill(Color.WHITE);
             getTxt().setFill(Color.BLACK);
         });
@@ -61,7 +64,7 @@ public class Button extends StackPane {
             getTxt().setFill(Color.WHITE);
         });
 
-        DropShadow ds = new DropShadow(50, Color.WHITE);
+        DropShadow ds = new DropShadow(30, Color.WHITE);
         ds.setInput(new Glow());
 
         setOnMousePressed(e -> setEffect(ds));
