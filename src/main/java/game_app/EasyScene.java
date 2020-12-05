@@ -32,13 +32,13 @@ public class EasyScene {
 	private BackgroundImage froggerbackground;
 	public int[] record;
 	public int rounds; 
+	//private GameSceneButtons scenebuttons;
 	
 
 	public EasyScene() { //view
 	record = new int[5];
 	rounds =0;
 		setGameroot1( new Bgm());
-		setScenegame1(new Scene(getGameroot1(),598,745));//745
 		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
@@ -51,6 +51,9 @@ public class EasyScene {
 		buildFrogHome();
 		getGameroot1().add(getFrog1());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
+		setScenegame1(new Scene(getGameroot1(),598,745));//745
+		//setScenebuttons(new GameSceneButtons());
+		//getGameroot1().getChildren().addAll(getScenebuttons());
 	}
 
 //*****************************************************************************************************************************************************
@@ -249,4 +252,12 @@ public BackgroundImage getFroggerbackground() {
 protected void setFroggerbackground(BackgroundImage froggerbackground) {
 	this.froggerbackground = froggerbackground;
 }
+
+//public GameSceneButtons getScenebuttons() {
+//	return scenebuttons;
+//}
+//
+//public void setScenebuttons(GameSceneButtons scenebuttons) {
+//	this.scenebuttons = scenebuttons;
+//}
 }
