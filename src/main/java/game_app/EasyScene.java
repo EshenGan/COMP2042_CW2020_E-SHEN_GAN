@@ -82,7 +82,9 @@ protected void createTimer() { //model
         	if (getFrog1().getChangeScore()) {
         		setNumber(getFrog1().getPoints());
         	}
-   			try {
+        	/**@Extension
+        	 */
+   			try { 
     				FileWriter board = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\"
     						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard.txt",true);
     				BufferedWriter writescore = new BufferedWriter(board);

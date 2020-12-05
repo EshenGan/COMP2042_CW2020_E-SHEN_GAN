@@ -25,7 +25,6 @@ public class Log extends Sprites {
 		setImage(new Image(imageLink, size,size, true, true));
 		setX(xpos);
 		setY(ypos);
-		//speed = s;
 		setSpeed(s);
 		
 	}
