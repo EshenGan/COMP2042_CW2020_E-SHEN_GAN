@@ -3,15 +3,16 @@ game_app\MenuPage.class
 game_app\Turtle.class
 game_app\Frog$2.class
 game_app\GamePane.class
-game_app\FroggerApp$1.class
 game_app\GamePane$1$2.class
 game_app\GamePane$2.class
+game_app\EasyScene.class
 game_app\Frog$1.class
 game_app\Digit.class
 game_app\ManualPage.class
 game_app\Log.class
 game_app\BubbleSort.class
 game_app\GamePane$1.class
+game_app\EasyScene$1.class
 game_app\FroggerApp.class
 game_app\Sprites.class
 game_app\Button.class
