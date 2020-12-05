@@ -32,7 +32,7 @@ public class FroggerApp extends Application {
 	 * create setter and getter for encapsulated field
 	 */
 	private AnimationTimer timer;
-	private Bgm gameroot;
+	private Bgm gameroot1;
 //	public Bgm gameroot2;
 //	public Bgm gameroot3;
 	private Frog frog1;
@@ -83,19 +83,19 @@ public class FroggerApp extends Application {
 
         
         //  game scene MAYBE CAN MOVE ENITRE Gameroot and scenegame1 to other class and invoke here
-		setGameroot( new Bgm());
-		setScenegame1(new Scene(getGameroot(),598,745));//745
+		setGameroot1( new Bgm());
+		setScenegame1(new Scene(getGameroot1(),598,745));//745
 		setFroggerbackground(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
 		 */		
 		setFrog1(Frog.createFrog("file:src/main/resources/froggerUp.png"));
-		getGameroot().add(getFroggerbackground());
-		getGameroot().add(new Digit(0, 40, 360, 25)); //changed xpos to 560 from 360, changed back to 360
+		getGameroot1().add(getFroggerbackground());
+		getGameroot1().add(new Digit(0, 40, 360, 25)); //changed xpos to 560 from 360, changed back to 360
 		buildLogs();
 		buildTurtles();
 		buildFrogHome();
-		getGameroot().add(getFrog1());//DO NOT EVER MOVE THIS method to other place		
+		getGameroot1().add(getFrog1());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
 		
 //		gameroot2 = new Bgm();
@@ -116,7 +116,7 @@ public class FroggerApp extends Application {
 		Button gamepause = Button.createButton("PAUSE",150,30);
 		Button gameexit = Button.createButton("EXIT",150,30);
 		gamebox.getChildren().addAll(gamepause,gameexit);
-		getGameroot().getChildren().addAll(gamebox);
+		getGameroot1().getChildren().addAll(gamebox);
 		
 		//pauselayer buttons
 		VBox pausebox = new VBox(30);
@@ -134,12 +134,12 @@ public class FroggerApp extends Application {
 		//button actions
 		gamepause.setOnMouseClicked(event ->{
 			if(pauseflag == 0) {
-				getGameroot().getChildren().addAll(pauselayer,pausebox);
+				getGameroot1().getChildren().addAll(pauselayer,pausebox);
 				pauseflag=1;
 			}
 			if(gamepause.isDisabled() == false) {
-			getGameroot().stop();
-			getGameroot().stopMusic();
+			getGameroot1().stop();
+			getGameroot1().stopMusic();
 			stop();
 			pauselayer.setDisable(false);
 			pauselayer.setFill(Color.DARKBLUE);
@@ -209,13 +209,13 @@ public class FroggerApp extends Application {
 //****************************************************************************CONTROLLER***************************************************************
 
 	/**@Refactor
-	 * gameroot.start() is moved into start() 
+	 * gameroot1.start() is moved into start() 
 	 * from start(Stage primaryStage)
 	 * method hiding since it is only used within the class
 	 */
 	protected void start() { //controller
-		getGameroot().start();
-		getGameroot().playMusic();
+		getGameroot1().start();
+		getGameroot1().playMusic();
     	createTimer();
         getTimer().start();
     }
@@ -247,10 +247,10 @@ public class FroggerApp extends Application {
         				Alert alert = new Alert(AlertType.INFORMATION);
         				String currentline;
                     	if (getFrog1().getStop()) {// if end is equal to 5 then 
-                    		getGameroot().stopMusic();
+                    		getGameroot1().stopMusic();
                     		//GamePane.createbgm().stopMusic(); // stopMusic();
                     		stop();
-                    		getGameroot().stop();
+                    		getGameroot1().stop();
                     		
                     		alert.setTitle("You Have Won The Game!");
                     		alert.setHeaderText("Your Score: "+getFrog1().getPoints()+"!");
@@ -306,7 +306,7 @@ public class FroggerApp extends Application {
     		  int d = n / 10;
     		  int k = n - d * 10;
     		  n = d;
-    		  getGameroot().add(new Digit(k, 40, 360 - shift, 25)); //changed xpos to 560, changed back to 360
+    		  getGameroot1().add(new Digit(k, 40, 360 - shift, 25)); //changed xpos to 560, changed back to 360
     		  shift+=30;
     		}
     }
@@ -319,11 +319,11 @@ public class FroggerApp extends Application {
     	int ax = 13 , bx= 141 , cx=269;
     	int dx = 398, ex=527;
     	int y = 96;
-    	getGameroot().add(new End(ax,y));
-    	getGameroot().add(new End(bx,y));
-    	getGameroot().add(new End(cx,y));
-    	getGameroot().add(new End(dx,y));
-    	getGameroot().add(new End(ex,y));
+    	getGameroot1().add(new End(ax,y));
+    	getGameroot1().add(new End(bx,y));
+    	getGameroot1().add(new End(cx,y));
+    	getGameroot1().add(new End(dx,y));
+    	getGameroot1().add(new End(ex,y));
     }
     
     /**@Refactor
@@ -332,14 +332,14 @@ public class FroggerApp extends Application {
      */
     protected void buildLogs() {
     	//should i extract the parameters into objects instead?
-    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 0, 166, 0.75));
-    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 220, 166, 0.75));
-    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 440, 166, 0.75));
-    	getGameroot().add(new Log("file:src/main/resources/logs.png", 300, 0, 276, -2));
-    	getGameroot().add(new Log("file:src/main/resources/logs.png", 300, 400, 276, -2));
-    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 50, 329, 0.75));
-    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 270, 329, 0.75));
-    	getGameroot().add(new Log("file:src/main/resources/log3.png", 150, 490, 329, 0.75));
+    	getGameroot1().add(new Log("file:src/main/resources/log3.png", 150, 0, 166, 0.75));
+    	getGameroot1().add(new Log("file:src/main/resources/log3.png", 150, 220, 166, 0.75));
+    	getGameroot1().add(new Log("file:src/main/resources/log3.png", 150, 440, 166, 0.75));
+    	getGameroot1().add(new Log("file:src/main/resources/logs.png", 300, 0, 276, -2));
+    	getGameroot1().add(new Log("file:src/main/resources/logs.png", 300, 400, 276, -2));
+    	getGameroot1().add(new Log("file:src/main/resources/log3.png", 150, 50, 329, 0.75));
+    	getGameroot1().add(new Log("file:src/main/resources/log3.png", 150, 270, 329, 0.75));
+    	getGameroot1().add(new Log("file:src/main/resources/log3.png", 150, 490, 329, 0.75));
     }
     
     /** @Refactor
@@ -347,12 +347,12 @@ public class FroggerApp extends Application {
      * method hiding since it is only used within the class
      */
     protected void buildTurtles() {
-    	getGameroot().add(new Turtle(500, 376, -1, 130, 130));
-    	getGameroot().add(new Turtle(300, 376, -1, 130, 130));
-    	getGameroot().add(new WetTurtle(700, 376, -1, 130, 130));
-    	getGameroot().add(new WetTurtle(600, 217, -1, 130, 130));
-    	getGameroot().add(new WetTurtle(400, 217, -1, 130, 130));
-    	getGameroot().add(new WetTurtle(200, 217, -1, 130, 130));
+    	getGameroot1().add(new Turtle(500, 376, -1, 130, 130));
+    	getGameroot1().add(new Turtle(300, 376, -1, 130, 130));
+    	getGameroot1().add(new WetTurtle(700, 376, -1, 130, 130));
+    	getGameroot1().add(new WetTurtle(600, 217, -1, 130, 130));
+    	getGameroot1().add(new WetTurtle(400, 217, -1, 130, 130));
+    	getGameroot1().add(new WetTurtle(200, 217, -1, 130, 130));
     
     }
     
@@ -361,31 +361,31 @@ public class FroggerApp extends Application {
      * method hiding since it is only used within the class
      */
     protected void buildObstacles() {
-    	getGameroot().add(new Obstacle("file:src/main/resources/truck1Right.png", 0, 649, 1, 120, 120));
-    	getGameroot().add(new Obstacle("file:src/main/resources/truck1Right.png", 300, 649, 1, 120, 120));
-    	getGameroot().add(new Obstacle("file:src/main/resources/truck1Right.png", 600, 649, 1, 120, 120));
-    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 100, 597, -1, 50, 50));
-    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 250, 597, -1, 50, 50));
-    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 400, 597, -1, 50, 50));
-    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 550, 597, -1, 50, 50));
-    	getGameroot().add(new Obstacle("file:src/main/resources/truck2Right.png", 0, 540, 1, 200, 200));
-    	getGameroot().add(new Obstacle("file:src/main/resources/truck2Right.png", 500, 540, 1, 200, 200));
-    	getGameroot().add(new Obstacle("file:src/main/resources/car1Left.png", 500, 490, -5, 50, 50));   	
+    	getGameroot1().add(new Obstacle("file:src/main/resources/truck1Right.png", 0, 649, 1, 120, 120));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/truck1Right.png", 300, 649, 1, 120, 120));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/truck1Right.png", 600, 649, 1, 120, 120));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/car1Left.png", 100, 597, -1, 50, 50));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/car1Left.png", 250, 597, -1, 50, 50));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/car1Left.png", 400, 597, -1, 50, 50));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/car1Left.png", 550, 597, -1, 50, 50));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/truck2Right.png", 0, 540, 1, 200, 200));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/truck2Right.png", 500, 540, 1, 200, 200));
+    	getGameroot1().add(new Obstacle("file:src/main/resources/car1Left.png", 500, 490, -5, 50, 50));   	
     }
 
 	public AnimationTimer getTimer() {
 		return timer;
 	}
 
-	public Bgm getGameroot() {
-		return gameroot;
+	public Bgm getGameroot1() {
+		return gameroot1;
 	}
 	
 	/**@Refactor
 	 * method hiding since it is only used within the class
 	 */
-	protected void setGameroot(Bgm gameroot) {
-		this.gameroot = gameroot;
+	protected void setGameroot1(Bgm gameroot1) {
+		this.gameroot1 = gameroot1;
 	}
 
 	public Frog getFrog1() {
@@ -406,8 +406,8 @@ public class FroggerApp extends Application {
 	/**@Refactor
 	 * method hiding since it is only used within the class
 	 */
-	protected void setScenegame1(Scene scenegame) {
-		this.scenegame1 = scenegame;
+	protected void setScenegame1(Scene scenegame1) {
+		this.scenegame1 = scenegame1;
 	}
 
 	public BackgroundImage getFroggerbackground() {
