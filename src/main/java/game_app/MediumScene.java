@@ -18,7 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class MediumScene {
 	private AnimationTimer timer2;
-	private Bgm gameroot2;
+	private GamePane gameroot2;
 	private Frog frog2;
 	private Scene scenegame2;
 	private BackgroundImage froggerbackground2;
@@ -29,7 +29,7 @@ public class MediumScene {
 	public MediumScene() { //view
 	record2 = new int[5];
 	rounds2 =0;
-		setGameroot2( new Bgm());
+		setGameroot2( new GamePane());
 		setFroggerbackground2(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
@@ -51,7 +51,7 @@ public class MediumScene {
 //****************************************************************************CONTROLLER***************************************************************
 
 	/**@Refactor
-	 * gameroot1.start() is moved into start() 
+	 * gameroot2.start() is moved into start() 
 	 */
 	public void start() { //controller
 		getGameroot2().start();
@@ -61,7 +61,9 @@ public class MediumScene {
     }
 
     public void stop() { //controller
-   	getTimer2().stop();
+    	getGameroot2().stop();
+    	getGameroot2().stopMusic();
+    	getTimer2().stop();
     }
 
 //*****************************************************************************************************************************************************	
@@ -81,7 +83,7 @@ protected void createTimer2() { //model
     						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard2.txt"));
     				Alert alert2 = new Alert(AlertType.INFORMATION);
     				String currentline2;
-                	if (getFrog2().getStop()) {// if end is equal to 5 then 
+                	if (getFrog2().gameOver()) { // if frog home is equal to 5 then  
                 		getGameroot2().stopMusic();
                 		//GamePane.createbgm().stopMusic(); // stopMusic();
                 		stop();
@@ -157,11 +159,11 @@ protected void buildFrogHome() {
 	int ax2 = 13 , bx2= 141 , cx2=269;
 	int dx2 = 398, ex2=527;
 	int y2 = 96;
-	getGameroot2().add(new End(ax2,y2));
-	getGameroot2().add(new End(bx2,y2));
-	getGameroot2().add(new End(cx2,y2));
-	getGameroot2().add(new End(dx2,y2));
-	getGameroot2().add(new End(ex2,y2));
+	getGameroot2().add(new Home(ax2,y2));
+	getGameroot2().add(new Home(bx2,y2));
+	getGameroot2().add(new Home(cx2,y2));
+	getGameroot2().add(new Home(dx2,y2));
+	getGameroot2().add(new Home(ex2,y2));
 }
 
 /**@Refactor
@@ -208,12 +210,12 @@ protected void buildObstacles() {
 	getGameroot2().add(new Obstacle("file:src/main/resources/car1Left.png", 500, 490, -8, 50, 50));   	
 }
 
-public Bgm getGameroot2() {
+public GamePane getGameroot2() {
 	return gameroot2;
 }
 
 
-protected void setGameroot2(Bgm gameroot2) {
+protected void setGameroot2(GamePane gameroot2) {
 	this.gameroot2 = gameroot2;
 }
 

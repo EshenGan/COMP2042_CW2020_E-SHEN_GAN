@@ -25,7 +25,7 @@ public class Frog extends Sprites {
 	 private Image imgS2;
 	 private Image imgD2;
 	 private int points = 0;
-	 private int end = 0;
+	 private int home = 0;
 	 private boolean second = false;
 	 private boolean noMove = false;
 	 private final double movement = 13.3333333*2;
@@ -46,7 +46,7 @@ public class Frog extends Sprites {
 	 	public static Frog createFrog(String imageLink) { 
 	 		return new Frog(imageLink);
 	 	}	
-	 ArrayList<End> inter = new ArrayList<End>();
+	 ArrayList<Home> inter = new ArrayList<Home>();
 		@Override
 		public void act(long now) { 
 			if (getY()<0 || getY()>734) {
@@ -142,24 +142,24 @@ public class Frog extends Sprites {
 				 else 
 					 move(-1,0);
 			}
-			else if (getIntersectingObjects(End.class).size() >= 1) {
-				inter = (ArrayList<End>) getIntersectingObjects(End.class);
-				if (getIntersectingObjects(End.class).get(0).isActivated()) {
-					minusEnd(1);
+			else if (getIntersectingObjects(Home.class).size() >= 1) {
+				inter = (ArrayList<Home>) getIntersectingObjects(Home.class);
+				if (getIntersectingObjects(Home.class).get(0).isActivated()) {
+					minusHome(1);
 					nPoints(50);
 				}
 				pPoints(50);
 				setChangeScore(true);
 				setW(800);
-				getIntersectingObjects(End.class).get(0).setEnd();
-				addEnd(1);
+				getIntersectingObjects(Home.class).get(0).reachHome();
+				addHome(1);
 				setX(300);
 				setY(679.8+movement);
 			}
 			else if (getY()<413){
 				setWaterDeath(true);
 			}
-		}//end of act(long now)
+		}//act(long now)
 		
 //******************************************************************CONTROLLER************************************************************************
 	private Frog(String imageLink) { 
@@ -222,9 +222,9 @@ public class Frog extends Sprites {
 			public void handle(KeyEvent event) {
 				if (isNoMove() == false ){
 					if (event.getCode() == KeyCode.W) {	  
-						if (getY() < w) {
+						if (getY() < getW()) {
 							setChangeScore(true);
-							w = getY();
+							setW(getY());//w = getY();
 							pPoints(10);
 						}
 		                move(0, -movement);
@@ -248,12 +248,12 @@ public class Frog extends Sprites {
 			}
 			
 		});
-	}// end of frog constructor
+	}// home of frog constructor
 	
 //********************************************************************************MODEL***********************************************************	
 	
-	public boolean getStop() {
-		return end==5;  //if frog home aka end contains/is equal to 5 then return true
+	public boolean gameOver() {
+		return home==5;  //if frog home contains/is equal to 5 then return true
 	}
 	
 	public void pPoints(int points) {
@@ -268,16 +268,16 @@ public class Frog extends Sprites {
 		return points;
 	}
 
-	public int getEnd() {
-		return end;
+	public int getHome() {
+		return home;
 	}
 
-	public void addEnd(int end) {
-		this.end += end;
+	public void addHome(int home) {
+		this.home += home;
 	}
 
-	public void minusEnd(int end) {
-		this.end -= end;
+	public void minusHome(int home) {
+		this.home -= home;
 	}
 	
 	public boolean isSecond() {

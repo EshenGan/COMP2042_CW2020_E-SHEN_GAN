@@ -22,6 +22,15 @@ public class GameSceneButtons extends Parent {
 		getChildren().addAll(getGamebox());
 	}
 
+	public void enable() {
+		getGamepause().setDisable(false);
+		getGameexit().setDisable(false);	
+	}
+	public void disable() {
+        getGamepause().setDisable(true);
+        getGameexit().setDisable(true);
+	}
+	
 	public Button getGamepause() {
 		return gamepause;
 	}

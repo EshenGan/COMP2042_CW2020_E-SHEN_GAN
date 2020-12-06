@@ -21,7 +21,7 @@ public abstract class Sprites extends ImageView{
         setY(getY() + dy);
     }
     /**@Refactor
-     * pull up method from End.java,BackgroundImage.java ,Digit.java
+     * pull up method from Home.java,BackgroundImage.java ,Digit.java
      */
         public void act(long now) {} //view
 

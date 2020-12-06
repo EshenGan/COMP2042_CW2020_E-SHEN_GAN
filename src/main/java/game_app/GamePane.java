@@ -18,21 +18,23 @@ import javafx.scene.layout.Pane;
 
 
 
-public abstract class GamePane extends Pane {
+public class GamePane extends Pane {
 	/**@Refactor
 	 * self encapsulating field to avoid direct access of field  even within own class
 	 * create setter and getter for encapsulated field
 	 */
     private AnimationTimer timer;
+    private Bgm bgm;
 
-  //****************************************************VIEW************************************************************************
+	//****************************************************VIEW************************************************************************
     //public abstract void act(long now);
     /** @Refactor
-     * pull up method from subclass Bgm
+     * Bgm class not subclass , replace inheritance with aggregation
      */
     public void act(long now) {} //view
 //****************************************************CONTROLLER********************************************************************
     public GamePane() { //controller
+    	 setBgm(new Bgm());
     	
     	sceneProperty().addListener(new ChangeListener<Scene>() {
 
@@ -84,6 +86,14 @@ public abstract class GamePane extends Pane {
 
     public void stop() {//controller
         getTimer().stop();
+    }
+    
+    public void playMusic() {
+    	getBgm().playMusic();
+    }
+    
+    public void stopMusic() {
+    	getBgm().stopMusic();
     }
     
   //****************************************************MODEL***********************************************************
@@ -138,4 +148,11 @@ public abstract class GamePane extends Pane {
     public AnimationTimer getTimer() {//model
     	return timer;
     }
+    
+    public Bgm getBgm() {
+  		return bgm;
+  	}
+  	public void setBgm(Bgm bgm) {
+  		this.bgm = bgm;
+  	}
 }

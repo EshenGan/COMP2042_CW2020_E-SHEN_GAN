@@ -18,7 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class HardScene {
 	private AnimationTimer timer3;
-	private Bgm gameroot3;
+	private GamePane gameroot3;
 	private Frog frog3;
 	private Scene scenegame3;
 	private BackgroundImage froggerbackground3;
@@ -29,7 +29,7 @@ public class HardScene {
 	public HardScene() { //view
 	record3 = new int[5];
 	rounds3 =0;
-		setGameroot3( new Bgm());
+		setGameroot3( new GamePane());
 		setFroggerbackground3(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
 		 * Replace constructor with factory method
@@ -51,7 +51,7 @@ public class HardScene {
 //****************************************************************************CONTROLLER***************************************************************
 
 	/**@Refactor
-	 * gameroot1.start() is moved into start() 
+	 * gameroot3.start() is moved into start() 
 	 */
 	public void start() { //controller
 		getGameroot3().start();
@@ -61,7 +61,9 @@ public class HardScene {
     }
 
     public void stop() { //controller
-   	getTimer3().stop();
+    	getGameroot3().stop();
+    	getGameroot3().stopMusic();
+    	getTimer3().stop();
     }
 
 //*****************************************************************************************************************************************************	
@@ -81,7 +83,7 @@ protected void createTimer3() { //model
     						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard3.txt"));
     				Alert alert3 = new Alert(AlertType.INFORMATION);
     				String currentline3;
-                	if (getFrog3().getStop()) {// if end is equal to 5 then 
+                	if (getFrog3().gameOver()) { // if frog home is equal to 5 then 
                 		getGameroot3().stopMusic();
                 		//GamePane.createbgm().stopMusic(); // stopMusic();
                 		stop();
@@ -95,8 +97,8 @@ protected void createTimer3() { //model
 	        			while((currentline3 = readscore3.readLine()) != null) {
 	        				//currentline = readscore.readLine();
 	        				int x3 = Integer.parseUnsignedInt(currentline3);
-		        			for(int i=0;i<5;i++) {
-		        				if(x3 == record3[i]) {
+		        			for(int j=0;j<5;j++) {
+		        				if(x3 == record3[j]) {
 		        					x3=0;
 		        				}
 		        			}		        				
@@ -157,11 +159,11 @@ protected void buildFrogHome() {
 	int ax3 = 13 , bx3= 141 , cx3=269;
 	int dx3 = 398, ex3=527;
 	int y3 = 96;
-	getGameroot3().add(new End(ax3,y3));
-	getGameroot3().add(new End(bx3,y3));
-	getGameroot3().add(new End(cx3,y3));
-	getGameroot3().add(new End(dx3,y3));
-	getGameroot3().add(new End(ex3,y3));
+	getGameroot3().add(new Home(ax3,y3));
+	getGameroot3().add(new Home(bx3,y3));
+	getGameroot3().add(new Home(cx3,y3));
+	getGameroot3().add(new Home(dx3,y3));
+	getGameroot3().add(new Home(ex3,y3));
 }
 
 /**@Refactor
@@ -208,12 +210,12 @@ protected void buildObstacles() {
 	getGameroot3().add(new Obstacle("file:src/main/resources/car1Left.png", 500, 490, -11, 50, 50));   	
 }
 
-public Bgm getGameroot3() {
+public GamePane getGameroot3() {
 	return gameroot3;
 }
 
 
-protected void setGameroot3(Bgm gameroot3) {
+protected void setGameroot3(GamePane gameroot3) {
 	this.gameroot3 = gameroot3;
 }
 

@@ -1,23 +1,24 @@
+/**@Refactor
+ * rename End class to Home class, setEnd() to reachHome()
+ * encapsulate field and created setter and getter method
+ * act(long now) method pulled to superclass Sprites
+ */
 package game_app;
 
 import javafx.scene.image.Image;
 
-public class End extends Sprites{
-	/**@Refactor
-	 * encapsulate field and created setter and getter method
-	 * act(long now) method pulled to superclass
-	 */
+public class Home extends Sprites{
 	private boolean activated = false;
 	
 //**************************************************CONTROLLER****************************************************************
-	public End(int x, int y) {
+	public Home(int x, int y) {
 		setX(x);
 		setY(y);
 		setImage(new Image("file:src/main/resources/End.png", 60, 60, true, true));
 	}
 	
 //**************************************************MODEL****************************************************************
-	public void setEnd() {
+	public void reachHome() {
 		setImage(new Image("file:src/main/resources/FrogEnd.png", 60, 60, true, true));
 		setActivated(true);
 	}

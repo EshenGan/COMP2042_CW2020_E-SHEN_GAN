@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class ManualPage extends Parent{
-    private Button manualplay;
     private Button manualexit;
     private Button manualmenu;
 	private Scene scenemanual;
@@ -31,10 +30,10 @@ public class ManualPage extends Parent{
 	        HBox manualhbox = new HBox(20);
 	        manualhbox.setTranslateX(5);
 	        manualhbox.setTranslateY(490);
-	        setManualplay(Button.createButton("PLAY",240,30));
+
 	        setManualexit(Button.createButton("EXIT",240,30));
 	        setManualmenu(Button.createButton("BACK TO MENU",240,30));
-	        manualhbox.getChildren().addAll(getManualplay(), getManualmenu(), getManualexit());
+	        manualhbox.getChildren().addAll(getManualmenu(), getManualexit());
 	        Rectangle rect1 = new Rectangle(800, 50);
 	        rect1.setFill(Color.DARKCYAN);
 	        rect1.setOpacity(0.8);
@@ -42,14 +41,6 @@ public class ManualPage extends Parent{
 	        getManualroot().getChildren().addAll(rect1, manualhbox);
 	        
 	        setScenemanual(new Scene(getManualroot()));
-		}
-
-		public Button getManualplay() {
-			return manualplay;
-		}
-
-		public void setManualplay(Button manualplay) {
-			this.manualplay = manualplay;
 		}
 
 		public Button getManualexit() {
