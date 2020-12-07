@@ -25,7 +25,6 @@ public class Obstacle extends Sprites {
 		setImage(new Image(imageLink, w,h, true, true));
 		setX(xpos);
 		setY(ypos);
-		//speed = s;
 		setSpeed(s);
 	}
 	

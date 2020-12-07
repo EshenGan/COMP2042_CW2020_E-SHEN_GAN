@@ -11,6 +11,8 @@ import javafx.scene.media.MediaPlayer;
 
 public class Bgm {
 	private MediaPlayer mediaPlayer;
+	private String musicFile;
+	private Media sound;
 	/**@Refactor
 	 * Bgm not subclass of GamePane, replace with aggregation, promote loose coupling
 	 * self encapsulating field to avoid direct access of field  even within own class
@@ -19,9 +21,9 @@ public class Bgm {
 	
 //*****************************CONTROLLER*************************************
 	public void playMusic() {
-		String musicFile = "src/main/resources/Frogger Main Song Theme (loop).mp3";   
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		setMediaPlayer(new MediaPlayer(sound));
+		setMusicFile("src/main/resources/Frogger Main Song Theme (loop).mp3");   
+		setSound(new Media(new File(getMusicFile()).toURI().toString()));
+		setMediaPlayer(new MediaPlayer(getSound()));
 		getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
 		getMediaPlayer().play();
 	}
@@ -32,13 +34,29 @@ public class Bgm {
 	
 
 //*****************************MODEL***************************************	
-	protected void setMediaPlayer(MediaPlayer mediaPlayer ) {
+	public void setMediaPlayer(MediaPlayer mediaPlayer ) {
 		this.mediaPlayer = mediaPlayer;
 		
 	}
 	
-	protected MediaPlayer getMediaPlayer() {
+	public MediaPlayer getMediaPlayer() {
 		 return mediaPlayer;
+	}
+
+	public String getMusicFile() {
+		return musicFile;
+	}
+
+	public void setMusicFile(String musicFile) {
+		this.musicFile = musicFile;
+	}
+
+	public Media getSound() {
+		return sound;
+	}
+
+	public void setSound(Media sound) {
+		this.sound = sound;
 	}
 
 }

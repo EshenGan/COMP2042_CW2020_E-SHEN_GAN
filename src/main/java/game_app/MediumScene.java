@@ -3,32 +3,20 @@
  */
 
 package game_app;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+
 
 
 
 public class MediumScene {
-	private AnimationTimer timer2;
+	private ScoreHandler scorehandler2;
 	private GamePane gameroot2;
 	private Frog frog2;
 	private Scene scenegame2;
 	private BackgroundImage froggerbackground2;
-	public int[] record2;
-	public int rounds2; 
+	private final String fp2 = "D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard2.txt";
 	
-
-	public MediumScene() { //view
-	record2 = new int[5];
-	rounds2 =0;
+public MediumScene() { //view
 		setGameroot2( new GamePane());
 		setFroggerbackground2(new BackgroundImage("file:src/main/resources/backdropfrogger600x800.jpg"));
 		/**@RefactorFactoryMethodDesignPattern
@@ -43,8 +31,6 @@ public class MediumScene {
 		getGameroot2().add(getFrog2());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
 		setScenegame2(new Scene(getGameroot2(),598,745));//745
-		//setScenebuttons(new GameSceneButtons());
-		//getGameroot1().getChildren().addAll(getScenebuttons());
 	}
 
 //*****************************************************************************************************************************************************
@@ -56,101 +42,18 @@ public class MediumScene {
 	public void start() { //controller
 		getGameroot2().start();
 		getGameroot2().playMusic();
-		createTimer2();
-        getTimer2().start();
+		setScorehandler2(ScoreHandler.createScoreHandler(getFrog2(), getGameroot2(), fp2));
+		getScorehandler2().getAt().start();
     }
 
     public void stop() { //controller
     	getGameroot2().stop();
     	getGameroot2().stopMusic();
-    	getTimer2().stop();
+    	getScorehandler2().getAt().stop();
     }
 
 //*****************************************************************************************************************************************************	
 //************************************************************MODEL*******************************************************************************
-protected void createTimer2() { //model
-    timer2 = new AnimationTimer() {
-    	@Override
-       public void handle(long now) {
-        	if (getFrog2().getChangeScore()) {
-        		setNumber2(getFrog2().getPoints());
-        	}
-   			try {
-    				FileWriter board2 = new FileWriter("D:\\(A)Y2_CSAI\\software maintenance\\"
-    						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard2.txt",true);
-    				BufferedWriter writescore2 = new BufferedWriter(board2);
-    				BufferedReader readscore2 = new BufferedReader(new FileReader("D:\\(A)Y2_CSAI\\software maintenance\\"
-    						+ "COMP2042_CW2020_E-SHEN_GAN\\Frogger\\scoreboard2.txt"));
-    				Alert alert2 = new Alert(AlertType.INFORMATION);
-    				String currentline2;
-                	if (getFrog2().gameOver()) { // if frog home is equal to 5 then  
-                		getGameroot2().stopMusic();
-                		//GamePane.createbgm().stopMusic(); // stopMusic();
-                		stop();
-                		getGameroot2().stop();
-                		
-                		alert2.setTitle("You Have Won The Game!");
-                		alert2.setHeaderText("Your Score: "+getFrog2().getPoints()+"!");
-						writescore2.write(""+getFrog2().getPoints());
-	        			writescore2.newLine();
-	        			writescore2.close();
-	        			while((currentline2 = readscore2.readLine()) != null) {
-	        				//currentline = readscore.readLine();
-	        				int x2 = Integer.parseUnsignedInt(currentline2);
-		        			for(int i=0;i<5;i++) {
-		        				if(x2 == record2[i]) {
-		        					x2=0;
-		        				}
-		        			}		        				
-	        				
-		        			if (rounds2 == 5 || rounds2 > 5) {
-	        				  if(x2 > record2[4]) {
-	        					  record2[4] = x2;
-	        				  }
-		        			}
-        			
-		        			if(rounds2 <5) {
-		        				record2[rounds2] = x2;
-		        			}
-		        			rounds2++;
-		        			BubbleSort.bubbleSort(record2);
-
-	        			}
-	        			readscore2.close();
-		        		alert2.setContentText("Top 5 high scores\nHighest recorded score:\n"+record2[0]+"\n Other high scores:\n"
-				        		+record2[1]+"\n"+record2[2]+"\n"+record2[3]+
-				        		"\n"+record2[4]+"\n\nHighest possible score: 800");
-		        		alert2.show();
-		        		System.out.println("success"+rounds2);
-	        			//System.exit(0);
-                	}
-
-        		
-				} 
-    			catch (IOException e) {
-				e.printStackTrace();}
-        }    
-    };
-}
-
-public AnimationTimer getTimer2() {
-	return timer2;
-}
-
-/** @Refactor
- *extract method
- */
-
-protected void setNumber2(int n) {//model
-	int shift2 = 0;
-	while (n > 0) {
-		  int d2 = n / 10;
-		  int k2 = n - d2 * 10;
-		  n = d2;
-		  getGameroot2().add(new Digit(k2, 40, 360 - shift2, 25)); //changed xpos to 560, changed back to 360
-		  shift2+=30;
-		}
-}
 
 /** @Refactor
  * extract method
@@ -244,5 +147,13 @@ public BackgroundImage getFroggerbackground2() {
 
 protected void setFroggerbackground2(BackgroundImage froggerbackground2) {
 	this.froggerbackground2 = froggerbackground2;
+}
+
+public ScoreHandler getScorehandler2() {
+	return scorehandler2;
+}
+
+public void setScorehandler2(ScoreHandler scorehandler2) {
+	this.scorehandler2 = scorehandler2;
 }
 }
