@@ -40,10 +40,11 @@ private JFXPanel panel= new JFXPanel();
 		s = new Media(new File(bgm.getMusicFile()).toURI().toString());	
 		mp = new MediaPlayer(bgm.getSound());
 		mp.setCycleCount(MediaPlayer.INDEFINITE);
-		assertEquals(str,bgm.getMusicFile(),"not the same file");
-		assertNotEquals(s,bgm.getSound(),"same media object");
-		assertNotEquals(mp,bgm.getMediaPlayer(),"same mediaplayer object");
-		assertEquals(mp.getCycleCount(), bgm.getMediaPlayer().getCycleCount(),"not the same cycle count");
+		assertEquals(str,bgm.getMusicFile(),"Error:not the same mp3 file");
+		assertTrue(bgm.getMediaPlayer()!=null,"Error: media player does not exist");
+		assertNotEquals(s,bgm.getSound(),"Error: same media object");
+		assertNotEquals(mp,bgm.getMediaPlayer(),"Error: same mediaplayer object");
+		assertEquals(mp.getCycleCount(), bgm.getMediaPlayer().getCycleCount(),"Error: not the same cycle count");
 		}
 		catch (Exception e) {
 			e.getStackTrace();

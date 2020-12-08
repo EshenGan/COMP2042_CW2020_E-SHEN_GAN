@@ -1,10 +1,10 @@
 game_app\Frog.class
 game_app\MenuPage.class
+game_app\ScoreHandler$1.class
 game_app\Turtle.class
 game_app\Frog$2.class
 game_app\GamePane.class
-game_app\HardScene$1.class
-game_app\MediumScene$1.class
+game_app\ScoreHandler.class
 game_app\GamePane$1$2.class
 game_app\GamePane$2.class
 game_app\HardScene.class
@@ -16,7 +16,6 @@ game_app\Log.class
 game_app\BubbleSort.class
 game_app\GamePane$1.class
 game_app\Home.class
-game_app\EasyScene$1.class
 game_app\FroggerApp.class
 game_app\MediumScene.class
 game_app\Sprites.class

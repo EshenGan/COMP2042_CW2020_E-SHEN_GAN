@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.image.Image;
 
 public class ObstacleTest {
 
@@ -28,14 +26,14 @@ public class ObstacleTest {
 	/**
 	 * to test whether the obstacle object properties are set up exactly as expected
 	 */
-	void test() { 
+	void testObstacle() { 
 		try {
-			assertNotEquals( new Image("file:src/main/resources/truck1Right.png",120,120,true,true),ob.getImage(),"image object is the same");
-			assertEquals(120,ob.getImage().getRequestedHeight(),"height is not the same");
-			assertEquals(120,ob.getImage().getRequestedWidth(),"width is not the same");
-			assertEquals(1,ob.getSpeed(),"speed is not the same");
-			assertEquals(0,ob.getX(),"x position is not the same");
-			assertEquals(649,ob.getY(),"y position is not the same");
+			assertTrue(ob.getImage()!=null,"Error: image object cannot be null");
+			assertEquals(120,ob.getImage().getRequestedHeight(),"Error: height is not the same");
+			assertEquals(120,ob.getImage().getRequestedWidth(),"Error: width is not the same");
+			assertEquals(1,ob.getSpeed(),"Error: speed is not the same");
+			assertEquals(0,ob.getX(),"Error: x position is not the same");
+			assertEquals(649,ob.getY(),"Error: y position is not the same");
 		}
 		catch (Exception e) {
 			e.getStackTrace();
@@ -47,11 +45,11 @@ public class ObstacleTest {
 	 */
 	void testact() {
 		ob.setSpeed(-3);
-		assertEquals(-3,ob.getSpeed(),"speed is not the same as what is set");
+		assertEquals(-3,ob.getSpeed(),"Error: speed is not the same as what is set");
 		ob.setX(-60);
-		assertEquals(-60,ob.getX(),"x position is not the same as what is set");
+		assertEquals(-60,ob.getX(),"Error: x position is not the same as what is set");
 		ob.act(0);
-		assertEquals(600,ob.getX(),"x position should be 600");
+		assertEquals(600,ob.getX(),"Error: x position is not 600, expected 600");
 		
 	}
 	
