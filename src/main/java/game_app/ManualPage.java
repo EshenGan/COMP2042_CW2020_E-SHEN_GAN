@@ -17,14 +17,15 @@ public class ManualPage extends Parent{
     private Button manualmenu;
 	private Scene scenemanual;
 	private Pane manualroot;
+	private ImageView img4manual;
 
 		public ManualPage () {
 	        //user guide scene
 	        setManualroot(new Pane());
 	        getManualroot().setPrefSize(800, 525);
 	        Image img1 = new Image("file:src/main/resources/user_guide.png",800,525,true,true);
-	        ImageView img4manual = new ImageView(img1);
-	        getManualroot().getChildren().addAll(img4manual);
+	        setImg4manual(new ImageView(img1));
+	        getManualroot().getChildren().addAll(getImg4manual());
 
 	        //user guide buttons
 	        HBox manualhbox = new HBox(20);
@@ -73,5 +74,13 @@ public class ManualPage extends Parent{
 
 		public void setManualroot(Pane manualroot) {
 			this.manualroot = manualroot;
+		}
+
+		public ImageView getImg4manual() {
+			return img4manual;
+		}
+
+		public void setImg4manual(ImageView img4manual) {
+			this.img4manual = img4manual;
 		}
 }

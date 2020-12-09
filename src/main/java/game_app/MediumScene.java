@@ -5,9 +5,6 @@
 package game_app;
 import javafx.scene.Scene;
 
-
-
-
 public class MediumScene {
 	private ScoreHandler scorehandler2;
 	private GamePane gameroot2;

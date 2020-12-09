@@ -1,6 +1,8 @@
 package game_app;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -24,6 +26,7 @@ class ScoreHandlerTest {
 		try {
 		fpT = "D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\testboard.txt";
 		shT = ScoreHandler.createScoreHandler(frogT, testrootT, fpT);
+		shT.setBoard(new FileWriter(fpT,false)); //override appending property of filewriter in scorehandler
 		
 		}
 		catch(Exception e) {
@@ -33,6 +36,7 @@ class ScoreHandlerTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
+		
 	}
 
 	@Test
@@ -42,13 +46,13 @@ class ScoreHandlerTest {
 	 */
 	void testfilewriter() { 
 			try {
-				//shT.setWritescore(new BufferedWriter(new FileWriter(fpT)));
 				shT.getWritescore().write("this is a test");
-				//shT.setReadscore(new BufferedReader(new FileReader(fpT)));
 				shT.getWritescore().close();
 				s = shT.getReadscore().readLine();
 				shT.getReadscore().close();
 				assertEquals("this is a test",s,"Error: not the same string, expected 'this is a test'" );
+				
+				
 				
 			}
 			catch(IOException ioe) {

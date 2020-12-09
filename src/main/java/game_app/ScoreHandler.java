@@ -29,7 +29,6 @@ public class ScoreHandler {
 	}
 
 	private ScoreHandler (Frog frog, GamePane gameroot, String filepath) {
-//		try {
 		setRecord(new int[5]);
 		setRounds(0);
 		try {
@@ -47,10 +46,6 @@ public class ScoreHandler {
 	            	/**@Extension
 	            	 */
 	            	try { 
-	//        				setBoard(new FileWriter(filepath,true));
-	//        				setWritescore(new BufferedWriter(getBoard()));
-	//        				setReadboard(new FileReader(filepath));
-	//        				setReadscore(new BufferedReader(getReadboard()));
 	        				Alert alert = new Alert(AlertType.INFORMATION);
 	        				String currentline;
 	                    	if (frog.gameOver()) {// if frog home is equal to 5 then 
@@ -104,7 +99,7 @@ public class ScoreHandler {
 			ioe.printStackTrace();
 		}
 	}
-//	}
+
 	
 	public void setNumber(int n,GamePane gameroot) {
 		int shift = 0;
