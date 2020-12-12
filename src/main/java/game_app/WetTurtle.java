@@ -1,14 +1,15 @@
+	/**@Refactor
+	 * self encapsulating field to avoid direct access of field even within own class
+	 * create setter and getter for encapsulated field
+	 * remove unused field and unused import packages
+	 * constructor in default access
+	 */
 package game_app;
 
 import javafx.scene.image.Image;
 
 public class WetTurtle extends Sprites{
-	/**@Refactor
-	 * self encapsulating field to avoid direct access of field 
-	 * even within own class
-	 * create setter and getter for encapsulated field
-	 * remove unused field 
-	 */
+
 	private Image turtle1;
 	private Image turtle2;
 	private Image turtle3;
@@ -16,7 +17,7 @@ public class WetTurtle extends Sprites{
 	private int speed;
 	private boolean sunk = false;
 	
-//*****************************VIEW*************************************
+//*****************************CONTROLLER*************************************
 	@Override
 	public void act(long now) {
 
@@ -37,20 +38,20 @@ public class WetTurtle extends Sprites{
 					setSunk(true);
 				}
 			
-		move(getSpeed() , 0);
-		if (getX() > 600 && getSpeed()>0)
-			setX(-200);
-		if (getX() < -75 && getSpeed()<0)
-			setX(600);
+				move(getSpeed() , 0);
+				
+				if (getX() > 600 && getSpeed()>0)
+					setX(-200);
+				if (getX() < -75 && getSpeed()<0)
+					setX(600);
 	}
-	
-//*****************************CONTROLLER*************************************
-	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
+
+	WetTurtle(int xpos, int ypos, int s, int w, int h) {
 		setTurtles(w,h);
 		setX(xpos);
 		setY(ypos);
 		setSpeed(s);
-		setImage(turtle2);
+		setImage(getTurtle2());
 	}
 	
 //*****************************MODEL*************************************

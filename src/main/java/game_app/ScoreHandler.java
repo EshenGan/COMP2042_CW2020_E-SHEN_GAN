@@ -1,6 +1,11 @@
 /**@Refactor
- * extracted class
+ * extracted class for createTimer()
  * always favor aggregation/composition over inheritance
+ * replace method with method object
+ */
+/**@Extension
+ * top scores pop up listed at end of each round
+ * permanent high score list, using a file to store score
  */
 package game_app;
 
@@ -24,11 +29,8 @@ public class ScoreHandler {
 	private BufferedWriter writescore;
 	private BufferedReader readscore;
 	
-	public static ScoreHandler createScoreHandler(Frog frog, GamePane gameroot, String filepath) {
-		return new ScoreHandler(frog, gameroot, filepath);
-	}
-
-	private ScoreHandler (Frog frog, GamePane gameroot, String filepath) {
+//***********************************************************CONTROLLER*********************************************************************
+	public ScoreHandler (Frog frog, GamePane gameroot, String filepath) {
 		setRecord(new int[5]);
 		setRounds(0);
 		try {
@@ -43,8 +45,7 @@ public class ScoreHandler {
 	            	if (frog.getChangeScore()) {
 	            		setNumber(frog.getPoints(),gameroot);
 	            	}
-	            	/**@Extension
-	            	 */
+	            	
 	            	try { 
 	        				Alert alert = new Alert(AlertType.INFORMATION);
 	        				String currentline;
@@ -101,17 +102,17 @@ public class ScoreHandler {
 	}
 
 	
-	public void setNumber(int n,GamePane gameroot) {
+	private void setNumber(int n,GamePane gameroot) {
 		int shift = 0;
 		while (n > 0) {
 			  int d = n / 10;
 			  int k = n - d * 10;
 			  n = d;
-			 gameroot.add(new Digit(k, 40, 360 - shift, 25));
+			 gameroot.add(SpriteFactory.createDigit(k, 40, 360 - shift, 25));
 			  shift+=30;
 			}
 	}
-
+//************************************************************************MODEL***************************************************
 	public AnimationTimer getAt() {
 		return at;
 	}
@@ -169,5 +170,4 @@ public class ScoreHandler {
 	public void setReadscore(BufferedReader readscore) {
 		this.readscore = readscore;
 	}
-
 }

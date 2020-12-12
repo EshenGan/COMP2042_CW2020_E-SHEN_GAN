@@ -1,21 +1,21 @@
+/**@Refactor
+ * Rename Animal.java to Frog.java
+ * self encapsulating field to avoid direct access of field even within own class
+ * create setter and getter for encapsulated field
+ * remove unused field 
+ * constructor in default access
+ */
 package game_app;
 
-/**@refactor
- * Changed Animal.java to Frog.java
- */
 import java.util.ArrayList;
+
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+public class Frog extends Sprites{
 
-public class Frog extends Sprites {
-	/**@Refactor
-	 * self encapsulating field to avoid direct access of field even within own class
-	 * create setter and getter for encapsulated field
-	 * remove unused field 
-	 */
 	 private Image imgW1;
 	 private Image imgA1;
 	 private Image imgS1;
@@ -25,30 +25,113 @@ public class Frog extends Sprites {
 	 private Image imgS2;
 	 private Image imgD2;
 	 private int points = 0;
-	 private int home = 0;
 	 private boolean second = false;
 	 private boolean noMove = false;
 	 private final double movement = 13.3333333*2;
 	 private final double movementX = 10.666666*2;
 	 private final int imgSize = 40;
+	 private boolean changeScore = false;
+	 private double w = 800;
+	 private int home = 0;
 	 private boolean carDeath = false;
 	 private boolean waterDeath = false;
-	 private boolean changeScore = false;
 	 private int carD = 0;
 	 private int waterD = 0;
-	 private double w = 800;
-	 
-//*********************************************************************VIEW*******************************************************************
-	 /**@RefactorFactoryMethodDesignPattern
-	  * Replace constructor with factory method
-	  * Frog constructor is encapsulated
-	  */
-	 	public static Frog createFrog(String imageLink) { 
-	 		return new Frog(imageLink);
-	 	}	
+	 private String mode;
+//******************************************************************CONTROLLER************************************************************************
+	Frog(String imageLink,String mode) {
+		setMode(mode);
+		setImage(new Image(imageLink, imgSize, imgSize, true, true));
+		setX(300); 
+		setY(679.8+movement); 
+		setFrogSprite(imgSize);
+		setOnKeyPressed(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event){
+			/**@Refactor
+			 * consolidate duplicate conditional fragments
+			 * removed the outer most layer of if else statement
+			 * 
+			 */
+				if (isNoMove() == false) {
+					if (isSecond()) {
+						if (event.getCode() == KeyCode.W) {	  
+			                move(0, -movement);
+			                setChangeScore(false);
+			                setImage(getw1());
+			            }
+			            else if (event.getCode() == KeyCode.A) {	            	
+			            	 move(-movementX, 0);
+			            	 setImage(geta1());
+			            }
+			            else if (event.getCode() == KeyCode.S) {	            	
+			            	 move(0, movement);
+			            	 setImage(gets1());
+			            }
+			            else if (event.getCode() == KeyCode.D) {	            	
+			            	 move(movementX, 0);
+			            	 setImage(getd1());
+			            }
+						setSecond(false);
+					}
+					else if (event.getCode() == KeyCode.W) {	            	
+		                move(0, -movement);
+		                setImage(getw2());
+		            }
+		            else if (event.getCode() == KeyCode.A) {	            	
+		            	 move(-movementX, 0);
+		            	 setImage(geta2());
+		            }
+		            else if (event.getCode() == KeyCode.S) {	            	
+		            	 move(0, movement);
+		            	 setImage(gets2());
+		            }
+		            else if (event.getCode() == KeyCode.D) {	            	
+		            	 move(movementX, 0);
+		            	 setImage(getd2());
+		            }
+					setSecond(true);
+				}
+			
+			}// handle method body
+		}// eventhandler instantiation body
+		);// setonkeypressed method call
+		
+		setOnKeyReleased(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event) {
+				if (isNoMove() == false ){
+					if (event.getCode() == KeyCode.W) {	  
+						if (getY() < getW()) {
+							setChangeScore(true);
+							setW(getY());
+							pPoints(10);
+						}
+		                move(0, -movement);
+		                setImage(getw1());
+		            }
+		            else if (event.getCode() == KeyCode.A) {	            	
+		            	 move(-movementX, 0);
+		            	 setImage(geta1());
+		            }
+		            else if (event.getCode() == KeyCode.S) {	            	
+		            	 move(0, movement);
+		            	 setImage(gets1());
+		            }
+		            else if (event.getCode() == KeyCode.D) {	            	
+		            	 move(movementX, 0);
+		            	 setImage(getd1());
+		            }
+				setSecond(false);	
+				}
+
+			}
+			
+		});
+	}// end of frog constructor
+	
 	 ArrayList<Home> inter = new ArrayList<Home>();
 		@Override
-		public void act(long now) { 
+		public void act(long now) {
+			
 			if (getY()<0 || getY()>734) {
 				setX(300);
 				setY(679.8+movement);
@@ -122,25 +205,65 @@ public class Frog extends Sprites {
 			if (getX()>600) {
 				move(-movement*2, 0);
 			}
-			if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+			if (getIntersectingObjects(Vehicles.class).size() >= 1) {
 				setCarDeath(true);
 			}
-			
-			
+			//new
+			if (getIntersectingObjects(Snake.class).size() >= 1) {
+				setCarDeath(true);
+			}			
 			if (getIntersectingObjects(Log.class).size() >= 1 && !isNoMove()) {
-				if(getIntersectingObjects(Log.class).get(0).moveLeft())
-					move(-2,0);
-				else
-					move (.75,0);
+				if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
+					if(getIntersectingObjects(Log.class).get(0).moveLeft()) {
+							move(-2,0);
+					}
+					else {
+						move(.75,0);
+					}
+				}
+				else if(getMode().equalsIgnoreCase("MEDIUM") || getMode().equalsIgnoreCase("M")) {
+					if(getIntersectingObjects(Log.class).get(0).moveLeft()) {
+							move(-2.50,0);
+					}
+					else {
+						move(1.25,0);
+					}
+				}
+				else if(getMode().equalsIgnoreCase("HARD") || getMode().equalsIgnoreCase("H")) {
+					if(getIntersectingObjects(Log.class).get(0).moveLeft()) {
+							move(-3,0);
+					}
+					else {
+						move(1.75,0);
+					}					
+				}
 			}
 			else if (getIntersectingObjects(Turtle.class).size() >= 1 && !isNoMove()) {
-				move(-1,0);
+				if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
+					move(-1,0);
+				}
+				else if (getMode().equalsIgnoreCase("MEDIUM") || getMode().equalsIgnoreCase("M")) {
+					move(-2,0);
+				}
+				else if(getMode().equalsIgnoreCase("HARD") || getMode().equalsIgnoreCase("H")) {
+					move(-3,0);
+				}
+				
 			}
 			else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 				if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) 
 					setWaterDeath(true);
-				 else 
-					 move(-1,0);
+				 else {
+					 if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
+						 move(-1,0);
+					 }
+					 else if(getMode().equalsIgnoreCase("MEDIUM") || getMode().equalsIgnoreCase("M")) {
+						 move(-2,0);
+					 }
+					 else if(getMode().equalsIgnoreCase("HARD") || getMode().equalsIgnoreCase("H")) {
+						 move(-3,0);
+					 }
+				 }				 
 			}
 			else if (getIntersectingObjects(Home.class).size() >= 1) {
 				inter = (ArrayList<Home>) getIntersectingObjects(Home.class);
@@ -160,160 +283,41 @@ public class Frog extends Sprites {
 				setWaterDeath(true);
 			}
 		}//act(long now)
-		
-//******************************************************************CONTROLLER************************************************************************
-	private Frog(String imageLink) { 
-		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(300); 
-		setY(679.8+movement); 
-		setFrogSprite(imgSize);
-		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event){
-			/**@Refactor
-			 * consolidate duplicate conditional fragments
-			 * removed the outer most layer of if else statement
-			 * 
-			 */
-				if (isNoMove() == false) {
-					if (isSecond()) {
-						if (event.getCode() == KeyCode.W) {	  
-			                move(0, -movement);
-			                setChangeScore(false);
-			                setImage(getw1());
-			            }
-			            else if (event.getCode() == KeyCode.A) {	            	
-			            	 move(-movementX, 0);
-			            	 setImage(geta1());
-			            }
-			            else if (event.getCode() == KeyCode.S) {	            	
-			            	 move(0, movement);
-			            	 setImage(gets1());
-			            }
-			            else if (event.getCode() == KeyCode.D) {	            	
-			            	 move(movementX, 0);
-			            	 setImage(getd1());
-			            }
-						setSecond(false);
-					}
-					else if (event.getCode() == KeyCode.W) {	            	
-		                move(0, -movement);
-		                setImage(getw2());
-		            }
-		            else if (event.getCode() == KeyCode.A) {	            	
-		            	 move(-movementX, 0);
-		            	 setImage(geta2());
-		            }
-		            else if (event.getCode() == KeyCode.S) {	            	
-		            	 move(0, movement);
-		            	 setImage(gets2());
-		            }
-		            else if (event.getCode() == KeyCode.D) {	            	
-		            	 move(movementX, 0);
-		            	 setImage(getd2());
-		            }
-					setSecond(true);
-				}
-			
-			}// handle method body
-		}// eventhandler instantiation body
-		);// setonkeypressed method call
-		
-		setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (isNoMove() == false ){
-					if (event.getCode() == KeyCode.W) {	  
-						if (getY() < getW()) {
-							setChangeScore(true);
-							setW(getY());//w = getY();
-							pPoints(10);
-						}
-		                move(0, -movement);
-		                setImage(getw1());
-		            }
-		            else if (event.getCode() == KeyCode.A) {	            	
-		            	 move(-movementX, 0);
-		            	 setImage(geta1());
-		            }
-		            else if (event.getCode() == KeyCode.S) {	            	
-		            	 move(0, movement);
-		            	 setImage(gets1());
-		            }
-		            else if (event.getCode() == KeyCode.D) {	            	
-		            	 move(movementX, 0);
-		            	 setImage(getd1());
-		            }
-				setSecond(false);	
-				}
-
-			}
-			
-		});
-	}// home of frog constructor
 	
 //********************************************************************************MODEL***********************************************************	
 	
-	public boolean gameOver() {
-		return home==5;  //if frog home contains/is equal to 5 then return true
-	}
+	public boolean gameOver() {return home==5;}
 	
-	public void pPoints(int points) {
-		this.points += points;
-	}
+	public void pPoints(int points) {this.points += points;	}
 
-	public void nPoints(int points) {
-		this.points -= points;
-	}
+	public void nPoints(int points) {this.points -= points;	}
 
-	public int getPoints() {
-		return points;
-	}
+	public int getPoints() {return points;	}
 
-	public int getHome() {
-		return home;
-	}
+	public int getHome() {return home;	}
 
-	public void addHome(int home) {
-		this.home += home;
-	}
+	public void addHome(int home) {this.home += home;}
 
-	public void minusHome(int home) {
-		this.home -= home;
-	}
+	public void minusHome(int home) {this.home -= home;	}
 	
-	public boolean isSecond() {
-		return second;
-	}
+	public boolean isSecond() {return second;	}
 
-	public void setSecond(boolean second) {
-		this.second = second;
-	}
+	public void setSecond(boolean second) {this.second = second;	}
 
-	public boolean isNoMove() {
-		return noMove;
-	}
+	public boolean isNoMove() {return noMove;	}
 
-	public void setNoMove(boolean noMove) {
-		this.noMove = noMove;
-	}
+	public void setNoMove(boolean noMove) {this.noMove = noMove;	}
 
-	public boolean isCarDeath() {
-		return carDeath;
-	}
+	public boolean isCarDeath() {return carDeath;	}
 
-	public void setCarDeath(boolean carDeath) {
-		this.carDeath = carDeath;
-	}
+	public void setCarDeath(boolean carDeath) {this.carDeath = carDeath;	}
 
-	public boolean isWaterDeath() {
-		return waterDeath;
-	}
+	public boolean isWaterDeath() {return waterDeath;}
 
-	public void setWaterDeath(boolean waterDeath) {
-		this.waterDeath = waterDeath;
-	}
+	public void setWaterDeath(boolean waterDeath) {this.waterDeath = waterDeath;}
 
-	/**@Refactor
-	 * rename to getChangeScore
+	/**@Rename
+	 * rename to getChangeScore from ChangeScore
 	 */
 	public boolean getChangeScore() {
 		if (changeScore) {
@@ -323,41 +327,23 @@ public class Frog extends Sprites {
 		return false;
 	}
 	
-	public void setChangeScore(boolean changeScore) {
-		this.changeScore = changeScore;
-	}
+	public void setChangeScore(boolean changeScore) {this.changeScore = changeScore;}
 	
-	public int getCarD() {
-		return carD;
-	}
+	public int getCarD() {return carD;}
 
-	public void setCarD(int carD) {
-		this.carD = carD;
-	}
+	public void setCarD(int carD) {this.carD = carD;}
 	
-	public void addCarD(int carD) {
-		this.carD += carD;
-	}
+	public void addCarD(int carD) {this.carD += carD;}
 
-	public int getWaterD() {
-		return waterD;
-	}
+	public int getWaterD() {return waterD;}
 
-	public void setWaterD(int waterD) {
-		this.waterD = waterD;
-	}
+	public void setWaterD(int waterD) {this.waterD = waterD;}
 	
-	public void addWaterD(int waterD) {
-		this.waterD += waterD;
-	}
+	public void addWaterD(int waterD) {this.waterD += waterD;}
 
-	public double getW() {
-		return w;
-	}
+	public double getW() {return w;}
 
-	public void setW(double w) {
-		this.w = w;
-	}
+	public void setW(double w) {this.w = w;}
 	
 	public void setFrogSprite(int i) {
 		imgW1 = new Image("file:src/main/resources/froggerUp.png", i, i, true, true);
@@ -370,35 +356,28 @@ public class Frog extends Sprites {
 		imgD2 = new Image("file:src/main/resources/froggerRightJump.png", i, i, true, true);
 	}
 	
-	public Image getw1() {
-		return imgW1;
-	}
+	public Image getw1() {return imgW1;}
 	
-	public Image geta1() {
-		return imgA1;
-	}
+	public Image geta1() {return imgA1;}
 	
-	public Image gets1() {
-		return imgS1;
-	}
+	public Image gets1() {return imgS1;}
 	
-	public Image getd1() {
-		return imgD1;
-	}
+	public Image getd1() {return imgD1; }
 	
-	public Image getw2() {
-		return imgW2;
-	}
+	public Image getw2() {return imgW2;	}
 	
-	public Image geta2() {
-		return imgA2;
-	}
+	public Image geta2() {return imgA2;	}
 	
-	public Image gets2() {
-		return imgS2;
-	}
+	public Image gets2() {return imgS2;	}
 	
-	public Image getd2() {
-		return imgD2;
+	public Image getd2() {return imgD2;	}
+
+	public String getMode() {
+		return mode;
 	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
 }

@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 class BubbleSortTest {
 
 	private int[] arr;
+
+	@Test
 	/*
 	 * to test whether the bubble sort is actually sorting numbers in descending order as expected
 	 */
-	@Test
 	void testBubbleSort() { 
 		arr = new int[]{1,2,3,4,5};
 

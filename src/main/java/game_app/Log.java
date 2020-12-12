@@ -1,16 +1,18 @@
+/**@Refactor
+ * constructor in default access
+ * self encapsulating field to avoid direct access of field even within own class
+ * create setter and getter for encapsulated field 
+ * rename getLeft() to moveLeft()
+ * constructor in default access
+ */
 package game_app;
 
 import javafx.scene.image.Image;
 
 public class Log extends Sprites {
-	/**@Refactor
-	 * self encapsulating field to avoid direct access of field 
-	 * even within own class
-	 * create setter and getter for encapsulated field 
-	 */
 	private double speed;
 	
-	//*****************************VIEW************************************************
+//*****************************CONTROLLER*******************************************
 	@Override
 	public void act(long now) { 
 		move(getSpeed() , 0);
@@ -20,8 +22,7 @@ public class Log extends Sprites {
 			setX(700);
 	}
 	
-	//*****************************CONTROLLER*******************************************
-	public Log(String imageLink, int size, int xpos, int ypos, double s) {
+	Log(String imageLink, int size, int xpos, int ypos, double s) {
 		setImage(new Image(imageLink, size,size, true, true));
 		setX(xpos);
 		setY(ypos);
@@ -30,17 +31,19 @@ public class Log extends Sprites {
 	}
 	
 //*****************************MODEL********************************************
-	/** @Refactor
-	 * rename getLeft to moveLeft
-	 */
+
+
 	public boolean moveLeft() { 
-		return speed < 0;
+		return getSpeed() < 0;
 	}
 	
+	
+
 	public double getSpeed() { 
 		return speed;
 	}
 	
+
 	public void setSpeed(double sp) { 
 		speed = sp;
 	}

@@ -1,15 +1,17 @@
-/**@Remove
- * @Rename
- * remove all unused imports
+/**@Refactor
+ * remove all unused import packages
  * rename World to GamePane
+ * self encapsulating field to avoid direct access of field  even within own class
+ * create setter and getter for encapsulated field
+ *  Bgm class not subclass , replace inheritance with aggregation
  */
 package game_app;
 
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ChangeListener;//observers
+import javafx.beans.value.ObservableValue;//subjects
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -19,22 +21,13 @@ import javafx.scene.layout.Pane;
 
 
 public class GamePane extends Pane {
-	/**@Refactor
-	 * self encapsulating field to avoid direct access of field  even within own class
-	 * create setter and getter for encapsulated field
-	 */
-    private AnimationTimer timer;
-    private Bgm bgm;
 
-	//****************************************************VIEW************************************************************************
-    //public abstract void act(long now);
-    /** @Refactor
-     * Bgm class not subclass , replace inheritance with aggregation
-     */
-    public void act(long now) {} //view
+    private AnimationTimer timer;
+    private Bgm bgm;    
 //****************************************************CONTROLLER********************************************************************
-    public GamePane() { //controller
-    	 setBgm(new Bgm());
+    public void act(long now) {} 
+    public GamePane() {
+    	setBgm(new Bgm());
     	
     	sceneProperty().addListener(new ChangeListener<Scene>() {
 
@@ -79,12 +72,12 @@ public class GamePane extends Pane {
 		});
     }
 
-    public void start() { //controller
+    public void start() {
     	createTimer();
         getTimer().start();
     }
 
-    public void stop() {//controller
+    public void stop() {
         getTimer().stop();
     }
     
@@ -96,41 +89,27 @@ public class GamePane extends Pane {
     	getBgm().stopMusic();
     }
     
-  //****************************************************MODEL***********************************************************
-    public void add(Sprites sprite) {//model
+//****************************************************MODEL***********************************************************
+    public void add(Sprites sprite) {
         getChildren().add(sprite);
     }
 
-    public void remove(Sprites sprite) {//model
+    public void remove(Sprites sprite) {
         getChildren().remove(sprite);
     }
 
-    /** @refactor 
-     * remove assignments to parameters 
-     *  assigned (A)n to variable a of type A before passing a to .add()
-     *  instead of someArray.add((A)n);
-     *  added try and catch
-     */
-    public <S extends Sprites> List<S> getObjects(Class<S> cls) {//model
+    @SuppressWarnings("unchecked")
+	public <S extends Sprites> List<S> getObjects(Class<S> cls) {
         ArrayList<S> someArray = new ArrayList<S>();
         for (Node n: getChildren()) {
             if (cls.isInstance(n)) {
-            	try {
-                	@SuppressWarnings("unchecked")
-					S s = (S)n;
-    				someArray.add(s);
-            	}
-            	catch(Exception e) {
-            		e.getStackTrace();
-            	}
-
-            	
+    				someArray.add((S)n);
             }
         }
-        return someArray;
+      return someArray;
     }
     
-    public void createTimer() {//model
+    public void createTimer() {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -145,7 +124,7 @@ public class GamePane extends Pane {
         };
     }
     
-    public AnimationTimer getTimer() {//model
+    public AnimationTimer getTimer() {
     	return timer;
     }
     

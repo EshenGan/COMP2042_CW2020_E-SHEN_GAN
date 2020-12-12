@@ -1,25 +1,30 @@
+/**@Extension
+ * class for bubble sorting in descending order
+ */
 package game_app;
 
 public class BubbleSort {
  
     private static int temp = 0;  
-	//DESCENDING
-  
-	    public static void bubbleSort(int[] arr) {  
+	
+    
+ //**************************************************CONTROLLER****************************************************
+	    public static void bubbleSort(int[] arr) {  //DESCENDING SORT
 	        int n = arr.length; 
 	         for(int i=0; i < n; i++){  
 	                 for(int j=1; j < (n-i); j++){  
 	                          if(arr[j-1] < arr[j]){  
 	                                 //swap elements  
-	                        	  	setTemp(arr[j-1]); //temp = arr[j-1];  
+	                        	  	setTemp(arr[j-1]);  
 	                                 arr[j-1] = arr[j];
-	                                 arr[j] = getTemp();//arr[j] = temp;
+	                                 arr[j] = getTemp();
 	                         }  
 	                          
 	                 }  
 	         }  
 	    }
 
+	    //**************************************************MODEL****************************************************
 		public static int getTemp() {
 			return temp;
 		}

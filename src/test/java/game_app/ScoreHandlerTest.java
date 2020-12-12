@@ -25,7 +25,7 @@ class ScoreHandlerTest {
 	void setUp() throws Exception {
 		try {
 		fpT = "D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\testboard.txt";
-		shT = ScoreHandler.createScoreHandler(frogT, testrootT, fpT);
+		shT = new ScoreHandler(frogT, testrootT, fpT);
 		shT.setBoard(new FileWriter(fpT,false)); //override appending property of filewriter in scorehandler
 		
 		}
@@ -40,8 +40,7 @@ class ScoreHandlerTest {
 	}
 
 	@Test
-	/**
-	 * to test file writing and reading system of scorehandler class
+	/*to test file writing and reading system of scorehandler class
 	 * also to test functionality of setter and getters of bufferedwriter and bufferedreader
 	 */
 	void testfilewriter() { 

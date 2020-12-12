@@ -1,8 +1,8 @@
-/**@Remove
- * @Rename
- * remove all unused imports
+/**@Refactor
+ * remove all unused import packages
  * rename Actor.java to Sprites.java 
  * rename getWorld() to getGamePane()
+ * pull up act() method from Home.java,BackgroundImage.java ,Digit.java
  */
 package game_app;
 
@@ -15,17 +15,14 @@ public abstract class Sprites extends ImageView{
 
 	
 
-	//***********************************************************************VIEW*********************************************************************
+//***********************************************************************CONTROLLER*********************************************************************
     public void move(double dx, double dy) { //view
         setX(getX() + dx);
         setY(getY() + dy);
     }
-    /**@Refactor
-     * pull up method from Home.java,BackgroundImage.java ,Digit.java
-     */
-        public void act(long now) {} //view
+ 
+    public void act(long now) {} //view
 
-//***********************************************************************CONTROLLER*****************************************************************        
     public <S extends Sprites> java.util.List<S> getIntersectingObjects(java.lang.Class<S> cls){ //controller
         ArrayList<S> someArray = new ArrayList<S>();
         for (S sprite: getGamePane().getObjects(cls)) {

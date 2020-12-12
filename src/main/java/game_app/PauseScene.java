@@ -1,9 +1,8 @@
-/**@Refactor
- * pause scene and buttons
+/**@Extension
+ * create a new class for pause scene and buttons
+ * back to menu button includes "auto save last checkpoint" feature
  */
 package game_app;
-
-
 
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
@@ -17,15 +16,15 @@ public class PauseScene extends Parent {
 	private Button backtomenu;
 	private Rectangle pauselayer;
 
-	
-	public PauseScene() {
+//*************************************************CONTROLLER************************************************************
+	PauseScene() {
 		//pauselayer buttons
 		setPausebox(new VBox(30));
 		getPausebox().setTranslateX(185);
 		getPausebox().setTranslateY(300);
-		setGameresume(Button.createButton("RESUME",250,30));
-		setGameExit(Button.createButton("EXIT",250,30));
-		setBacktomenu(Button.createButton("MENU", 250, 30));
+		setGameresume(new Button("RESUME",250,30));
+		setGameExit(new Button("EXIT",250,30));
+		setBacktomenu(new Button("MENU", 250, 30));
 		getPausebox().getChildren().addAll(getGameresume(),getBacktomenu(),getGameExit());
 		setPauselayer(new Rectangle(598,745));
         getPauselayer().setOpacity(0.8);
@@ -56,6 +55,8 @@ public class PauseScene extends Parent {
 		getBacktomenu().setDisable(true);
 		getGameExit().setDisable(true);
 	}
+
+//**********************************************************MODEL*******************************************************************
 	public VBox getPausebox() {
 		return pausebox;
 	}
@@ -95,12 +96,4 @@ public class PauseScene extends Parent {
 	public void setBacktomenu(Button backtomenu) {
 		this.backtomenu = backtomenu;
 	}
-
-//	public Button getBacktomenu() {
-//		return backtomenu;
-//	}
-//
-//	public void setBacktomenu(Button backtomenu) {
-//		this.backtomenu = backtomenu;
-//	}
 }

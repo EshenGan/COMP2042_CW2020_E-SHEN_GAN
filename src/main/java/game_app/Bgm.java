@@ -1,6 +1,10 @@
-/**@RemoveAndRename
+/**@Refactor
  * remove all unused imports
  * changed file name from MyStage to Bgm
+ * Bgm not subclass of GamePane, replace with aggregation, promote loose coupling
+ * self encapsulating field to avoid direct access of field  even within own class
+ * create setter and getter for encapsulated field
+ * extract method prepareMP() to set up a media player
  */
 package game_app;
 
@@ -13,25 +17,22 @@ public class Bgm {
 	private MediaPlayer mediaPlayer;
 	private String musicFile;
 	private Media sound;
-	/**@Refactor
-	 * Bgm not subclass of GamePane, replace with aggregation, promote loose coupling
-	 * self encapsulating field to avoid direct access of field  even within own class
-	 * create setter and getter for encapsulated field
-	 */
 	
-//*****************************CONTROLLER*************************************
+//*********************************CONTROLLER**********************************
 	public void playMusic() {
-		setMusicFile("src/main/resources/Frogger Main Song Theme (loop).mp3");   
-		setSound(new Media(new File(getMusicFile()).toURI().toString()));
-		setMediaPlayer(new MediaPlayer(getSound()));
-		getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+		prepareMP();
 		getMediaPlayer().play();
 	}
 	
 	public void stopMusic() {
 		getMediaPlayer().stop();
 	}
-	
+	public void prepareMP() {
+		setMusicFile("src/main/resources/Frogger Main Song Theme (loop).mp3");   
+		setSound(new Media(new File(getMusicFile()).toURI().toString()));
+		setMediaPlayer(new MediaPlayer(getSound()));
+		getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+	}
 
 //*****************************MODEL***************************************	
 	public void setMediaPlayer(MediaPlayer mediaPlayer ) {

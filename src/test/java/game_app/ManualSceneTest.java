@@ -8,11 +8,11 @@ import org.testfx.api.FxRobotException;
 import javafx.scene.Parent;
 import org.testfx.assertions.api.Assertions;
 
-class ManualPageTest extends FroggerAppTest {
-	private ManualPage infopage;
+class ManualSceneTest extends FroggerAppTest {
+	private ManualScene infopage;
 	
 	public Parent getRootNode() {
-		infopage = new ManualPage();
+		infopage = SceneFactory.createManualScene();
 		return infopage.getManualroot();
 	}
 
@@ -26,8 +26,7 @@ class ManualPageTest extends FroggerAppTest {
 
 	
 	@Test 
-	/*
-	 * test existence of back to menu button and BACK TO MENU text word on the button
+	/*test existence of back to menu button and BACK TO MENU text word on the button
 	 */
 	void testClickOnMenubtn_In_Manual() {
 		try {

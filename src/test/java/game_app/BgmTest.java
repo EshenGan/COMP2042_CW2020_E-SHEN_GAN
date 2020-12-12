@@ -22,19 +22,19 @@ private JFXPanel panel= new JFXPanel();
 	@BeforeEach
 	void setUp() throws Exception {
 		bgm = new Bgm();
-		bgm.playMusic();
+		bgm.prepareMP();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		bgm.stopMusic();
+
 	}
 
 	@Test
 	/*
 	 * test whether is it functioning as expected
 	 */
-	void testPlayMusic() {
+	void testPrepareMP() {
 		try {
 		str = "src/main/resources/Frogger Main Song Theme (loop).mp3";
 		s = new Media(new File(bgm.getMusicFile()).toURI().toString());	

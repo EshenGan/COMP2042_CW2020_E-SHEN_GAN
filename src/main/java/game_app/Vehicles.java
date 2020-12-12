@@ -1,16 +1,17 @@
-package game_app;
-
-import javafx.scene.image.Image;
-
-public class Obstacle extends Sprites {
 	/**@Refactor
 	 * self encapsulating field to avoid direct access of field 
 	 * even within own class
 	 * create setter and getter for encapsulated field 
 	 */
+package game_app;
+
+import javafx.scene.image.Image;
+
+public class Vehicles extends Sprites {
+
 	private int speed;
 	
-//*****************************VIEW******************************************
+//*****************************CONTROLLER******************************************
 	@Override
 	public void act(long now) { 
 		move(getSpeed() , 0);
@@ -19,9 +20,8 @@ public class Obstacle extends Sprites {
 		if (getX() < -50 && getSpeed()<0)
 			setX(600);
 	}
-
-//*****************************CONTROLLER*******************************************
-	public Obstacle(String imageLink, int xpos, int ypos, int s, int w, int h) {
+	
+	Vehicles(String imageLink, int xpos, int ypos, int s, int w, int h) {
 		setImage(new Image(imageLink, w,h, true, true));
 		setX(xpos);
 		setY(ypos);
@@ -29,11 +29,11 @@ public class Obstacle extends Sprites {
 	}
 	
 //*****************************MODEL***************************************
-	public int getSpeed() { //model
+	public int getSpeed() { 
 		return speed;
 	}
 	
-	public void setSpeed(int sp) {//model
+	public void setSpeed(int sp) {
 		speed = sp;
 	}
 
