@@ -1,5 +1,7 @@
 /** @Extension
  * extra levels - similar to easy mode
+ * increased speed of safe platforms and obstacles
+ * added snake as another new obstacle
  */
 
 package game_app;
@@ -24,7 +26,7 @@ public class MediumScene{
 		buildFrogHome();
 		getGameroot2().add(getFrog2());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
-    	getGameroot2().add(SpriteFactory.createSnake(0, 420, 4, 80, 80,1));
+    	getGameroot2().add(SpriteFactory.createSnake(0, 445, 4, 80, 80,1));
 		setScenegame2(new Scene(getGameroot2(),598,745));
 	}
 

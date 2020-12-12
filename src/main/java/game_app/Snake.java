@@ -81,13 +81,13 @@ public class Snake extends Sprites{
 	}
 
 	public void setSnakesLR(int ws, int hs){
-		s1 = new Image("file:src/main/resources/snake1.png", ws, hs, true, true);
-		s2 = new Image("file:src/main/resources/snake2.png", ws, hs, true, true);
+		s1 = new Image("file:src/main/resources/snake1new.png", ws, hs, true, true);
+		s2 = new Image("file:src/main/resources/snake2new.png", ws, hs, true, true);
 	}
 	
 	public void setSnakesRL(int ws, int hs){
-		s3 = new Image("file:src/main/resources/snake1RL.png", ws, hs, true, true);
-		s4 = new Image("file:src/main/resources/snake2RL.png", ws, hs, true, true);
+		s3 = new Image("file:src/main/resources/snake1RLnew.png", ws, hs, true, true);
+		s4 = new Image("file:src/main/resources/snake2RLnew.png", ws, hs, true, true);
 	}
 	
 	public Image gets1(){

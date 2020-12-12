@@ -35,6 +35,8 @@ public class Frog extends Sprites{
 	 private int home = 0;
 	 private boolean carDeath = false;
 	 private boolean waterDeath = false;
+	 private boolean snakeDeath = false;
+	 private int snakeD = 0;
 	 private int carD = 0;
 	 private int waterD = 0;
 	 private String mode;
@@ -202,6 +204,28 @@ public class Frog extends Sprites{
 				}	
 			}
 			
+			if(isSnakeDeath()) {
+				if ((now)% 11 ==0) {
+					addSnakeD(1);
+				}
+				if (getSnakeD() == 1) {
+					setImage(new Image("file:src/main/resources/waterdeath1.png", imgSize,imgSize , true, true));
+				}
+				if (getSnakeD() == 2) {
+					setX(300);
+					setY(679.8+movement);
+					setSnakeDeath(false);
+					setSnakeD(0);
+					setImage(new Image("file:src/main/resources/froggerUp.png", imgSize, imgSize, true, true));
+					setNoMove(false);
+					if (getPoints()>50) {
+						nPoints(50);
+						setChangeScore(true);
+					}
+				}	
+				
+			}
+			
 			if (getX()>600) {
 				move(-movement*2, 0);
 			}
@@ -210,8 +234,9 @@ public class Frog extends Sprites{
 			}
 			//new
 			if (getIntersectingObjects(Snake.class).size() >= 1) {
-				setCarDeath(true);
-			}			
+				setSnakeDeath(true);
+			}
+			
 			if (getIntersectingObjects(Log.class).size() >= 1 && !isNoMove()) {
 				if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
 					if(getIntersectingObjects(Log.class).get(0).moveLeft()) {
@@ -372,12 +397,18 @@ public class Frog extends Sprites{
 	
 	public Image getd2() {return imgD2;	}
 
-	public String getMode() {
-		return mode;
-	}
+	public String getMode() {return mode;}
 
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
+	public void setMode(String mode) {this.mode = mode;}
+
+	public boolean isSnakeDeath() {return snakeDeath;}
+
+	public void setSnakeDeath(boolean snakeDeath) {this.snakeDeath = snakeDeath;}
+
+	public int getSnakeD() {return snakeD;}
+
+	public void setSnakeD(int snakeD) {this.snakeD = snakeD;}
+	
+	public void addSnakeD(int snakeD) {this.snakeD += snakeD;}
 
 }

@@ -25,7 +25,7 @@ public class ManualScene{
 	        //user guide scene
 	        setManualroot(new Pane());
 	        getManualroot().setPrefSize(800, 525);
-	        Image manualimg = new Image("file:src/main/resources/user_guide.png",800,525,true,true);
+	        Image manualimg = new Image("file:src/main/resources/user_guide_new.png",800,525,true,true);
 	        setImg4manual(new ImageView(manualimg));
 	        getManualroot().getChildren().addAll(getImg4manual());
 

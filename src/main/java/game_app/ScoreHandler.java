@@ -2,6 +2,7 @@
  * extracted class for createTimer()
  * always favor aggregation/composition over inheritance
  * replace method with method object
+ * setNumber() rename to setScore()
  */
 /**@Extension
  * top scores pop up listed at end of each round
@@ -43,7 +44,7 @@ public class ScoreHandler {
 				@Override
 				public void handle(long now) {
 	            	if (frog.getChangeScore()) {
-	            		setNumber(frog.getPoints(),gameroot);
+	            		setScore(frog.getPoints(),gameroot);
 	            	}
 	            	
 	            	try { 
@@ -102,7 +103,7 @@ public class ScoreHandler {
 	}
 
 	
-	private void setNumber(int n,GamePane gameroot) {
+	private void setScore(int n,GamePane gameroot) {
 		int shift = 0;
 		while (n > 0) {
 			  int d = n / 10;

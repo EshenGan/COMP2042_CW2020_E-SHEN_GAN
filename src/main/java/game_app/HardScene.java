@@ -1,5 +1,7 @@
 /** @Extension
  * extra levels, similar to easy mode scene(original from Main.java)
+ * increased speed of safe platforms and obstacles
+ * added snake as another new obstacle
  */
 
 package game_app;
@@ -26,7 +28,7 @@ public class HardScene{
 		buildFrogHome();
 		getGameroot3().add(getFrog3());//DO NOT EVER MOVE THIS method to other place		
 		buildObstacles();
-    	getGameroot3().add(SpriteFactory.createSnake(0, 420, -6, 80, 80,2));
+    	getGameroot3().add(SpriteFactory.createSnake(0, 445, -6, 80, 80,2));
 		setScenegame3(new Scene(getGameroot3(),598,745));
 	}
 //****************************************************************************CONTROLLER*************************************************
