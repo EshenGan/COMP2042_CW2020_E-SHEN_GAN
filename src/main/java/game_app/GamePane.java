@@ -1,10 +1,3 @@
-/**@Refactor
- * remove all unused import packages
- * rename World to GamePane
- * self encapsulating field to avoid direct access of field  even within own class
- * create setter and getter for encapsulated field
- *  Bgm class not subclass , replace inheritance with aggregation
- */
 package game_app;
 
 import java.util.ArrayList;
@@ -19,7 +12,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 
-
+/**<b>REFACTOR</b>:<br>
+ * <p>. Rename World.java to GamePane.java<br>
+ * . Self encapsulating field to avoid direct access of field  even within own class<br>
+ * . Create setter and getter for encapsulated field<br>
+ *  . Bgm class not subclass , replace inheritance with aggregation</p>
+ */
 public class GamePane extends Pane {
 
     private AnimationTimer timer;
@@ -81,10 +79,15 @@ public class GamePane extends Pane {
         getTimer().stop();
     }
     
+    /**<b>EXTENSION</b>:
+     * method to play background music
+     */
     public void playMusic() {
     	getBgm().playMusic();
     }
-    
+    /**<b>EXTENSION</b>:
+     * method to stop background music
+     */   
     public void stopMusic() {
     	getBgm().stopMusic();
     }
@@ -109,6 +112,8 @@ public class GamePane extends Pane {
       return someArray;
     }
     
+    /**method to create Animation Timer
+     */
     public void createTimer() {
         timer = new AnimationTimer() {
             @Override
@@ -124,13 +129,19 @@ public class GamePane extends Pane {
         };
     }
     
+    /**@return timer object of type AnimationTimer
+     */
     public AnimationTimer getTimer() {
     	return timer;
     }
     
+    /**@return bgm object of type Bgm
+     */
     public Bgm getBgm() {
   		return bgm;
   	}
+    /**@param bgm : Bgm object instantiated
+     */
   	public void setBgm(Bgm bgm) {
   		this.bgm = bgm;
   	}

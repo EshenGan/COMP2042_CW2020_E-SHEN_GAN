@@ -12,6 +12,7 @@ import javafx.embed.swing.JFXPanel;
 
 class ScoreHandlerTest {
 	private ScoreHandler shT;
+	private AnimationHandler ahT;
 	private Frog frogT;
 	private GamePane testrootT;
 	private String fpT;
@@ -25,9 +26,9 @@ class ScoreHandlerTest {
 	void setUp() throws Exception {
 		try {
 		fpT = "D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\testboard.txt";
-		shT = new ScoreHandler(frogT, testrootT, fpT);
+		shT = new ScoreHandler(fpT);
 		shT.setBoard(new FileWriter(fpT,false)); //override appending property of filewriter in scorehandler
-		
+		ahT = new AnimationHandler(frogT, testrootT, fpT);
 		}
 		catch(Exception e) {
 			e.getStackTrace();
@@ -43,7 +44,7 @@ class ScoreHandlerTest {
 	/*to test file writing and reading system of scorehandler class
 	 * also to test functionality of setter and getters of bufferedwriter and bufferedreader
 	 */
-	void testfilewriter() { 
+	void TestBufferedWriter() { 
 			try {
 				shT.getWritescore().write("this is a test");
 				shT.getWritescore().close();
@@ -58,17 +59,18 @@ class ScoreHandlerTest {
 				ioe.getStackTrace();
 			}
 	}
+	
 	@Test
 	/**
-	 * to test getter of AnimationTimer in scorehandler class
+	 * to test getter of AnimationTimer in AnimationHandler class
 	 */
-	void testGetAt() {
-		assertTrue(shT.getAt()!=null,"Error: getAt() returns null");
+	void testGetAt_in_AnimationHandler() {
+		assertTrue(ahT.getAt()!=null,"Error: getAt() returns null");
 	}
 
 	@Test
 	/**
-	 * to test whether the record array size is created as expected
+	 * to test whether the record array created has size as expected
 	 */
 	void testGetRecord() {
 		
@@ -83,6 +85,4 @@ class ScoreHandlerTest {
 	void testGetRounds() {
 		assertEquals(0,shT.getRounds(),"Error: rounds is not 0, expected to always start with 0");
 	}
-
-
 }

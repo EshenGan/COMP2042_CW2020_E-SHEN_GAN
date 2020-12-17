@@ -1,7 +1,3 @@
-/**@Extension
- * create a new class for pause scene and buttons
- * back to menu button includes "auto save last checkpoint" feature
- */
 package game_app;
 
 import javafx.scene.Parent;
@@ -9,6 +5,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**<b>EXTENSION</b>:
+ * Create a new class for pause scene and buttons
+ */
 public class PauseScene extends Parent {
 	private VBox pausebox;
 	private Button gameresume;
@@ -17,6 +16,9 @@ public class PauseScene extends Parent {
 	private Rectangle pauselayer;
 
 //*************************************************CONTROLLER************************************************************
+	/**? Construct pause screen, resume , back to menu and exit buttons<br>
+	 * ? Back to menu button includes "auto save last checkpoint" feature
+	 */
 	PauseScene() {
 		//pauselayer buttons
 		setPausebox(new VBox(30));
@@ -34,6 +36,9 @@ public class PauseScene extends Parent {
         
 	}
 
+	/**
+	 * enable pause scene and all buttons in the scene
+	 */
 	public void enable() {
 		getPauselayer().setDisable(false);
 		getPauselayer().setFill(Color.DARKBLUE);
@@ -45,6 +50,9 @@ public class PauseScene extends Parent {
 		getGameExit().setDisable(false);		
 	}
 	
+	/**
+	 * disable pause scene and all buttons in the scene
+	 */
 	public void disable() {
 		getPauselayer().setFill(Color.TRANSPARENT);
 		getPauselayer().setDisable(true);

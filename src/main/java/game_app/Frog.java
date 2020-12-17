@@ -1,19 +1,15 @@
-/**@Refactor
- * Rename Animal.java to Frog.java
- * self encapsulating field to avoid direct access of field even within own class
- * create setter and getter for encapsulated field
- * remove unused field 
- * constructor in default access
- */
 package game_app;
-
 import java.util.ArrayList;
-
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
+/**<b>REFACTOR</b>:
+ * <p>. Rename Animal.java to Frog.java<br>
+ * . Self encapsulating field to avoid direct access of field even within own class<br>
+ * . Create setter and getter for encapsulated field or objects<br>
+ * . Constructor in default access</p>
+ */
 public class Frog extends Sprites{
 
 	 private Image imgW1;
@@ -41,19 +37,24 @@ public class Frog extends Sprites{
 	 private int waterD = 0;
 	 private String mode;
 //******************************************************************CONTROLLER************************************************************************
-	Frog(String imageLink,String mode) {
+	/**
+	 * <p>Construct specific mode of frog and frog movement handler<br>
+	 * <b>REFACTOR</b>:<br>
+	 * . line_56 and line_107 Consolidate duplicate conditional fragments<br>
+	 * . line_56 and line_107 Removed the outer most layer of if else statement</p>
+	 * @param imageLink : frog image directory
+	 * @param mode      : string to specify mode of frog
+	 */
+	 Frog(String imageLink,String mode) {
 		setMode(mode);
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(300); 
 		setY(679.8+movement); 
 		setFrogSprite(imgSize);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
+
 			public void handle(KeyEvent event){
-			/**@Refactor
-			 * consolidate duplicate conditional fragments
-			 * removed the outer most layer of if else statement
-			 * 
-			 */
+
 				if (isNoMove() == false) {
 					if (isSecond()) {
 						if (event.getCode() == KeyCode.W) {	  
@@ -131,7 +132,14 @@ public class Frog extends Sprites{
 	}// end of frog constructor
 	
 	 ArrayList<Home> inter = new ArrayList<Home>();
-		@Override
+		
+		/**<b>REFACTOR</b>: 
+		 * changed use of carD field to waterD field to avoid confusion of water death with car death<br>
+		 * <b>EXTENSION</b>:<br>
+		 * ? line 216_animation handler for death by snake<br>
+		 * ? line 245_condition for frog to die if meet with snake<br>
+		 * ? line 249_nested if else statements to ensure that frog is moving same speed and direction as safe platforms<br>
+		 */
 		public void act(long now) {
 			
 			if (getY()<0 || getY()>734) {
@@ -169,10 +177,7 @@ public class Frog extends Sprites{
 				}
 				
 			}
-			/**@Rename 
-			 * changed use of carD to waterD to avoid confusion
-			 * with car death
-			 */
+
 			if (isWaterDeath()) {
 				setNoMove(true);
 				if ((now)% 11 ==0) {
@@ -203,7 +208,7 @@ public class Frog extends Sprites{
 					}
 				}	
 			}
-			
+
 			if(isSnakeDeath()) {
 				if ((now)% 11 ==0) {
 					addSnakeD(1);
@@ -232,11 +237,11 @@ public class Frog extends Sprites{
 			if (getIntersectingObjects(Vehicles.class).size() >= 1) {
 				setCarDeath(true);
 			}
-			//new
+
 			if (getIntersectingObjects(Snake.class).size() >= 1) {
 				setSnakeDeath(true);
 			}
-			
+
 			if (getIntersectingObjects(Log.class).size() >= 1 && !isNoMove()) {
 				if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
 					if(getIntersectingObjects(Log.class).get(0).moveLeft()) {
@@ -265,28 +270,59 @@ public class Frog extends Sprites{
 			}
 			else if (getIntersectingObjects(Turtle.class).size() >= 1 && !isNoMove()) {
 				if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
-					move(-1,0);
+					if(getIntersectingObjects(Turtle.class).get(0).moveLeft()) {
+						move(-1,0);
+					}
+					else {
+						move(1,0);
+					}
+					
 				}
 				else if (getMode().equalsIgnoreCase("MEDIUM") || getMode().equalsIgnoreCase("M")) {
-					move(-2,0);
+					if(getIntersectingObjects(Turtle.class).get(0).moveLeft()) {
+						move(-2,0);
+					}
+					else {
+						move(2,0);
+					}
 				}
 				else if(getMode().equalsIgnoreCase("HARD") || getMode().equalsIgnoreCase("H")) {
-					move(-3,0);
-				}
-				
+					if(getIntersectingObjects(Turtle.class).get(0).moveLeft()) {
+						move(-3,0);
+					}
+					else {
+						move(3,0);
+					}
+				}		
 			}
 			else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-				if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) 
+				if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) { 
 					setWaterDeath(true);
+				}
 				 else {
 					 if(getMode().equalsIgnoreCase("EASY") || getMode().equalsIgnoreCase("E")) {
-						 move(-1,0);
+							if(getIntersectingObjects(WetTurtle.class).get(0).moveLeft()) {
+								move(-1,0);
+							}
+							else {
+								move(1,0);
+							}
 					 }
 					 else if(getMode().equalsIgnoreCase("MEDIUM") || getMode().equalsIgnoreCase("M")) {
-						 move(-2,0);
+							if(getIntersectingObjects(WetTurtle.class).get(0).moveLeft()) {
+								move(-2,0);
+							}
+							else {
+								move(2,0);
+							}
 					 }
 					 else if(getMode().equalsIgnoreCase("HARD") || getMode().equalsIgnoreCase("H")) {
-						 move(-3,0);
+							if(getIntersectingObjects(WetTurtle.class).get(0).moveLeft()) {
+								move(-3,0);
+							}
+							else {
+								move(3,0);
+							}
 					 }
 				 }				 
 			}
@@ -310,7 +346,6 @@ public class Frog extends Sprites{
 		}//act(long now)
 	
 //********************************************************************************MODEL***********************************************************	
-	
 	public boolean gameOver() {return home==5;}
 	
 	public void pPoints(int points) {this.points += points;	}
@@ -341,8 +376,8 @@ public class Frog extends Sprites{
 
 	public void setWaterDeath(boolean waterDeath) {this.waterDeath = waterDeath;}
 
-	/**@Rename
-	 * rename to getChangeScore from ChangeScore
+	/**Rename to getChangeScore from ChangeScore
+	 * @return boolean : condition to change score
 	 */
 	public boolean getChangeScore() {
 		if (changeScore) {

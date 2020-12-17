@@ -1,16 +1,16 @@
-/**@Refactor
- * FactoryMethodDesignPattern - factory for all type of sprite available
- * Replace constructors with factory method
- */
-/**@Extension
- * factory class to create different type of sprite in game scenes
- */
+
 package game_app;
 
+/**<b>REFACTOR</b>:
+ * <p>. FactoryMethodDesignPattern : factory for all type of sprite available<br>
+ * . Replace constructors with factory method
+ * . Factory class to create different type of sprites in game scenes</p>
+ */
 public class SpriteFactory {
 
 //******************************************************VIEW*****************************************************************	
- 	public static Frog createFrog(String imageLink, String mode) { 
+
+	public static Frog createFrog(String imageLink, String mode) { 
  		return new Frog(imageLink,mode);
  	}
 	public static BackgroundImage createBackgroundImage(String imageLink) {
@@ -28,11 +28,11 @@ public class SpriteFactory {
 	public static Vehicles createVehicles(String imageLink, int xpos, int ypos, int s, int w, int h) {
 		return new Vehicles(imageLink, xpos, ypos, s, w, h);
 	}
-	public static Turtle createTurtle(int xpos, int ypos, int s, int w, int h) {
-		return new Turtle(xpos, ypos, s, w, h);
+	public static Turtle createTurtle(int xpos, int ypos, int s, int w, int h,int dir) {
+		return new Turtle(xpos, ypos, s, w, h,dir);
 	}
-	public static WetTurtle createWetTurtle(int xpos, int ypos, int s, int w, int h) {
-		return new WetTurtle(xpos, ypos, s, w, h);
+	public static WetTurtle createWetTurtle(int xpos, int ypos, int s, int w, int h,int dir) {
+		return new WetTurtle(xpos, ypos, s, w, h,dir);
 	}
 	public static Snake createSnake(int xpos, int ypos, int s, int w, int h,int dir) {
 		return new Snake(xpos, ypos, s, w, h,dir);

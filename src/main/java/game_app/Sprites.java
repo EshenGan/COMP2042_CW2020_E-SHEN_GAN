@@ -1,26 +1,31 @@
-/**@Refactor
- * remove all unused import packages
- * rename Actor.java to Sprites.java 
- * rename getWorld() to getGamePane()
- * pull up act() method from Home.java,BackgroundImage.java ,Digit.java
- */
 package game_app;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import java.util.ArrayList;
 
-
+/**<b>REFACTOR</b>:
+ * <p>. Rename Actor.java to Sprites.java<br>
+ * . Rename getWorld() to getGamePane()<br>
+ * . Pull up act() method from Home.java,BackgroundImage.java ,Digit.java</p>
+ */
 public abstract class Sprites extends ImageView{
 
 	
 
 //***********************************************************************CONTROLLER*********************************************************************
-    public void move(double dx, double dy) { //view
+    /**
+     * @param dx : movement of sprite along horizontal axis
+     * @param dy : movement of sprite along vertical axis 
+     */
+	public void move(double dx, double dy) { //view
         setX(getX() + dx);
         setY(getY() + dy);
     }
  
+    /**some subclass act method will override this method
+     * @param now : parameter of type long
+     */
     public void act(long now) {} //view
 
     public <S extends Sprites> java.util.List<S> getIntersectingObjects(java.lang.Class<S> cls){ //controller

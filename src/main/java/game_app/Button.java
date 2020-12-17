@@ -1,6 +1,3 @@
-/**@Extension
- * class for creating buttons
- */
 package game_app;
 
 import javafx.scene.effect.DropShadow;
@@ -12,10 +9,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**<b>EXTENSION</b>:
+ * class for creating buttons
+ */
 public class Button extends StackPane {
 	private Text txt;
 	private Rectangle rectBtn;
 	private DropShadow ds;
+	
+	/**Construct buttons in any pane or layout
+	 * @param label   : string name for button
+	 * @param width   : horizontal length of button
+	 * @param height  : vertical length of button
+	 */
 	public Button(String label, double width, double height) {
 //**************************************************************CONTROLLER*****************************************************************
 		setTxt(new Text(label));
@@ -51,16 +57,28 @@ public class Button extends StackPane {
     }
 
 //**************************************************************MODEL*****************************************************************
-	    public Text getTxt() { return txt;}
+	    /** @return txt : txt object of type Text
+	     */
+		public Text getTxt() { return txt;}
 
+		/**@param txt : txt object instantiated of type Text
+		 */
 		public void setTxt(Text txt) {this.txt = txt;}
-
+		
+		/**@return rectBtn : rectBtn object of type Rectangle
+		 */
 		public Rectangle getRectBtn() {return rectBtn;}
-
+		
+		/**@param rectBtn : rectBtn object instantiated of type Rectangle
+		 */
 		public void setRectBtn(Rectangle rectBtn) {this.rectBtn = rectBtn;}
-
+		
+		/**@return ds : ds object of type DropShadow
+		 */
 		public DropShadow getDs() {return ds;}
-
+		
+		/**@param ds : ds object instantiated of type DropShadow
+		 */
 		public void setDs(DropShadow ds) {this.ds = ds;}
 		
 }

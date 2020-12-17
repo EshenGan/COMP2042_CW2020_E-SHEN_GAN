@@ -1,23 +1,18 @@
-/**
- * @Refactor 
- *  rename package to game_app
- *  rename Main.java to FroggerApp.java
- *  remove unused import packages
- *  move png  jpg piskel etc "media" files to src/main/resources
- *  edited background color for all digits and also edited background for game scenes
- * set up aggregated field here before instantiating as object in start(Stage primaryStage)
- * field data encapsulation - OO Core Concept
- * self encapsulating field to avoid direct access of field even within own class
- * create setter and getter for encapsulated field
- * method hiding for all setters and getters because should only be used in this package/class/subclass
- */
 package game_app;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
+/**<b>REFACTOR</b>:
+ *  <p>. Rename package to game_app,Main.java to FroggerApp.java<br>
+ *. Move png,jpg,piskel etc "media" files to src/main/resources<br>
+ *. Edited background color for all digits and also edited background for game scenes<br>
+ *. Self encapsulate field to avoid direct access of field even within own class<br>
+ *. Create setter and getter for encapsulated field</p>
+ *<b>EXTENSION</b>:
+ *Extracted interface named Launchable.java
+ */
 public class FroggerApp extends Application implements Launchable {
 	private int pauseflag1;
 	private int pauseflag2;
@@ -39,7 +34,9 @@ public class FroggerApp extends Application implements Launchable {
 		launch(args);
 	}
 
-	@Override
+	/**Method to start and launch GUI of game application<br>
+	 * <b>EXTENSION</b>: added icon image and title for GUI
+	 */
 	public void start(Stage primaryStage) throws Exception {
 		setPauseflag1(0);
 		setPauseflag2(0);
@@ -112,7 +109,6 @@ public class FroggerApp extends Application implements Launchable {
 			getPausescene1().enable();
 			getGamescenebuttons1().disable();
 			getEasyscene().stop();
-
 			}
 		});
 
@@ -218,61 +214,61 @@ public class FroggerApp extends Application implements Launchable {
 		});
 	}
 //******************************************************************MODEL***********************************************************************
-	protected void setPauseflag1(int pauseflag1) {this.pauseflag1 = pauseflag1;	}
+	public void setPauseflag1(int pauseflag1) {this.pauseflag1 = pauseflag1;	}
 
-	protected int getPauseflag1() {return pauseflag1;}
+	public int getPauseflag1() {return pauseflag1;}
 
-	protected void setPauseflag2(int pauseflag2) {this.pauseflag2 = pauseflag2;}
+	public void setPauseflag2(int pauseflag2) {this.pauseflag2 = pauseflag2;}
 	
-	protected int getPauseflag2() {return pauseflag2;}
+	public int getPauseflag2() {return pauseflag2;}
 	
-	protected void setPauseflag3(int pauseflag3) {this.pauseflag3 = pauseflag3;}
+	public void setPauseflag3(int pauseflag3) {this.pauseflag3 = pauseflag3;}
 
-	protected int getPauseflag3() {return pauseflag3;}
+	public int getPauseflag3() {return pauseflag3;}
 
-	protected void setMenu(MenuScene menu) {this.menu = menu;}
+	public void setMenu(MenuScene menu) {this.menu = menu;}
 
-	protected MenuScene getMenu() {return menu;}
+	public MenuScene getMenu() {return menu;}
 
-	protected void setManual(ManualScene manual) {this.manual = manual;}	
+	public void setManual(ManualScene manual) {this.manual = manual;}	
 
-	protected ManualScene getManual() {return manual;}
+	public ManualScene getManual() {return manual;}
 
-	protected void setEasyscene(EasyScene easyscene) {this.easyscene = easyscene;}
+	public void setEasyscene(EasyScene easyscene) {this.easyscene = easyscene;}
 	
-	protected EasyScene getEasyscene() {return easyscene;}
+	public EasyScene getEasyscene() {return easyscene;}
 	
-	protected void setGamescenebuttons1(GameSceneButtons gamescenebuttons1) {this.gamescenebuttons1 = gamescenebuttons1;}
+	public void setGamescenebuttons1(GameSceneButtons gamescenebuttons1) {this.gamescenebuttons1 = gamescenebuttons1;}
 
-	protected GameSceneButtons getGamescenebuttons1() {return gamescenebuttons1;}
+	public GameSceneButtons getGamescenebuttons1() {return gamescenebuttons1;}
 
-	protected void setPausescene1(PauseScene pausescene1) {this.pausescene1 = pausescene1;}
+	public void setPausescene1(PauseScene pausescene1) {this.pausescene1 = pausescene1;}
 	
-	protected PauseScene getPausescene1() {return pausescene1;}
+	public PauseScene getPausescene1() {return pausescene1;}
 
-	protected void setMediumscene(MediumScene mediumscene) {this.mediumscene = mediumscene;}
+	public void setMediumscene(MediumScene mediumscene) {this.mediumscene = mediumscene;}
 
-	protected MediumScene getMediumscene() {return mediumscene;}
+	public MediumScene getMediumscene() {return mediumscene;}
 
-	protected void setGamescenebuttons2(GameSceneButtons gamescenebuttons2) {this.gamescenebuttons2 = gamescenebuttons2;}
+	public void setGamescenebuttons2(GameSceneButtons gamescenebuttons2) {this.gamescenebuttons2 = gamescenebuttons2;}
 	
-	protected GameSceneButtons getGamescenebuttons2() {return gamescenebuttons2;}
+	public GameSceneButtons getGamescenebuttons2() {return gamescenebuttons2;}
 
-	protected void setPausescene2(PauseScene pausescene2) {this.pausescene2 = pausescene2;}
+	public void setPausescene2(PauseScene pausescene2) {this.pausescene2 = pausescene2;}
 	
-	protected PauseScene getPausescene2() {return pausescene2;}
+	public PauseScene getPausescene2() {return pausescene2;}
 
-	protected void setHardscene(HardScene hardscene) {this.hardscene = hardscene;}
+	public void setHardscene(HardScene hardscene) {this.hardscene = hardscene;}
 	
-	protected HardScene getHardscene() {return hardscene;}
+	public HardScene getHardscene() {return hardscene;}
 
-	protected void setGamescenebuttons3(GameSceneButtons gamescenebuttons3) {this.gamescenebuttons3 = gamescenebuttons3;}
+	public void setGamescenebuttons3(GameSceneButtons gamescenebuttons3) {this.gamescenebuttons3 = gamescenebuttons3;}
 	
-	protected GameSceneButtons getGamescenebuttons3() {return gamescenebuttons3;}
+	public GameSceneButtons getGamescenebuttons3() {return gamescenebuttons3;}
 
-	protected void setPausescene3(PauseScene pausescene3) {this.pausescene3 = pausescene3;}
+	public void setPausescene3(PauseScene pausescene3) {this.pausescene3 = pausescene3;}
 
-	protected PauseScene getPausescene3() {return pausescene3;}
+	public PauseScene getPausescene3() {return pausescene3;}
 
 }
 

@@ -1,13 +1,3 @@
-/**@Refactor
- * extracted class for createTimer()
- * always favor aggregation/composition over inheritance
- * replace method with method object
- * setNumber() rename to setScore()
- */
-/**@Extension
- * top scores pop up listed at end of each round
- * permanent high score list, using a file to store score
- */
 package game_app;
 
 import java.io.BufferedReader;
@@ -16,13 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javafx.animation.AnimationTimer;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-
+/**<b>EXTENSION</b>:
+ * new class for handling score and text file(score board) to store scores
+ */
 public class ScoreHandler {
-
-	private AnimationTimer at;
 	private int[] record;
 	private int rounds; 
 	private FileWriter board;
@@ -31,7 +18,10 @@ public class ScoreHandler {
 	private BufferedReader readscore;
 	
 //***********************************************************CONTROLLER*********************************************************************
-	public ScoreHandler (Frog frog, GamePane gameroot, String filepath) {
+	/**Construct handler for recording score permanently and to read score in text file
+	 * @param filepath : text file directory string 
+	 */
+	public ScoreHandler ( String filepath) {
 		setRecord(new int[5]);
 		setRounds(0);
 		try {
@@ -39,88 +29,13 @@ public class ScoreHandler {
 			setWritescore(new BufferedWriter(getBoard()));
 			setReadboard(new FileReader(filepath));
 			setReadscore(new BufferedReader(getReadboard()));
-			setAt(new AnimationTimer() {
-
-				@Override
-				public void handle(long now) {
-	            	if (frog.getChangeScore()) {
-	            		setScore(frog.getPoints(),gameroot);
-	            	}
-	            	
-	            	try { 
-	        				Alert alert = new Alert(AlertType.INFORMATION);
-	        				String currentline;
-	                    	if (frog.gameOver()) {// if frog home is equal to 5 then 
-	                    		gameroot.stopMusic();//.stopMusic();
-	                    		stop();
-	                    		gameroot.stop();
-	                    		
-	                    		alert.setTitle("You Have Won The Game!");
-	                    		alert.setHeaderText("Your Score: "+frog.getPoints()+"!");
-	    						getWritescore().write(""+frog.getPoints());
-	    	        			getWritescore().newLine();
-	    	        			getWritescore().close();
-	    	        			while((currentline = getReadscore().readLine()) != null) {
-	    	        				int x = Integer.parseUnsignedInt(currentline);
-	    	        				
-	    		        			for(int k=0;k<5;k++) {
-	    		        				if(x == getRecord()[k]) { // if same score is read from different line, it will be ignored
-	    		        					x=0;
-	    		        				}
-	    		        			}		        				
-	    	        				
-	    		        			if (getRounds() == 5 || getRounds() > 5) { // only the 5 highest scores among all will be shown
-	    	        				  if(x > getRecord()[4]) {  // starting from the 6th round , if higher than the lowest in top 5,            
-	    	        					  getRecord()[4] = x;   //then 5th highest will be replaced 
-	    	        				  }
-	    		        			}
-	            			
-	    		        			if(getRounds() <5) { //first 5 rounds will be recorded in array "record"
-	    		        				getRecord()[getRounds()] = x;
-	    		        			}
-	    		        			addRounds(1); //rounds++;
-	    		        			BubbleSort.bubbleSort(getRecord()); // sort scores in record array descendingly
-	
-	    	        			}
-	    	        			getReadscore().close();
-	    		        		alert.setContentText("Top 5 high scores:\nHighest recorded score:\n"+getRecord()[0]+"\n Other high scores:\n"
-	    				        		+getRecord()[1]+"\n"+getRecord()[2]+"\n"+getRecord()[3]+
-	    				        		"\n"+getRecord()[4]+"\n\n\nHighest possible score: 800");
-	    		        		alert.show();
-	    		        		System.out.println("success"+rounds);
-	                    	}
-	
-	            		
-	    				} 
-	        			catch (IOException e) {
-	    				e.printStackTrace();}				
-				}
-				
-			});}
+			}
 		catch(IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
-	
-	private void setScore(int n,GamePane gameroot) {
-		int shift = 0;
-		while (n > 0) {
-			  int d = n / 10;
-			  int k = n - d * 10;
-			  n = d;
-			 gameroot.add(SpriteFactory.createDigit(k, 40, 360 - shift, 25));
-			  shift+=30;
-			}
-	}
 //************************************************************************MODEL***************************************************
-	public AnimationTimer getAt() {
-		return at;
-	}
-
-	public void setAt(AnimationTimer at) {
-		this.at = at;
-	}
 	public int[] getRecord() {
 		return record;
 	}

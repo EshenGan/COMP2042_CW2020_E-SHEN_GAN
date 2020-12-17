@@ -1,10 +1,10 @@
-/**@Extension
- * new class, similar to vehicles
- */
 package game_app;
 
 import javafx.scene.image.Image;
 
+/**<b>EXTENSION</b>:
+ * new class to act as obstacles, similar to vehicles
+ */
 public class Snake extends Sprites{
 
 	private int speed;
@@ -15,7 +15,8 @@ public class Snake extends Sprites{
 	private int direction;
 	
 //*****************************CONTROLLER******************************************
-	@Override
+	/** movement and animation of snake in both direction
+	 */
 	public void act(long now) {
 		if(getDirection() == 1) {
 			if (now/900000000  % 4 ==0) {
@@ -53,22 +54,27 @@ public class Snake extends Sprites{
 			setX(600);
 	}
 	
+	/**Construct snake sprite
+	 * @param xpos       : x coordinate for snake 
+	 * @param ypos       : y coordinate for snake
+	 * @param s          : speed value for snake
+	 * @param w          : width of snake sprite
+	 * @param h          : height of snake sprite
+	 * @param direction  : direction of which snake sprite move
+	 */
 	Snake(int xpos, int ypos, int s, int w, int h,int direction) {
 		setDirection(direction); //1== LR 
 		if(getDirection() == 1) {
 			setSnakesLR(w,h);
-			setX(xpos);
-			setY(ypos);
-			setSpeed(s);
 			setImage(gets1());
 		}
 		else { //RL
 			setSnakesRL(w,h);
-			setX(xpos);
-			setY(ypos);
-			setSpeed(s);
 			setImage(getS3());
 		}
+		setX(xpos);
+		setY(ypos);
+		setSpeed(s);
 	}
 	
 //*****************************MODEL***************************************
@@ -80,11 +86,19 @@ public class Snake extends Sprites{
 		speed = sp;
 	}
 
+	/**set up snake objects for movement animation from left to right
+	 * @param ws : width of snake image
+	 * @param hs : height of snake image
+	 */
 	public void setSnakesLR(int ws, int hs){
 		s1 = new Image("file:src/main/resources/snake1new.png", ws, hs, true, true);
 		s2 = new Image("file:src/main/resources/snake2new.png", ws, hs, true, true);
 	}
 	
+	/**set up snake objects for movement animation from right to left
+	 * @param ws : width of snake image
+	 * @param hs : height of snake image
+	 */
 	public void setSnakesRL(int ws, int hs){
 		s3 = new Image("file:src/main/resources/snake1RLnew.png", ws, hs, true, true);
 		s4 = new Image("file:src/main/resources/snake2RLnew.png", ws, hs, true, true);

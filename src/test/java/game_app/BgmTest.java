@@ -14,7 +14,6 @@ import javafx.scene.media.MediaPlayer;
 
 class BgmTest {	
 private  MediaPlayer mp;
-private  String str;
 private  Media s;
 private Bgm bgm;
 @SuppressWarnings("unused")
@@ -22,6 +21,7 @@ private JFXPanel panel= new JFXPanel();
 	@BeforeEach
 	void setUp() throws Exception {
 		bgm = new Bgm();
+		MenuScene.setSong("src/main/resources/Crazy Frog - Axel F (Official Video).mp3");
 		bgm.prepareMP();
 	}
 
@@ -31,12 +31,12 @@ private JFXPanel panel= new JFXPanel();
 	}
 
 	@Test
-	/*
+	/**
 	 * test whether is it functioning as expected
 	 */
 	void testPrepareMP() {
 		try {
-		str = "src/main/resources/Frogger Main Song Theme (loop).mp3";
+		String str = "src/main/resources/Crazy Frog - Axel F (Official Video).mp3";
 		s = new Media(new File(bgm.getMusicFile()).toURI().toString());	
 		mp = new MediaPlayer(bgm.getSound());
 		mp.setCycleCount(MediaPlayer.INDEFINITE);

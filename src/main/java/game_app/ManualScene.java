@@ -1,6 +1,3 @@
-/**@Extension
- * new class for manual/info scene and buttons
- */
 package game_app;
 
 import javafx.scene.Scene;
@@ -11,6 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**<b>EXTENSION</b>:
+ *new class for manual/info scene and buttons
+ */
 public class ManualScene{
     private Button manualexit;
     private Button manualmenu;
@@ -21,6 +21,8 @@ public class ManualScene{
 	private Rectangle manualrect;
 
 //**********************************************CONTROLLER*******************************************************
+		/**Construct info screen for game, construct exit and back to menu button
+		 */
 		ManualScene () {
 	        //user guide scene
 	        setManualroot(new Pane());

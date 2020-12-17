@@ -1,38 +1,50 @@
-/**@Refactor
- * FactoryMethodDesignPattern - factory for all type of scenes available
- * Replace constructors with factory method
- */
-/**@Extension
- * factory class to create different type of  scenes
- */
-package game_app;
 
+package game_app;
+/**<b>REFACTOR</b>:
+ * <p>. FactoryMethodDesignPattern:factory for all type of scenes available<br>
+ * . Replace constructors with factory method<br>
+ * . Factory class to create different type of  scenes</p>
+ */
 public class SceneFactory {
 //********************************************VIEW*********************************************************
+	/** @return MenuScene object : Main Menu
+	 */
 	public static MenuScene createMenuScene() {
 		return new MenuScene();
 	}
 
+	/**@return GameSceneButtons object : buttons in all game scenes
+	 */
 	public static GameSceneButtons createGameSceneButtons() {
 		return new GameSceneButtons();
 	}
 
+	/**@return ManualScene object : info screen
+	 */
 	public static ManualScene createManualScene() {
 		return new ManualScene();
 	}
 
+	/**@return PauseScene object : pause screen for all game scenes
+	 */
 	public static PauseScene createPauseScene() {
 		return new PauseScene();
 	}
 
+	/**@return EasyScene object : easy mode game scene
+	 */
 	public static EasyScene createEasyScene() {
 		return new EasyScene();
 	}
 
+	/**@return MediumScene object : medium mode game scene
+	 */
 	public static MediumScene createMediumScene() {
 		return new MediumScene();
 	}
 
+	/**@return HardScene object : hard mode game scene
+	 */
 	public static HardScene createHardScene() {
 		return new HardScene();
 	}
