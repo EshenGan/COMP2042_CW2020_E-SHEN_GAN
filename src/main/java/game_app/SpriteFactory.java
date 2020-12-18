@@ -3,7 +3,7 @@ package game_app;
 
 /**<b>REFACTOR</b>:
  * <p>. FactoryMethodDesignPattern : factory for all type of sprite available<br>
- * . Replace constructors with factory method
+ * . Replace constructors with factory method<br>
  * . Factory class to create different type of sprites in game scenes</p>
  */
 public class SpriteFactory {

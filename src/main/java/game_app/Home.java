@@ -12,6 +12,10 @@ public class Home extends Sprites{
 	private boolean activated = false;
 	
 //**************************************************CONTROLLER****************************************************************
+	/**Constructs frog home 
+	 * @param x : specify x coordinate for frog home
+	 * @param y : specify y coordinate for frog home
+	 */
 	Home(int x, int y) {
 		setX(x);
 		setY(y);

@@ -12,7 +12,7 @@ public class MediumScene{
 	private Frog frog2;
 	private Scene scenegame2;
 	private BackgroundImage froggerbackground2;
-	private final String fp2 = "scoreboard2.txt";//D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\
+	private final String fp2 = "scoreboard2.txt";
 //*****************************************************************CONTROLLER****************************************************************
 	/**Construct game scene  and sprites for medium mode 
 	 */
@@ -41,7 +41,7 @@ public class MediumScene{
     }
 	
 	/**
-	 * method to stop/pause everything in game scene
+	 * method to stop everything in game scene
 	 */
     public void stop() { 
     	getGameroot2().stop();

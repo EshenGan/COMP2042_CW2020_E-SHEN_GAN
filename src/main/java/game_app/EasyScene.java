@@ -2,12 +2,12 @@ package game_app;
 
 import javafx.scene.Scene;
 
-/** <b>REFACTOR</b>:
- * <p>. Extracted class from FroggerApp<br>
+/** <p><b>REFACTOR</b>:<br>
+ * . Extracted class from FroggerApp<br>
  * . Self encapsulating field to avoid direct access of field even within own class<br>
- * . Create setter and getter for encapsulated field and objects</p>
- *<b>EXTENSION</b>:
- * slight changes to the original behavior of the game
+ * . Create setter and getter for encapsulated field and objects<br>
+ *<b>EXTENSION</b>:<br>
+ * . Slight changes to the original behavior of the game, reduce number of vehicles and also logs</p>
  */
 public class EasyScene{
 	private AnimationHandler ah;
@@ -15,7 +15,7 @@ public class EasyScene{
 	private Frog frog1;
 	private Scene scenegame1;
 	private BackgroundImage froggerbackground;
-	private final String fp = "scoreboard.txt"; //D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\
+	private final String fp = "scoreboard.txt";
 
 
 //*****************************************************************CONTROLLER****************************************************************
@@ -35,8 +35,8 @@ public class EasyScene{
 		setScenegame1(new Scene(getGameroot1(),598,745));
 	}
 
-/**method to start everything the game scene<br>
- * <b>REFACTOR</b>: gameroot1.start() is moved into start() from constructor body
+/**? method to start everything the game scene<br>
+ * ? <b>REFACTOR</b>: gameroot1.start() is moved into start() from constructor body
  */
 	public void start() {
 		getGameroot1().start();

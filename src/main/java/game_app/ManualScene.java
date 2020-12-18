@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 /**<b>EXTENSION</b>:
  *new class for manual/info scene and buttons
+
  */
 public class ManualScene{
     private Button manualexit;
@@ -21,7 +22,10 @@ public class ManualScene{
 	private Rectangle manualrect;
 
 //**********************************************CONTROLLER*******************************************************
-		/**Construct info screen for game, construct exit and back to menu button
+		/**
+		 *? Construct info screen for game, construct exit and back to menu button<br>
+		 *? BACK TO MENU button leads back to START screen<br>
+		 *? EXIT button exits the entire application
 		 */
 		ManualScene () {
 	        //user guide scene

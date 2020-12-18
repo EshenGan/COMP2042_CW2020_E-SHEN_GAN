@@ -38,10 +38,10 @@ public class Frog extends Sprites{
 	 private String mode;
 //******************************************************************CONTROLLER************************************************************************
 	/**
-	 * <p>Construct specific mode of frog and frog movement handler<br>
+	 * <p>? Construct specific mode of frog and frog movement handler<br>
 	 * <b>REFACTOR</b>:<br>
-	 * . line_56 and line_107 Consolidate duplicate conditional fragments<br>
-	 * . line_56 and line_107 Removed the outer most layer of if else statement</p>
+	 * ? line_56 and line_107 Consolidate duplicate conditional fragments<br>
+	 * ? line_56 and line_107 Removed the outer most else statement</p>
 	 * @param imageLink : frog image directory
 	 * @param mode      : string to specify mode of frog
 	 */
@@ -134,7 +134,7 @@ public class Frog extends Sprites{
 	 ArrayList<Home> inter = new ArrayList<Home>();
 		
 		/**<b>REFACTOR</b>: 
-		 * changed use of carD field to waterD field to avoid confusion of water death with car death<br>
+		 * ? Changed use of carD field to waterD field to avoid confusion of water death with car death<br>
 		 * <b>EXTENSION</b>:<br>
 		 * ? line 216_animation handler for death by snake<br>
 		 * ? line 245_condition for frog to die if meet with snake<br>
@@ -346,37 +346,72 @@ public class Frog extends Sprites{
 		}//act(long now)
 	
 //********************************************************************************MODEL***********************************************************	
+	/** Rename from getEnd() to gameOver()
+	 * @return home : boolean condition to check if all 5 frog homes are filled
+	 */
 	public boolean gameOver() {return home==5;}
 	
+	/** Add points cumulatively
+	 * @param points : score of type int
+	 */
 	public void pPoints(int points) {this.points += points;	}
-
+	
+	/** Subtract points cumulatively
+	 * @param points : score of type int
+	 */
 	public void nPoints(int points) {this.points -= points;	}
 
+	/** @return points : score of type int
+	 */
 	public int getPoints() {return points;	}
-
+	
+	/** @return home : number of frogs home , type int
+	 */
 	public int getHome() {return home;	}
 
+	/** Add number of frog home occupied cumulatively
+	 * @param home : type int
+	 */
 	public void addHome(int home) {this.home += home;}
 
+	/** Minus number of frog home occupied cumulatively
+	 * @param home : type int
+	 */
 	public void minusHome(int home) {this.home -= home;	}
 	
+	/** @return second : field of type boolean
+	 */
 	public boolean isSecond() {return second;	}
 
+	/** @param second : boolean value
+	 */
 	public void setSecond(boolean second) {this.second = second;	}
 
+	/** @return noMove : field of type boolean
+	 */
 	public boolean isNoMove() {return noMove;	}
 
+	/** @param noMove : boolean value
+	 */
 	public void setNoMove(boolean noMove) {this.noMove = noMove;	}
 
+	/** @return carDeath : field of type boolean
+	 */
 	public boolean isCarDeath() {return carDeath;	}
 
+	/** @param carDeath : boolean value
+	 */
 	public void setCarDeath(boolean carDeath) {this.carDeath = carDeath;	}
 
+	/** @return isWaterDeath : field of type boolean
+	 */
 	public boolean isWaterDeath() {return waterDeath;}
 
+	/** @param waterDeath : boolean value
+	 */
 	public void setWaterDeath(boolean waterDeath) {this.waterDeath = waterDeath;}
 
-	/**Rename to getChangeScore from ChangeScore
+	/**Rename from ChangeScore() to getChangeScore() 
 	 * @return boolean : condition to change score
 	 */
 	public boolean getChangeScore() {
@@ -393,18 +428,27 @@ public class Frog extends Sprites{
 
 	public void setCarD(int carD) {this.carD = carD;}
 	
+	/** Add int value to carD cumulatively 
+	 * @param carD : int value
+	 */
 	public void addCarD(int carD) {this.carD += carD;}
 
 	public int getWaterD() {return waterD;}
 
 	public void setWaterD(int waterD) {this.waterD = waterD;}
 	
+	/**  Add int value to waterD cumulatively 
+	 * @param waterD : int value
+	 */
 	public void addWaterD(int waterD) {this.waterD += waterD;}
 
 	public double getW() {return w;}
 
 	public void setW(double w) {this.w = w;}
 	
+	/** Sets up all images for frog sprite animation 
+	 *  @param i : int value for width and height of image
+	 */
 	public void setFrogSprite(int i) {
 		imgW1 = new Image("file:src/main/resources/froggerUp.png", i, i, true, true);
 		imgA1 = new Image("file:src/main/resources/froggerLeft.png", i, i, true, true);
@@ -444,6 +488,9 @@ public class Frog extends Sprites{
 
 	public void setSnakeD(int snakeD) {this.snakeD = snakeD;}
 	
+	/** Add int value to snakeD cumulatively 
+	 * @param snakeD : int value
+	 */
 	public void addSnakeD(int snakeD) {this.snakeD += snakeD;}
 
 }

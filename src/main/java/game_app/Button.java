@@ -10,7 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**<b>EXTENSION</b>:
- * class for creating buttons
+ * . Class for creating buttons, animation and effects for buttons if come in contact with mouse cursor 
  */
 public class Button extends StackPane {
 	private Text txt;

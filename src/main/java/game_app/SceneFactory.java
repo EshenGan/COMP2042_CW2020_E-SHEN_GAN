@@ -13,22 +13,10 @@ public class SceneFactory {
 		return new MenuScene();
 	}
 
-	/**@return GameSceneButtons object : buttons in all game scenes
-	 */
-	public static GameSceneButtons createGameSceneButtons() {
-		return new GameSceneButtons();
-	}
-
 	/**@return ManualScene object : info screen
 	 */
 	public static ManualScene createManualScene() {
 		return new ManualScene();
-	}
-
-	/**@return PauseScene object : pause screen for all game scenes
-	 */
-	public static PauseScene createPauseScene() {
-		return new PauseScene();
 	}
 
 	/**@return EasyScene object : easy mode game scene

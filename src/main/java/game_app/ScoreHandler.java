@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**<b>EXTENSION</b>:
- * new class for handling score and text file(score board) to store scores
+ * new class for handling text files(score board) to write and read scores
  */
 public class ScoreHandler {
 	private int[] record;
@@ -18,7 +18,7 @@ public class ScoreHandler {
 	private BufferedReader readscore;
 	
 //***********************************************************CONTROLLER*********************************************************************
-	/**Construct handler for recording score permanently and to read score in text file
+	/**Construct handler for recording score permanently and to read score in text files
 	 * @param filepath : text file directory string 
 	 */
 	public ScoreHandler ( String filepath) {

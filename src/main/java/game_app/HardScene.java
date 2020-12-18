@@ -13,7 +13,7 @@ public class HardScene{
 	private Frog frog3;
 	private Scene scenegame3;
 	private BackgroundImage froggerbackground3;
-	private final String fp3 = "scoreboard3.txt";//D:\\(A)Y2_CSAI\\software maintenance\\COMP2042_CW2020_E-SHEN_GAN\\Frogger\\
+	private final String fp3 = "scoreboard3.txt";
 
 //*****************************************************************VIEW****************************************************************
 	/**Construct game scene and sprites for hard mode 
@@ -42,7 +42,7 @@ public class HardScene{
 		getAh3().getAt().start();
     }
 
-	/**method to stop/pause everything in game scene
+	/**method to stop everything in game scene
 	 */
     public void stop() { 
     	getGameroot3().stop();

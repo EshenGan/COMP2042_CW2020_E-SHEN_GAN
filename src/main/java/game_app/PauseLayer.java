@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 /**<b>EXTENSION</b>:
  * Create a new class for pause scene and buttons
  */
-public class PauseScene extends Parent {
+public class PauseLayer extends Parent {
 	private VBox pausebox;
 	private Button gameresume;
 	private Button gameExit;
@@ -17,9 +17,11 @@ public class PauseScene extends Parent {
 
 //*************************************************CONTROLLER************************************************************
 	/**? Construct pause screen, resume , back to menu and exit buttons<br>
-	 * ? Back to menu button includes "auto save last checkpoint" feature
+	 * ? BACK TO MENU button includes "auto save last checkpoint" feature<br>
+	 * ? RESUME button resumes the game<br>
+	 * ? EXIT button exits the application<br>
 	 */
-	PauseScene() {
+	public PauseLayer() {
 		//pauselayer buttons
 		setPausebox(new VBox(30));
 		getPausebox().setTranslateX(185);

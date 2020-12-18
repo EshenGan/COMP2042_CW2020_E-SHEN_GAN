@@ -24,6 +24,10 @@ public class GamePane extends Pane {
     private Bgm bgm;    
 //****************************************************CONTROLLER********************************************************************
     public void act(long now) {} 
+    
+    /**
+     * Constructs Pane for all game scenes , controls how frog sprite move in the scene on key pressed n released
+     */
     public GamePane() {
     	setBgm(new Bgm());
     	
@@ -69,12 +73,18 @@ public class GamePane extends Pane {
     		
 		});
     }
-
+    
+    /**
+     * Method to create a timer and start it
+     */
     public void start() {
     	createTimer();
         getTimer().start();
     }
 
+    /**
+     * Method to stop timer
+     */
     public void stop() {
         getTimer().stop();
     }
@@ -93,10 +103,16 @@ public class GamePane extends Pane {
     }
     
 //****************************************************MODEL***********************************************************
+    /** Method that adds sprite into current GamePane
+     * @param sprite : object of type Sprites
+     */
     public void add(Sprites sprite) {
         getChildren().add(sprite);
     }
 
+    /**Method that removes sprite from current GamePane
+     * @param sprite : object of type Sprites
+     */
     public void remove(Sprites sprite) {
         getChildren().remove(sprite);
     }

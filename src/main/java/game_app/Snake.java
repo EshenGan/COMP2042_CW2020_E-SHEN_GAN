@@ -55,8 +55,8 @@ public class Snake extends Sprites{
 	}
 	
 	/**Construct snake sprite
-	 * @param xpos       : x coordinate for snake 
-	 * @param ypos       : y coordinate for snake
+	 * @param xpos       : x coordinate to put snake 
+	 * @param ypos       : y coordinate  to put snake
 	 * @param s          : speed value for snake
 	 * @param w          : width of snake sprite
 	 * @param h          : height of snake sprite

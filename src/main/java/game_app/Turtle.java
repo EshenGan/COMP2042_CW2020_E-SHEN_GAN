@@ -69,10 +69,11 @@ public class Turtle extends Sprites{
 					setX(600);
 	}
 	
-	/**Construct turtles sprites
-	 * @param xpos  : x coordinate for sprite
-	 * @param ypos  : y coordinate for sprite
-	 * @param s     : speed value for sprite
+	/**? Construct turtles sprites<br>
+	 * ? <b>EXTENSION</b>: added new parameter dir to determine movement direction
+	 * @param xpos  : x coordinate to put sprite
+	 * @param ypos  : y coordinate to put sprite
+	 * @param s     : speed value to put sprite
 	 * @param w     : width for sprite
 	 * @param h     : height for sprite
 	 * @param dir   : direction in which sprite move

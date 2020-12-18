@@ -26,8 +26,8 @@ public class Log extends Sprites {
 	/**Construct log sprite in any game scenes
 	 * @param imageLink : image directory for log
 	 * @param size      : height and width of image
-	 * @param xpos      : x coordinate for log
-	 * @param ypos      : y coordinate for log
+	 * @param xpos      : x coordinate to put log
+	 * @param ypos      : y coordinate to put log
 	 * @param s         : speed value of log
 	 */
 	Log(String imageLink, int size, int xpos, int ypos, double s) {

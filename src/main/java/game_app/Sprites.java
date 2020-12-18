@@ -14,7 +14,7 @@ public abstract class Sprites extends ImageView{
 	
 
 //***********************************************************************CONTROLLER*********************************************************************
-    /**
+    /** Movement handler for sprites
      * @param dx : movement of sprite along horizontal axis
      * @param dy : movement of sprite along vertical axis 
      */

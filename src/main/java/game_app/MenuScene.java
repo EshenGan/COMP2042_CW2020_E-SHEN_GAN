@@ -8,12 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-/**<b>EXTENSION</b>:<br>
- * <p>. new class for start screen and buttons<br>
- * . PLAY button will drop down 3 other buttons to choose level of difficulty<br>
- * . MANUAL button generates INFO screen<br>
- * . BGM button will drop down 3 other buttons to choose background music<br>
- * . EXIT button exits application</p>
+/**<b>EXTENSION</b>:
+ * new class for start screen and buttons
  */
 public class MenuScene{
 	private Button menuplay;
@@ -36,7 +32,12 @@ public class MenuScene{
 	private static String song;
 
 //***************************************************CONTROLLER***************************************************************
-	/**Construct main menu/start screen and buttons
+	/**? Construct main menu/start screen and buttons<br>
+	 * ? line84 and below : button actions for PLAY button, BGM button and BGM drop down buttons<br>
+	 * ? PLAY button will drop down 3 other buttons to choose level of difficulty<br>
+	 * ? MANUAL button generates INFO screen<br>
+	 * ? BGM button will drop down 3 other buttons to choose background music<br>
+	 * ? EXIT button exits application
 	 */
 	MenuScene() {
 		// main menu scene

@@ -1,7 +1,7 @@
 
 package game_app;
-/**<b>EXTENSION</b>:<br>
- * class for bubble sorting in descending order
+/**<b>EXTENSION</b>:
+ * . Class for bubble sorting in descending order
  */
 public class BubbleSort {
  

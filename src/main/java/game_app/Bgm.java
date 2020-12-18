@@ -7,8 +7,7 @@ import javafx.scene.media.MediaPlayer;
 /**<b>REFACTOR</b>:
  * <p>. Rename class from MyStage to Bgm <br>
  * . Bgm not subclass of GamePane, replace with aggregation to promote loose coupling <br>
- * . Self encapsulating field to avoid direct access of field  even within own class,
- * create setter and getter for encapsulated field</p>
+ * . Self encapsulating field to avoid direct access of field  even within own class,create setter and getter for encapsulated field</p>
  */
 public class Bgm {
 	private MediaPlayer mediaPlayer;
@@ -28,11 +27,10 @@ public class Bgm {
 		getMediaPlayer().stop();
 	}
 
-	/**<b>REFACTOR</b>:
-	 * Extract method prepareMP() from playMusic() to set up a media player<br>
+	/**? <b>REFACTOR</b>:Extract method prepareMP() from playMusic() to set up a media player<br>
 	 * <b>EXTENSION</b>:<br> 
 	 * ? get music file path using static getter method from MenuScene class<br>
-	 * ? if no background music is chosen by user, there is a default song : frogger main song theme
+	 * ? if no background music is chosen by user, there is a default song : Frogger Main Song Theme (loop).mp3
 	 */
 	public void prepareMP() {
 		if(MenuScene.getSong() != null) {

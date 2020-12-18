@@ -5,16 +5,18 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
 /**<b>EXTENSION</b>:
- * class for  pause and exit buttons in all game scenes: easy , medium and hard mode
+ * Class for  pause and exit buttons in all game scenes: easy , medium and hard mode
  */
 public class GameSceneButtons extends Parent {
 	private Button gamepause;
 	private Button gameexit;
 	private VBox gamebox;
 //**************************************************CONTROLLER*******************************************************	
-	/**Construct pause and exit buttons using Button class
+	/**? Construct pause and exit buttons using Button class<br>
+	 * ? PAUSE button pauses the game <br>
+	 * ? EXIT button exits the entire application
 	 */
-	GameSceneButtons() {
+	public GameSceneButtons() {
 		//game scene buttons
 		setGamebox(new VBox(5));
 		getGamebox().setTranslateX(5);

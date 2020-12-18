@@ -1,22 +1,21 @@
 package game_app;
 
 import java.io.IOException;
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+
 /**<b>REFACTOR</b>:
  * <p>. Extracted class for createTimer() method in FroggerApp: replace method with method object<br>
- * . Use of ScoreHandler lass: always favor aggregation/composition over inheritance</p>
+ * . Use of ScoreHandler class: always favor aggregation/composition over inheritance</p>
  */
 public class AnimationHandler {
 	private AnimationTimer at;
 	private ScoreHandler sh;
 	
 	/**<b>EXTENSION</b>:<br>
-	 * ? Using a file to store score permanently in a high score list,
-	 * top scores pop up listed at end of each round<br>
+	 * ? Using a txt file to store score permanently,top 5 scores list pop up  at end of each round as well as score for current round<br>
 	 * ? Makes use of ScoreHandler class<br>
 	 * @param frog     : frog object
 	 * @param gameroot : Pane for any game scene
@@ -84,8 +83,7 @@ public class AnimationHandler {
 		});
 	}
 	
-	/**<b>RENAME</b>:
-	 * Rename from setNumber() to SetScore()
+	/**<b>RENAME</b>: Rename from setNumber() to SetScore()
 	 * @param n        : score to be set
 	 * @param gameroot : Pane for any game scene
 	 */

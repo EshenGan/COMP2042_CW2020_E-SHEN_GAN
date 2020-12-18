@@ -3,7 +3,8 @@ package game_app;
 import javafx.scene.image.Image;
 
 /**<b>REFACTOR</b>:
- * <p>. self encapsulating field to avoid direct access of field even within own class<br>
+ * <p>. Rename class to Vehicles<br>
+ * . self encapsulating field to avoid direct access of field even within own class<br>
  * . create setter and getter for encapsulated field<br>
  * . rename from obstacles to vehicles</p>
  */
@@ -25,6 +26,14 @@ public class Vehicles extends Sprites {
 			setX(600);
 	}
 	
+	/**Construts Vehicle sprite
+	 * @param imageLink : file directory for vehicle image
+	 * @param xpos		: x coordinate to put sprite
+	 * @param ypos		: y coordinate to put sprite
+	 * @param s			: speed value for sprite
+	 * @param w			: width for sprite
+	 * @param h			: height for sprite
+	 */
 	Vehicles(String imageLink, int xpos, int ypos, int s, int w, int h) {
 		setImage(new Image(imageLink, w,h, true, true));
 		setX(xpos);

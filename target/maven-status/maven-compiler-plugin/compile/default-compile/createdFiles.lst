@@ -24,11 +24,11 @@ game_app\SceneFactory.class
 game_app\Button.class
 game_app\BackgroundImage.class
 game_app\GameSceneButtons.class
-game_app\PauseScene.class
 game_app\Snake.class
 game_app\Launchable.class
 game_app\AnimationHandler.class
 game_app\Bgm.class
+game_app\PauseLayer.class
 game_app\WetTurtle.class
 game_app\GamePane$1$1.class
 game_app\ManualScene.class
