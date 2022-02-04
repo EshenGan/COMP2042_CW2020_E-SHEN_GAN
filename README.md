@@ -2,8 +2,6 @@
 >- **VERY IMPORTANT** - Guide on running the application : shorturl.at/rsPR4 
 >- I have two remote repositories , one which has corrupted files so i decided to create a new one
 >
->>- old remote repo : https://github.com/EshenGan/COMP2042_CW_E-SHENGAN-outdated-.git
->>- new and curernt repo: https://github.com/EshenGan/COMP2042_CW2020_E-SHEN_GAN.git
 
 # EXTENSION
 *All extensions made are for the purpose of providing convenience and better player experience*
