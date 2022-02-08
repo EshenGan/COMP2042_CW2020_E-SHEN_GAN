@@ -1,7 +1,8 @@
 #ALERT
 >- **VERY IMPORTANT** - Guide on running the application : shorturl.at/rsPR4 
->- I have two remote repositories , one which has corrupted files so i decided to create a new one
->
+>- **Disclaimer** - The game is developed by https://github.com/hirish99/Frogger-Arcade-Game, I refactored most of the codes and added a few more features. 
+>- Details of refactoring work and added features are mentioned below.
+>- This project is done as one of my Year 2 module assignment in University of Nottingham, Malaysia.
 
 # EXTENSION
 *All extensions made are for the purpose of providing convenience and better player experience*
