@@ -1,4 +1,4 @@
-#ALERT
+# ALERT
 >- **VERY IMPORTANT** - Guide on running the application : shorturl.at/rsPR4 
 >- **Disclaimer** - The game is developed by https://github.com/hirish99/Frogger-Arcade-Game, I refactored most of the codes and added a few more features. 
 >- Details of refactoring work and added features are mentioned below.
