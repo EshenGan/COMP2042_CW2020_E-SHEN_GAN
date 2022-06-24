@@ -10,7 +10,7 @@
 >
 >>- **MenuScene.java** is the class to create START screen
 >>- Contains 4 buttons ,**PLAY** ,**MANUAL** ,**BGM** ,**EXIT**
->>- <img src="https://user-images.githubusercontent.com/61282110/175561953-e3b78e3a-4b29-4a9f-8d25-552923c74554.png" width="500" height="300">
+>> <img src="https://user-images.githubusercontent.com/61282110/175561953-e3b78e3a-4b29-4a9f-8d25-552923c74554.png" width="500" height="300">
 
 
 >- **INFO SCREEN**
