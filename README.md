@@ -6,10 +6,12 @@
 
 # EXTENSION
 *All extensions made are for the purpose of providing convenience and better player experience*
->- **START SCREEN**
+>- **GAME MENU**
 >
 >>- **MenuScene.java** is the class to create START screen
 >>- Contains 4 buttons ,**PLAY** ,**MANUAL** ,**BGM** ,**EXIT**
+>>- ![Game Menu](https://user-images.githubusercontent.com/61282110/175561953-e3b78e3a-4b29-4a9f-8d25-552923c74554.png)
+
 
 >- **INFO SCREEN**
 >
