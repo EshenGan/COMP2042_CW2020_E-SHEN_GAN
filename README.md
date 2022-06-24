@@ -13,9 +13,10 @@
 >> <img src="https://user-images.githubusercontent.com/61282110/175561953-e3b78e3a-4b29-4a9f-8d25-552923c74554.png" width="500" height="300">
 
 
->- **INFO SCREEN**
+>- **PLAYER GUIDE**
 >
->>- **ManualScene.java** is the class to create INFO screen and also 2 buttons, **BACK TO MENU** and **EXIT**. 
+>>- **ManualScene.java** is the class to create INFO screen and also 2 buttons, **BACK TO MENU** and **EXIT**.
+>> <img src="https://user-images.githubusercontent.com/61282110/175563161-866f4112-4417-4dec-83d8-d16a098b19fc.png" width="500" height="300">
 
 >- **INTERESTING LEVELS ADDED**
 >
@@ -43,7 +44,8 @@
 >
 >>- **GameSceneButtons.java** and **PauseLayer.java**:
 >>
->>>- **PAUSE** to generate PAUSE screen with 3 buttons: **RESUME**,**BACK TO MENU** and **EXIT** 
+>>>- **PAUSE** to generate PAUSE screen with 3 buttons: **RESUME**,**BACK TO MENU** and **EXIT**
+>>> <img src="https://user-images.githubusercontent.com/61282110/175563991-a7ded0b8-e26d-49f6-abb9-4f55c5c72250.png" width="300" height="500">
 
 >- **BACK TO MENU AND AUTO SAVE FEATURE**
 >
@@ -59,11 +61,11 @@
 >
 >>- Unit testing with Junit5 and TestFX framework, test files all in src/test/java  
 
->- **Class for Buttons**
+>- **CLASS FOR BUTTONS**
 >
 >>- **Button.java** is used for creating buttons in any pane
 
->- **Set up icon and title for application GUI**
+>- **NEW ICON AND TITLE for GAME GUI**
  
 
 
